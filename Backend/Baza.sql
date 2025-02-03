@@ -1,14 +1,18 @@
-use master;
-go -- dajemo mu vremena da se prebaci prije nego što ide dalje
--- brišem postojeæu bazu ako postoji
-drop database if exists azil_udomi_me;
-go
+-- Zamjeniti db_a98acf_edunovawp5 s imenom svoje baze
 
-create database azil_udomi_me collate Croatian_CI_AS;
-go
+SELECT name, collation_name FROM sys.databases;
+GO
+ALTER DATABASE db_ab2678_udomime SET SINGLE_USER WITH
+ROLLBACK IMMEDIATE;
+GO
+ALTER DATABASE db_ab2678_udomime COLLATE Croatian_CI_AS;
+GO
+ALTER DATABASE db_ab2678_udomime SET MULTI_USER;
+GO
+SELECT name, collation_name FROM sys.databases;
+GO
 
-use azil_udomi_me;
-go
+
 
 --TABLICA STATUS
 
