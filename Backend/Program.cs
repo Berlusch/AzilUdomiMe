@@ -1,8 +1,5 @@
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models; 
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,11 +30,11 @@ app.UseAuthorization();
 
 // dodati ove dvije linije za swagger
 app.UseSwagger();
-/*app.UseSwaggerUI(o =>
-{
+
+app.UseSwaggerUI(o => {
     o.EnableTryItOutByDefault();
     o.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
-});*/
+});
 
 app.MapControllers();
 
