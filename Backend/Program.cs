@@ -1,3 +1,10 @@
+using Backend.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models; 
+using Swashbuckle.AspNetCore.SwaggerGen;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,18 +12,32 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+// dodati ovu liniju za swagger
+builder.Services.AddSwaggerGen();
+
+//dodavanje konteksta baze
+
+builder.Services.AddDbContext<BackendContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BackendContext"));
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+app.MapOpenApi();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+// dodati ove dvije linije za swagger
+app.UseSwagger();
+/*app.UseSwaggerUI(o =>
+{
+    o.EnableTryItOutByDefault();
+    o.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
+});*/
 
 app.MapControllers();
 
