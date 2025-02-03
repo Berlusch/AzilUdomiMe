@@ -13,7 +13,7 @@ namespace Backend.Data
 
         }
 
-        public DbSet<Pas> Psi { get; set; } // zbog ovog ovdje Smjerovi se tablica zove u mnozini
+        public DbSet<Udomitelj> Udomitelji { get; set; } // zbog ovog ovdje Smjerovi se tablica zove u mnozini
 
 
 
