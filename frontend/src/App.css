@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+.grad{
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #6a0dad; /* Tamnoljubičasta boja */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+
+}
