@@ -16,21 +16,21 @@ GO
 
 --TABLICA STATUS
 
-create table status(
+create table statusi(
 sifra int not null primary key identity(1,1),
 naziv varchar(30) not null
 );
 
 --TABLICA VELIČINA
 
-create table velicina(
+create table velicine(
 sifra int not null primary key identity(1,1),
 naziv varchar(30)
 );
 
 --TABLICA BOJA
 
-create table boja(
+create table boje(
 sifra int not null primary key identity(1,1),
 naziv varchar(10)
 );
@@ -44,10 +44,10 @@ ime varchar(20) not null,
 datum_rodjenja date not null,
 spol varchar(10) not null,
 CONSTRAINT chk_spol CHECK (spol IN ('muški', 'ženski')),
-velicina int not null references velicina(sifra),
-boja int not null references boja(sifra),
+velicina int not null references velicine(sifra),
+boja int not null references boje(sifra),
 mojaprica varchar(300) not null,
-status int not null references status(sifra),
+status int not null references statusi(sifra),
 kastracija bit not null,
 );
 
@@ -73,18 +73,18 @@ status_upita varchar(30) not null,
 napomene varchar(200)
 );
 
-insert into status(naziv) values
+insert into statusi(naziv) values
 ('udomljen'),
 ('rezerviran'),
 ('slobodan'),
 ('privremeni smještaj');
 
-insert into velicina(naziv) values
+insert into velicine(naziv) values
 ('mali: do 5 kg'),
 ('srednji: 5-25 kg'),
 ('veliki: >25 kg');
 
-insert into boja(naziv) values
+insert into boje(naziv) values
 ('bijeli'),
 ('crni'),
 ('smeđi'),
