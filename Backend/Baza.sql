@@ -1,4 +1,4 @@
--- Zamjeniti db_a98acf_edunovawp5 s imenom svoje baze
+ï»¿-- Zamjeniti db_a98acf_edunovawp5 s imenom svoje baze
 
 SELECT name, collation_name FROM sys.databases;
 GO
@@ -21,7 +21,7 @@ sifra int not null primary key identity(1,1),
 naziv varchar(30) not null
 );
 
---TABLICA VELIÈINA
+--TABLICA VELIÄŒINA
 
 create table velicina(
 sifra int not null primary key identity(1,1),
@@ -43,7 +43,7 @@ brojcipa char(17) not null,
 ime varchar(20) not null,
 datum_rodjenja date not null,
 spol varchar(10) not null,
-CONSTRAINT chk_spol CHECK (spol IN ('muški', 'enski')),
+CONSTRAINT chk_spol CHECK (spol IN ('muÅ¡ki', 'Å¾enski')),
 velicina int not null references velicina(sifra),
 boja int not null references boja(sifra),
 mojaprica varchar(300) not null,
@@ -77,7 +77,7 @@ insert into status(naziv) values
 ('udomljen'),
 ('rezerviran'),
 ('slobodan'),
-('privremeni smještaj');
+('privremeni smjeÅ¡taj');
 
 insert into velicina(naziv) values
 ('mali: do 5 kg'),
@@ -87,53 +87,53 @@ insert into velicina(naziv) values
 insert into boja(naziv) values
 ('bijeli'),
 ('crni'),
-('smeği'),
-('šareni');
+('smeÄ‘i'),
+('Å¡areni');
 
 insert into psi(brojcipa, ime, datum_rodjenja, spol, velicina, boja, mojaprica, kastracija, status) VALUES
-('HR123456789012345', 'Max', '2010-08-15', 'muški', 2, 1, 'Max je energièan pas koji voli igru i šetnje.', 1, 3),
-('HR234567890123456', 'Luna', '2015-01-20', 'enski', 1, 2, 'Luna je mirna i njena, voli biti u društvu ljudi.', 1, 3),
-('HR345678901234567', 'Leo', '2010-06-30', 'muški', 3, 3, 'Leo je veliki pas koji trai puno prostora i igre.', 1, 3),
-('HR456789012345678', 'Bella', '2013-03-12', 'enski', 2, 4, 'Bella je vesela i hrabra, uvijek spremna za avanture.', 1, 1),
-('HR567890123456789', 'Rex', '2011-11-09', 'muški', 3, 3, 'Rex je zaštitnièki nastrojen pas, idealan za obitelj.', 1, 3),
-('HR678901234567890', 'Maja', '2017-02-05', 'enski', 1, 1, 'Maja je umiljata i voli biti u centru panje.', 1, 2),
-('HR789012345678901', 'Bruno', '2012-07-22', 'muški', 2, 2, 'Bruno je prijateljski nastrojen pas koji voli sve ljude.', 0, 3),
-('HR890123456789012', 'Zara', '2016-04-11', 'enski', 1, 2, 'Zara je vesela i razigrana, èesto trèi po dvorištu.', 1, 3),
-('HR901234567890123', 'Oscar', '2009-10-02', 'muški', 3, 3, 'Oscar je smiren pas koji voli dugi odmor.', 1, 4),
-('HR012345678901234', 'Nina', '2018-06-17', 'enski', 1, 1, 'Nina je ljubazna i voli društvo drugih pasa.', 0, 1),
-('HR112345678901235', 'Dino', '2014-12-08', 'muški', 2, 2, 'Dino je odan pas koji se èesto igra s djecom.', 1, 3),
-('HR223456789012346', 'Kira', '2013-09-03', 'enski', 2, 4, 'Kira je srameljiva, ali odana prijateljica.', 1, 3),
-('HR334567890123457', 'Toby', '2016-11-10', 'muški', 1, 3, 'Toby je aktivan pas koji uiva u trèanju i lovu na lopticu.', 0, 3),
-('HR445678901234568', 'Rita', '2012-03-25', 'enski', 2, 1, 'Rita je vesela, uvijek spremna za igru.', 1, 1),
-('HR556789012345679', 'Maks', '2011-07-15', 'muški', 3, 2, 'Maks je veliki, ljubazan pas koji se voli opuštati.', 1, 3),
-('HR667890123456780', 'Fiona', '2016-05-09', 'enski', 2, 3, 'Fiona je smirena i vrlo paljiva prema djeci.', 0, 2),
-('HR778901234567891', 'Gustav', '2013-04-17', 'muški', 2, 2, 'Gustav je veselo naravnog temperamenta, pravi pas za obitelj.', 1, 3),
-('HR889012345678902', 'Vera', '2014-01-30', 'enski', 1, 1, 'Vera je njena i voli biti u društvu svojih vlasnika.', 1, 3),
-('HR990123456789013', 'Vuk', '2010-09-05', 'muški', 3, 3, 'Vuk je vrlo energièan, voli biti vani i trèati po prirodi.', 0, 3);
+('HR123456789012345', 'Max', '2010-08-15', 'muÅ¡ki', 2, 1, 'Max je energiÄan pas koji voli igru i Å¡etnje.', 1, 3),
+('HR234567890123456', 'Luna', '2015-01-20', 'Å¾enski', 1, 2, 'Luna je mirna i njeÅ¾na, voli biti u druÅ¡tvu ljudi.', 1, 3),
+('HR345678901234567', 'Leo', '2010-06-30', 'muÅ¡ki', 3, 3, 'Leo je veliki pas koji traÅ¾i puno prostora i igre.', 1, 3),
+('HR456789012345678', 'Bella', '2013-03-12', 'Å¾enski', 2, 4, 'Bella je vesela i hrabra, uvijek spremna za avanture.', 1, 1),
+('HR567890123456789', 'Rex', '2011-11-09', 'muÅ¡ki', 3, 3, 'Rex je zaÅ¡titniÄki nastrojen pas, idealan za obitelj.', 1, 3),
+('HR678901234567890', 'Maja', '2017-02-05', 'Å¾enski', 1, 1, 'Maja je umiljata i voli biti u centru paÅ¾nje.', 1, 2),
+('HR789012345678901', 'Bruno', '2012-07-22', 'muÅ¡ki', 2, 2, 'Bruno je prijateljski nastrojen pas koji voli sve ljude.', 0, 3),
+('HR890123456789012', 'Zara', '2016-04-11', 'Å¾enski', 1, 2, 'Zara je vesela i razigrana, Äesto trÄi po dvoriÅ¡tu.', 1, 3),
+('HR901234567890123', 'Oscar', '2009-10-02', 'muÅ¡ki', 3, 3, 'Oscar je smiren pas koji voli dugi odmor.', 1, 4),
+('HR012345678901234', 'Nina', '2018-06-17', 'Å¾enski', 1, 1, 'Nina je ljubazna i voli druÅ¡tvo drugih pasa.', 0, 1),
+('HR112345678901235', 'Dino', '2014-12-08', 'muÅ¡ki', 2, 2, 'Dino je odan pas koji se Äesto igra s djecom.', 1, 3),
+('HR223456789012346', 'Kira', '2013-09-03', 'Å¾enski', 2, 4, 'Kira je srameÅ¾ljiva, ali odana prijateljica.', 1, 3),
+('HR334567890123457', 'Toby', '2016-11-10', 'muÅ¡ki', 1, 3, 'Toby je aktivan pas koji uÅ¾iva u trÄanju i lovu na lopticu.', 0, 3),
+('HR445678901234568', 'Rita', '2012-03-25', 'Å¾enski', 2, 1, 'Rita je vesela, uvijek spremna za igru.', 1, 1),
+('HR556789012345679', 'Maks', '2011-07-15', 'muÅ¡ki', 3, 2, 'Maks je veliki, ljubazan pas koji se voli opuÅ¡tati.', 1, 3),
+('HR667890123456780', 'Fiona', '2016-05-09', 'Å¾enski', 2, 3, 'Fiona je smirena i vrlo paÅ¾ljiva prema djeci.', 0, 2),
+('HR778901234567891', 'Gustav', '2013-04-17', 'muÅ¡ki', 2, 2, 'Gustav je veselo naravnog temperamenta, pravi pas za obitelj.', 1, 3),
+('HR889012345678902', 'Vera', '2014-01-30', 'Å¾enski', 1, 1, 'Vera je njeÅ¾na i voli biti u druÅ¡tvu svojih vlasnika.', 1, 3),
+('HR990123456789013', 'Vuk', '2010-09-05', 'muÅ¡ki', 3, 3, 'Vuk je vrlo energiÄan, voli biti vani i trÄati po prirodi.', 0, 3);
 
 
 insert into udomitelji(ime, prezime, adresa, telefon, email)
 VALUES
-('Ivan', 'Horvat', 'Osijek, Ulica Mije Ğaka 12', '385 98 1234567', 'ivan.horvat@gmail.com'),
-('Ana', 'Kovaè', 'Vinkovci, Trg Kneza Mihajla 3', '385 91 2345678', 'ana.kovac@gmail.com'),
+('Ivan', 'Horvat', 'Osijek, Ulica Mije Äaka 12', '385 98 1234567', 'ivan.horvat@gmail.com'),
+('Ana', 'KovaÄ', 'Vinkovci, Trg Kneza Mihajla 3', '385 91 2345678', 'ana.kovac@gmail.com'),
 ('Marko', 'Novak', 'Valpovo, Kralja Zvonimira 45', '385 98 3456789', 'marko.novak@gmail.com'),
-('Lina', 'Petroviæ', 'Osijek, Stjepana Radiæa 14', '385 91 4567890', 'lina.petrovic@gmail.com'),
-('Josip', 'Matiæ', 'Vinkovci, Kolodvorska 9', '385 98 5678901', 'josip.matic@gmail.com'),
-('Maja', 'Šimiæ', 'Valpovo, Dravska 19', '385 91 6789012', 'maja.simic@gmail.com'),
-('Tomislav', 'Juriæ', 'Osijek, Antuna Mihanoviæa 7', '385 98 7890123', 'tomislav.juric@gmail.com'),
-('Ivana', 'Babiæ', 'Vinkovci, I.G.Kovaèiæa 25', '385 91 8901234', 'ivana.babic@gmail.com'),
-('Petar', 'Soldo', 'Valpovo, Zagrebaèka 34', '385 98 9012345', 'petar.soldo@gmail.com'),
-('Jelena', 'Vukoviæ', 'Osijek, Trg Sv. Trojstva 8', '385 91 0123456', 'jelena.vukovic@gmail.com');
+('Lina', 'PetroviÄ‡', 'Osijek, Stjepana RadiÄ‡a 14', '385 91 4567890', 'lina.petrovic@gmail.com'),
+('Josip', 'MatiÄ‡', 'Vinkovci, Kolodvorska 9', '385 98 5678901', 'josip.matic@gmail.com'),
+('Maja', 'Å imiÄ‡', 'Valpovo, Dravska 19', '385 91 6789012', 'maja.simic@gmail.com'),
+('Tomislav', 'JuriÄ‡', 'Osijek, Antuna MihanoviÄ‡a 7', '385 98 7890123', 'tomislav.juric@gmail.com'),
+('Ivana', 'BabiÄ‡', 'Vinkovci, I.G.KovaÄiÄ‡a 25', '385 91 8901234', 'ivana.babic@gmail.com'),
+('Petar', 'Soldo', 'Valpovo, ZagrebaÄka 34', '385 98 9012345', 'petar.soldo@gmail.com'),
+('Jelena', 'VukoviÄ‡', 'Osijek, Trg Sv. Trojstva 8', '385 91 0123456', 'jelena.vukovic@gmail.com');
 
 INSERT INTO upiti (pas, udomitelj, datum_upita, status_upita, napomene)
 VALUES
 (3, 7, '2024-06-15', 'zaprimljen', 'nema napomene'),
 (9, 2, '2024-08-10', 'u obradi', 'nema napomene'),
-(1, 5, '2024-07-05', 'obrağen', 'udomljenje'),
+(1, 5, '2024-07-05', 'obraÄ‘en', 'udomljenje'),
 (7, 4, '2024-04-20', 'zaprimljen', 'nema napomene'),
 (5, 6, '2024-01-25', 'u obradi', 'nema napomene'),
 (8, 3, '2024-02-10', 'zaprimljen', 'nema napomene'),
-(2, 10, '2024-05-18', 'obrağen', 'na èekanju'),
+(2, 10, '2024-05-18', 'obraÄ‘en', 'na Äekanju'),
 (10, 1, '2024-03-12', 'zaprimljen', 'nema napomene'),
 (4, 9, '2024-06-22', 'u obradi', 'nema napomene'),
-(6, 8, '2024-04-15', 'obrağen', 'odbijeno');
+(6, 8, '2024-04-15', 'obraÄ‘en', 'odbijeno');
