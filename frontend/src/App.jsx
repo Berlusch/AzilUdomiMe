@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RouteNames } from './constants'
 import Pocetna from './Pages/Pocetna'
 import UdomiteljiPregled from './Pages/Udomitelji/UdomiteljiPregled'
-
+import UdomiteljiDodaj from './Pages/Udomitelji/UdomiteljiDodaj'
 
 
 
@@ -21,11 +21,12 @@ function App() {
   <Routes>
     <Route path={RouteNames.HOME} element={<Pocetna />} />
     <Route path={RouteNames.UDOMITELJ_PREGLED} element={<UdomiteljiPregled />} />
+    <Route path={RouteNames.UDOMITELJ_NOVI} element={<UdomiteljiDodaj />}/>
   </Routes>
   <hr/>
   
 
-      <img src="/logoveliki.svg" alt="Opis slike" />
+      <img src="/logoveliki.svg" alt="Logo" />
 
       
    

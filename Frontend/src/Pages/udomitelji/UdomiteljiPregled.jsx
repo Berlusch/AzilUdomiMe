@@ -1,6 +1,8 @@
 import { useEffect,useState } from "react"
 import UdomiteljService from "../../services/UdomiteljService"
 import { Tab, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { RouteNames } from "../../constants";
 
 
 export default function UdomiteljiPregled(){
@@ -23,6 +25,11 @@ export default function UdomiteljiPregled(){
 
     return(
         <>
+
+        <Link
+        to={RouteNames.UDOMITELJ_NOVI}
+        className="btn btn-success siroko"
+        >Dodaj novog udomitelja</Link>
         <Table striped bordered hover responsive>
             <thead>
                 <tr>

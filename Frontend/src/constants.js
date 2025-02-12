@@ -1,7 +1,8 @@
 export const RouteNames={
     HOME: '/',
 
-    UDOMITELJ_PREGLED: '/udomitelji'
+    UDOMITELJ_PREGLED: '/udomitelji',
+    UDOMITELJ_NOVI: './udomitelji/dodaj'
 }
 
 

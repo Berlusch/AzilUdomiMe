@@ -30,6 +30,7 @@ export default function NavBarEdunova(){
                     >Udomitelji</NavDropdown.Item>
                     
                     </NavDropdown>
+                    <Nav.Link href='https://blusch-001-site1.qtempurl.com/swagger' target='_blank'>Swagger</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
