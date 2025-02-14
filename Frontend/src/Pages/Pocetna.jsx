@@ -1,7 +1,7 @@
 export default function Pocetna(){
     return(
         <>  
-        Dobro došli u moju aplikaciju!
+        Dobro došli u aplikaciju Udomi me!
         </>
     )
 }

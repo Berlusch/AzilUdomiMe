@@ -13,35 +13,26 @@ import UdomiteljiDodaj from './Pages/Udomitelji/UdomiteljiDodaj'
 
 function App() {
   
-
   return (
     <>
-<Container>
-  <NavbarEdunova />
-  <Routes>
-    <Route path={RouteNames.HOME} element={<Pocetna />} />
-    <Route path={RouteNames.UDOMITELJ_PREGLED} element={<UdomiteljiPregled />} />
-    <Route path={RouteNames.UDOMITELJ_NOVI} element={<UdomiteljiDodaj />}/>
-  </Routes>
-  <hr/>
-  
-
-      <img src="/logoveliki.svg" alt="Logo" />
-
-      
-   
-      
-      
-</Container>
-
-&copy; Udomi me 2025.
+      <Container>
+        <NavbarEdunova />
+        <Routes>
+          <Route path={RouteNames.HOME} element={<Pocetna />} />
+          <Route path={RouteNames.UDOMITELJ_PREGLED} element={<UdomiteljiPregled />} />
+          <Route path={RouteNames.UDOMITELJ_NOVI} element={<UdomiteljiDodaj />}/>
+        </Routes>
+        <hr/>
     
 
-    
-     
-      
-      
+        <img src="/logoveliki.svg" alt="Logo" />
+        
+            
+        
+      </Container>
+      &copy; Bernarda Lusch 2025. 
     </>
+      
   )
 }
 

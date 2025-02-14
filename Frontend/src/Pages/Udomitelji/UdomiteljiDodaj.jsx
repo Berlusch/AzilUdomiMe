@@ -4,20 +4,18 @@ import { RouteNames } from "../../constants";
 
 export default function UdomiteljiDodaj(){
 
-
+    
     return(
-
-        <>
-        Dodavanje udomitelja
-        <Row>
-            <Col>
+    <>
+    Dodavanje udomitelja
+    <Row>
+        <Col>
             <Link
             to={RouteNames.UDOMITELJ_PREGLED}
             className="btn btn-danger siroko"
-            >Odustani
-            </Link>
-            </Col>
-        </Row>
-        </>
+            >Odustani</Link>
+        </Col>
+    </Row>
+    </>
     )
 }

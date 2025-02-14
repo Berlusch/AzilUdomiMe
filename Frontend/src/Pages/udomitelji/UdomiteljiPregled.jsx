@@ -1,14 +1,17 @@
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import UdomiteljService from "../../services/UdomiteljService"
-import { Tab, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
+//import { NumericFormat } from "react-number-format";
+//import moment from "moment";
+//import { GrValidate } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { RouteNames } from "../../constants";
+
 
 
 export default function UdomiteljiPregled(){
 
     const [udomitelji, setUdomitelji]= useState();
-
 
 
     async function dohvatiUdomitelje(){
@@ -59,7 +62,7 @@ export default function UdomiteljiPregled(){
                         </td>
                         <td>
                             {udomitelj.email}
-                        </td>
+                        </td>                        
                     </tr>
                 ))}
             </tbody>
