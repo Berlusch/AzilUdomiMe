@@ -8,6 +8,7 @@ import { RouteNames } from './constants'
 import Pocetna from './Pages/Pocetna'
 import UdomiteljiPregled from './Pages/Udomitelji/UdomiteljiPregled'
 import UdomiteljiDodaj from './Pages/Udomitelji/UdomiteljiDodaj'
+import UdomiteljiPromjena from './Pages/Udomitelji/UdomiteljiPromjena'
 
 
 
@@ -21,6 +22,7 @@ function App() {
           <Route path={RouteNames.HOME} element={<Pocetna />} />
           <Route path={RouteNames.UDOMITELJ_PREGLED} element={<UdomiteljiPregled />} />
           <Route path={RouteNames.UDOMITELJ_NOVI} element={<UdomiteljiDodaj />}/>
+          <Route path={RouteNames.UDOMITELJ_PROMJENA} element={<UdomiteljiPromjena />} />
         </Routes>
         <hr/>
     

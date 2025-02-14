@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import UdomiteljService from "../../services/UdomiteljService"
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 //import { NumericFormat } from "react-number-format";
 //import moment from "moment";
 //import { GrValidate } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
 
 
@@ -12,6 +12,7 @@ import { RouteNames } from "../../constants";
 export default function UdomiteljiPregled(){
 
     const [udomitelji, setUdomitelji]= useState();
+    const navigate=useNavigate();
 
 
     async function dohvatiUdomitelje(){
@@ -41,6 +42,7 @@ export default function UdomiteljiPregled(){
                     <th>Adresa</th>
                     <th>Telefon</th>
                     <th>Email</th>
+                    <th>Akcija</th>
                 </tr>
 
             </thead>
@@ -62,7 +64,12 @@ export default function UdomiteljiPregled(){
                         </td>
                         <td>
                             {udomitelj.email}
-                        </td>                        
+                        </td>   
+                        <td>
+                            <Button
+                            onClick={()=>navigate(`/udomitelji/${udomitelj.sifra}`)}
+                            >Promjena</Button>
+                            </td>                     
                     </tr>
                 ))}
             </tbody>

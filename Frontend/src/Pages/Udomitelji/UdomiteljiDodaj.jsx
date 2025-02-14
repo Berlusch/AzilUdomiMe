@@ -1,23 +1,26 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import UdomiteljService from "../../services/UdomiteljService";
+import moment from "moment"
 
 export default function UdomiteljiDodaj(){
 
-    const navigate = useNavigate();
+    const navigate = useNavigate();     
 
     async function dodaj(udomitelj){
-        const odgovor= UdomiteljService.dodaj(udomitelj);
+        const odgovor= await UdomiteljService.dodaj(udomitelj);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
         navigate(RouteNames.UDOMITELJ_PREGLED)
+        
+        
 
     }
 
-    function OdradiSubmit(e){ // e je event
+    function odradiSubmit(e){ // e je event
         e.preventDefault(); //nemoj odraditi zahtjev na server na standardni način
         
         let podatci = new FormData(e.target);
@@ -40,7 +43,7 @@ export default function UdomiteljiDodaj(){
     return(
     <>
     Dodavanje udomitelja
-    <Form onSubmit={OdradiSubmit}>
+    <Form onSubmit={odradiSubmit}>
 
         <Form.Group controlId="ime">
             <Form.Label>Ime</Form.Label>
@@ -70,24 +73,28 @@ export default function UdomiteljiDodaj(){
         <hr/>
     
 
-    <Row>
-        <Col xs={6} sm={12} md={3} lg={6} xl={6} xxl={6}>
-            <Link
-            to={RouteNames.UDOMITELJ_PREGLED}
-            className="btn btn-danger siroko"
-            >Odustani</Link>
-        </Col>
+        <Row>
+            <Col xs={6} sm={12} md={3} lg={6} xl={6} xxl={6}>
+                <Link
+                to={RouteNames.UDOMITELJ_PREGLED}
+                className="btn btn-danger siroko"
+                >Odustani</Link>
+            </Col>
 
-        <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
-            <Button variant="success" type="submit" className="siroko">
-                Dodaj udomitelja
-            </Button>
-        </Col>
+            <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
+                <Button variant="success" type="submit" className="siroko">
+                    Dodaj udomitelja
+                </Button>
+            </Col>
 
-    </Row>
+        </Row>
 
 
     </Form>
+
+
+    
     </>
     )
+
 }
