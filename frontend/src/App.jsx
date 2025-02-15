@@ -27,7 +27,7 @@ function App() {
         <hr/>
     
 
-        <img src="/logoveliki.svg" alt="Logo" />
+        <img src="/logosrednji.jpg" alt="Logo" className="logo-centered" />
         
             
         

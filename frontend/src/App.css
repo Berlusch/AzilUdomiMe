@@ -4,3 +4,7 @@
 .siroko{
     width:100%
 }
+.logo-centered {
+    display: block;
+    margin: 0 auto;
+}
