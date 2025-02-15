@@ -20,8 +20,8 @@ export default function UdomiteljiPromjena(){
         dohvatiUdomitelje();
     },[])
 
-    async function dodaj(udomitelj){
-        const odgovor= UdomiteljService.dodaj(udomitelj);
+    async function promijeni(udomitelj){
+        const odgovor= await UdomiteljService.promijeni(routeParams.sifra,udomitelj);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
@@ -37,7 +37,7 @@ export default function UdomiteljiPromjena(){
         
         let podatci = new FormData(e.target);
 
-        dodaj(
+        promijeni(
             {           
  
                 ime: podatci.get('ime'),
@@ -76,7 +76,7 @@ export default function UdomiteljiPromjena(){
 
         <Form.Group controlId="telefon">
             <Form.Label>Telefon</Form.Label>
-            <Form.Control type="number" name="telefon" required
+            <Form.Control type="text" name="telefon" required
             defaultValue={udomitelj.telefon}/>
         </Form.Group>
 
