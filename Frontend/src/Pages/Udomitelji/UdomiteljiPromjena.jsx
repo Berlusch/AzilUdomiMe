@@ -53,7 +53,7 @@ export default function UdomiteljiPromjena(){
     
     return(
     <>
-    Promjena udomitelja
+    <h2 className="naslov">Promjena udomitelja</h2>
     <Form onSubmit={OdradiSubmit}>
 
         <Form.Group controlId="ime">

@@ -19,7 +19,7 @@ export default function NavBarEdunova(){
                 <Navbar.Brand 
                 className='ruka'
                 onClick={()=>navigate(RouteNames.HOME)}
-                >Udomi me</Navbar.Brand>
+                ><img src="/logosrednji.jpg" alt="Logo" className="logo-navbar" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

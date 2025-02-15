@@ -8,3 +8,17 @@
     display: block;
     margin: 0 auto;
 }
+.naslov{
+    font-weight: bold;  /* Podebljana slova */
+    font-size: 16px;    /* Veličina slova */
+    background-color: #E6CCFF; /* Svijetloljubičasta pozadina */
+    padding: 5px 10px;  /* Malo prostora oko teksta */
+    display: inline-block; /* Omogućava da pozadina prati veličinu teksta */
+    border-radius: 5px; /* Zaobljeni rubovi (po želji) */
+
+}
+.logo-navbar {
+    width: 100px;  /* Podešavanje širine slike */
+    height: auto;  /* Automatski postavljena visina, održava proporcije */
+    cursor: pointer;  /* Pokazivač na ruci kad se prijeđe mišem */
+  }

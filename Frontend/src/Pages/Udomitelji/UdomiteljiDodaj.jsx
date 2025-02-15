@@ -42,7 +42,7 @@ export default function UdomiteljiDodaj(){
     
     return(
     <>
-    Dodavanje udomitelja
+    <h2 className="naslov">Dodavanje udomitelja</h2>
     <Form onSubmit={odradiSubmit}>
 
         <Form.Group controlId="ime">
