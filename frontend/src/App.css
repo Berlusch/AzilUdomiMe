@@ -32,7 +32,7 @@
   } 
 
   .welcome-title {
-    font-weight: bold;         /* Podebljana slova */
+    
     font-size: 24px;           /* Veličina slova */
     color: #4B0082;            /* Ljubičasta boja (možeš zamijeniti s nekom drugom) */
     text-align: left;        /* Centriranje teksta */
