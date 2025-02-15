@@ -41,3 +41,9 @@
     background-color: #f0e6ff; /* Svijetloljubičasta pozadina (možeš promijeniti) */
     border-radius: 10px;       /* Zaobljeni rubovi */
   }
+
+  .custom-right-align {
+    margin-left: auto;
+}
+
+ 

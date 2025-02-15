@@ -78,11 +78,12 @@ export default function UdomiteljiDodaj(){
                 <Link
                 to={RouteNames.UDOMITELJ_PREGLED}
                 className="btn btn-danger siroko"
+                style={{ backgroundColor: '#E0B0FF' }}
                 >Odustani</Link>
             </Col>
 
             <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
-                <Button variant="success" type="submit" className="siroko">
+                <Button variant="success" type="submit" className="siroko" style={{ backgroundColor: '#7d3d9b' }}>
                     Dodaj udomitelja
                 </Button>
             </Col>
