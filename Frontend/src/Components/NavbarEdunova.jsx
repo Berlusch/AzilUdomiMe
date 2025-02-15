@@ -24,7 +24,7 @@ export default function NavBarEdunova(){
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                  
-                    <NavDropdown title="Udomitelji" id="basic-nav-dropdown">
+                    <NavDropdown title={<span className="dropdown-title">Udomitelji</span>} id="basic-nav-dropdown">
                     <NavDropdown.Item
                     onClick={()=>navigate(RouteNames.UDOMITELJ_PREGLED)}
                     >Udomitelji</NavDropdown.Item>

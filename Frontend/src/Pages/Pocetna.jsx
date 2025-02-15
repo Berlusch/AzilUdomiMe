@@ -1,7 +1,9 @@
 export default function Pocetna(){
     return(
         <>  
-        Dobro došli u aplikaciju Udomi me!
+        <h1 className="welcome-title">
+  Dobro došli u aplikaciju Udomi me!
+</h1>
         </>
     )
 }
