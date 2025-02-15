@@ -91,6 +91,7 @@ namespace Backend.Controllers
                 s.Prezime = udomitelj.Prezime;
                 s.Adresa = udomitelj.Adresa;
                 s.Telefon = udomitelj.Telefon;
+                s.Email = udomitelj.Email;
                 _context.Udomitelji.Update(s);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno ažurirano" });
