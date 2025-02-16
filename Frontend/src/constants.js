@@ -3,7 +3,8 @@ export const RouteNames={
 
     UDOMITELJ_PREGLED: '/udomitelji',
     UDOMITELJ_NOVI: '/udomitelji/dodaj',
-    UDOMITELJ_PROMJENA: '/udomitelji/:sifra'
+    UDOMITELJ_PROMJENA: '/udomitelji/:sifra',
+    UDOMITELJ_BRISANJE: '/udomitelji/obrisi'
 }
 
 

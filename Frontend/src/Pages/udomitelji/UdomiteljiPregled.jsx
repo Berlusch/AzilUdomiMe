@@ -42,7 +42,7 @@ export default function UdomiteljiPregled(){
                     <th>Adresa</th>
                     <th>Telefon</th>
                     <th>Email</th>
-                    <th>Akcija</th>
+                    <th style={{ width: "120px", textAlign: "center" }}>Akcija</th>
                 </tr>
 
             </thead>
@@ -64,12 +64,22 @@ export default function UdomiteljiPregled(){
                         </td>
                         <td>
                             {udomitelj.email}
-                        </td>   
-                        <td>
+                        </td>  
+                        <td style={{ display: "flex", gap: "10px" }}>
                             <Button
-                            onClick={()=>navigate(`/udomitelji/${udomitelj.sifra}`)}
-                            >Promjena</Button>
-                            </td>                     
+                            style={{ backgroundColor: '#7d3d9b', color: "white" }}
+                            onClick={() => navigate(`/udomitelji/${udomitelj.sifra}`)}
+                            >
+                                Promjena
+                            </Button>
+                            
+                            <Button
+                            style={{ backgroundColor: '#9c989a', color: "white" }}
+                            onClick={() => navigate(`/udomitelji/obrisi/`)}
+                            >Brisanje
+                            </Button>
+                            </td> 
+                                        
                     </tr>
                 ))}
             </tbody>

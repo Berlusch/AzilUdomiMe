@@ -31,9 +31,16 @@ async function promijeni(sifra,udomitelj){
     .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
 }
 
+async function obrisi(sifra){
+    return HttpService.delete(`/Udomitelj/${sifra}`)
+    .then(()=>{return{greska:false, poruka: 'Obrisano'}})
+    .catch(()=>{return{greska:true, poruka:'Problem kod brisanja'}})
+}
+
 export default{
     get,
     getBySifra,
     promijeni,
-    dodaj
+    dodaj,
+    obrisi
 }

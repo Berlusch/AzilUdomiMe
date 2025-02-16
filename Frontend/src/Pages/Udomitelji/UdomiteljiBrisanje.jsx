@@ -1,11 +1,10 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import moment from "moment";
 import UdomiteljService from "../../services/UdomiteljService";
 import { useEffect, useState } from "react";
 
-export default function UdomiteljiPromjena(){
+export default function UdomiteljiBrisanje(){
 
     const navigate = useNavigate();
     const [udomitelj,setUdomitelj]= useState({});
@@ -18,15 +17,15 @@ export default function UdomiteljiPromjena(){
 
     useEffect(()=>{
         dohvatiUdomitelje();
-    },[])
+    },[routeParams.sifra])
 
-    async function promijeni(udomitelj){
-        const odgovor= await UdomiteljService.promijeni(routeParams.sifra,udomitelj);
+    async function obrisi (){
+        const odgovor= await UdomiteljService.obrisi(routeParams.sifra);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
-        navigate(RouteNames.UDOMITELJ_PREGLED)
+        navigate(RouteNames.UDOMITELJ_BRISANJE)
 
         
         
@@ -37,53 +36,50 @@ export default function UdomiteljiPromjena(){
         
         let podatci = new FormData(e.target);
 
-        promijeni(
-            {           
- 
-                ime: podatci.get('ime'),
-                prezime: podatci.get('prezime'),
-                adresa: podatci.get('adresa'),
-                telefon: podatci.get('telefon'),
-                email: podatci.get('email')
-            }
+        obrisi();           
                 
-        );
+        
     }
 
     
     return(
     <>
-    <h2 className="naslov">Promjena udomitelja</h2>
+    <h2 className="naslov">Brisanje udomitelja</h2>
     <Form onSubmit={OdradiSubmit}>
 
         <Form.Group controlId="ime">
             <Form.Label>Ime</Form.Label>
             <Form.Control type="text" name="ime" required
-            defaultValue={udomitelj.ime}/>
+            defaultValue={udomitelj.ime}
+            readOnly/>
         </Form.Group>
 
         <Form.Group controlId="prezime">
             <Form.Label>Prezime</Form.Label>
             <Form.Control type="text" name="prezime" required
-            defaultValue={udomitelj.prezime}/>
+            defaultValue={udomitelj.prezime}
+            readOnly/>
         </Form.Group>
 
         <Form.Group controlId="adresa">
             <Form.Label>Adresa</Form.Label>
             <Form.Control type="text" name="adresa" required
-            defaultValue={udomitelj.adresa}/>
+            defaultValue={udomitelj.adresa}
+            readOnly/>
         </Form.Group>
 
         <Form.Group controlId="telefon">
             <Form.Label>Telefon</Form.Label>
             <Form.Control type="text" name="telefon" required
-            defaultValue={udomitelj.telefon}/>
+            defaultValue={udomitelj.telefon}
+            readOnly/>
         </Form.Group>
 
         <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control type="text" name="email" required
-            defaultValue={udomitelj.email}/>
+            defaultValue={udomitelj.email}
+            readOnly/>
         </Form.Group>
 
         <hr/>
@@ -99,8 +95,9 @@ export default function UdomiteljiPromjena(){
             </Col>
 
             <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
-                <Button variant="success" type="submit" className="siroko"style={{ backgroundColor: '#7d3d9b' }}>
-                    Promijeni udomitelja
+                <Button variant="success" type="submit" className="siroko"
+                style={{ backgroundColor: '#7d3d9b' }}
+                >Obrisi udomitelja
                 </Button>
             </Col>
 

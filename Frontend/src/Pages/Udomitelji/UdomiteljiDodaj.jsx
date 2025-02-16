@@ -78,7 +78,7 @@ export default function UdomiteljiDodaj(){
                 <Link
                 to={RouteNames.UDOMITELJ_PREGLED}
                 className="btn btn-danger siroko"
-                style={{ backgroundColor: '#E0B0FF' }}
+                style={{ backgroundColor: '#9c989a' }}
                 >Odustani</Link>
             </Col>
 
