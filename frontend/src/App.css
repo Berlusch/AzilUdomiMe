@@ -24,28 +24,27 @@
 
 }
 .logo-navbar {
-    width: 100px;  /* Podešavanje širine slike */
-    height: auto;  /* Automatski postavljena visina, održava proporcije */
-    cursor: pointer;  /* Pokazivač na ruci kad se prijeđe mišem */
+    width: 120px;  
+    height: auto;  
+    cursor: pointer;  
   }
 
   .dropdown-title {
     
-    font-size: 18px;          /* Veličina slova */
-    color: #4B0082;           /* Ljubičasta boja (ili bilo koja koju želiš) */
-    
-    cursor: pointer;         /* Pokazivač na ruci kad se prijeđe mišem */
+    font-size: 20px;          
+    color: #4B0082;           
+    cursor: pointer;         
   } 
 
   .welcome-title {
     
-    font-size: 24px;           /* Veličina slova */
-    color: #4B0082;            /* Ljubičasta boja (možeš zamijeniti s nekom drugom) */
-    text-align: left;        /* Centriranje teksta */
+    font-size: 24px;           
+    color: #4B0082;            
+    text-align: center;        
     
-    padding: 20px 0;           /* Prostor iznad i ispod teksta */
-    background-color: #f0e6ff; /* Svijetloljubičasta pozadina (možeš promijeniti) */
-    border-radius: 10px;       /* Zaobljeni rubovi */
+    padding: 20px 0;           
+    background-color: #f0e6ff; 
+    border-radius: 10px;       
   }
 
   .custom-right-align {
