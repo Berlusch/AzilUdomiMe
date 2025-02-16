@@ -17,15 +17,15 @@ export default function UdomiteljiBrisanje(){
 
     useEffect(()=>{
         dohvatiUdomitelje();
-    },[routeParams.sifra])
+    },[])
 
     async function obrisi (){
-        const odgovor= await UdomiteljService.obrisi(routeParams.sifra);
+        const odgovor= await UdomiteljService.obrisi(routeParams.sifra,udomitelj);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
-        navigate(RouteNames.UDOMITELJ_BRISANJE)
+        navigate(RouteNames.UDOMITELJ_PREGLED)
 
         
         
@@ -36,11 +36,20 @@ export default function UdomiteljiBrisanje(){
         
         let podatci = new FormData(e.target);
 
-        obrisi();           
+        obrisi(
+            {           
+ 
+                ime: podatci.get('ime'),
+                prezime: podatci.get('prezime'),
+                adresa: podatci.get('adresa'),
+                telefon: podatci.get('telefon'),
+                email: podatci.get('email')
+            }
+
+        );           
                 
         
     }
-
     
     return(
     <>
@@ -97,7 +106,7 @@ export default function UdomiteljiBrisanje(){
             <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
                 <Button variant="success" type="submit" className="siroko"
                 style={{ backgroundColor: '#7d3d9b' }}
-                >Obrisi udomitelja
+                >Obriši udomitelja
                 </Button>
             </Col>
 

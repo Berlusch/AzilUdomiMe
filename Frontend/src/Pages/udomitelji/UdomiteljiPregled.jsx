@@ -75,8 +75,9 @@ export default function UdomiteljiPregled(){
                             
                             <Button
                             style={{ backgroundColor: '#9c989a', color: "white" }}
-                            onClick={() => navigate(`/udomitelji/obrisi/`)}
-                            >Brisanje
+                            onClick={() => navigate(`/udomitelji/obrisi/${udomitelj.sifra}`)}
+                            >
+                                Brisanje
                             </Button>
                             </td> 
                                         
