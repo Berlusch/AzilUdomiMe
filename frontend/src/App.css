@@ -15,12 +15,12 @@
     margin: 0 auto;
 }
 .naslov{
-    font-weight: bold;  /* Podebljana slova */
-    font-size: 16px;    /* Veličina slova */
-    background-color: #E6CCFF; /* Svijetloljubičasta pozadina */
-    padding: 5px 10px;  /* Malo prostora oko teksta */
+    font-weight: bold;  
+    font-size: 16px;    
+    background-color: #E6CCFF; 
+    padding: 5px 10px;  
     display: inline-block; /* Omogućava da pozadina prati veličinu teksta */
-    border-radius: 5px; /* Zaobljeni rubovi (po želji) */
+    border-radius: 5px; /* Zaobljeni rubovi (po želji)*/
 
 }
 .logo-navbar {

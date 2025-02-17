@@ -34,7 +34,7 @@ function App() {
             
         
       </Container>
-      &copy; Bernarda Lusch 2025. 
+      &copy; Udomi me 2025. 
     </>
       
   )
