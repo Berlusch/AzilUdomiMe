@@ -21,6 +21,7 @@ export default function UdomiteljiPregled(){
 
     }
 
+    
     //hooks (kuka) se izvodi prilikom dolaska na stranicu Udomitelji
     useEffect(()=>{
         dohvatiUdomitelje();
