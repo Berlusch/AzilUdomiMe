@@ -1,5 +1,5 @@
 .ruka{
-    cursor:pointer;
+  cursor: pointer;
 }
 .siroko{
     width:100%;
@@ -30,9 +30,11 @@ siroko:focus {
 
 }
 .logo-navbar {
-    width: 120px;  
+    width: 150px;  
     height: auto;  
-    cursor: pointer;  
+    cursor: pointer;
+    padding-bottom: 20px;  
+    padding-right: 20px;
   }
 
   .dropdown-title {

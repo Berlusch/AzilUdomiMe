@@ -32,10 +32,10 @@ export default function NavBarEdunova(){
     <Nav.Link
         href="https://blusch-001-site1.qtempurl.com/swagger"
         target="_blank"
-        style={{ backgroundColor: '#00ff00' }}
+        style={{ backgroundColor: '#00ff00'}}
         className="ms-auto"
     >
-        Swagger
+        <strong>Swagger</strong>
     </Nav.Link>
 </Nav>
                 

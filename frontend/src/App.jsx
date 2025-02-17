@@ -29,12 +29,15 @@ function App() {
         <hr/>
     
 
-        <img src="/logosrednji.jpg" alt="Logo" className="logo-centered" />
+        <img src="/paw.png" alt="Logo" className="logo-centered" />
         
             
         
       </Container>
-      &copy; Udomi me 2025. 
+      <div style={{ textAlign: 'center', paddingRight: '30px' }}>
+  &copy; Udomi me 2025.
+</div>
+
     </>
       
   )

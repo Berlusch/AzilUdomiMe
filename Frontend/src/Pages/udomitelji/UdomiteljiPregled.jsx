@@ -42,7 +42,7 @@ export default function UdomiteljiPregled(){
                     <th>Adresa</th>
                     <th>Telefon</th>
                     <th>Email</th>
-                    <th style={{ width: "120px", textAlign: "center" }}>Akcija</th>
+                    <th style={{ width: "120px", textAlign: "center" }}>Opcije</th>
                 </tr>
 
             </thead>
