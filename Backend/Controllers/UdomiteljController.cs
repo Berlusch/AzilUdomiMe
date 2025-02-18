@@ -1,72 +1,77 @@
-﻿using Backend.Data;
+﻿using AutoMapper;
+using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class UdomiteljController : ControllerBase
+    public class UdomiteljController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
     {
-        private readonly BackendContext _context;
-
-        public UdomiteljController(BackendContext context)
-        {
-            _context = context;
-        }
+        
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<UdomiteljDTORead>> Get()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                return Ok(_context.Udomitelji);
+                return Ok(_mapper.Map<List<UdomiteljDTORead>>(_context.Udomitelji));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
 
         }
         [HttpGet]
         [Route("{sifra:int}")]
-        public IActionResult GetBySifra(int sifra)
+        public ActionResult<UdomiteljDTORead> GetBySifra(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            Udomitelj? e;
             try
             {
-                var s = _context.Udomitelji.Find(sifra);
-                if (s == null)
-                {
-                    return NotFound();
-                }
-                return Ok(s);
+                e = _context.Udomitelji.Find(sifra);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Udomitelj ne postoji u bazi" });
+            }
+
+            return Ok(_mapper.Map<UdomiteljDTORead>(e));
         }
 
 
         [HttpPost]
-        public IActionResult Post(Udomitelj udomitelj)
+        public IActionResult Post(UdomiteljDTOInsertUpdate dto)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                _context.Udomitelji.Add(udomitelj);
+                var e = _mapper.Map<Udomitelj>(dto);
+                _context.Udomitelji.Add(e);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, udomitelj);
-
-
-
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<UdomiteljDTORead>(e));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
-
 
 
 
@@ -75,57 +80,75 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Udomitelj udomitelj)
-
+        public IActionResult Put(int sifra, UdomiteljDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-
-                var s = _context.Udomitelji.Find(sifra);
-                if (s == null)
+                Udomitelj? e;
+                try
                 {
-                    return NotFound();
+                    e = _context.Udomitelji.Find(sifra);
                 }
-                //rucno mapiranje, kasnije automaper
-                s.Ime = udomitelj.Ime;
-                s.Prezime = udomitelj.Prezime;
-                s.Adresa = udomitelj.Adresa;
-                s.Telefon = udomitelj.Telefon;
-                s.Email = udomitelj.Email;
-                _context.Udomitelji.Update(s);
-                _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno ažurirano" });
-            }
-            catch (Exception e)
-            {
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Udomitelj ne postoji u bazi" });
+                }
 
-                return BadRequest(e);
+                e = _mapper.Map(dto, e);
+
+                _context.Udomitelji.Update(e);
+                _context.SaveChanges();
+
+                return Ok(new { poruka = "Uspješno promijenjeno" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
             }
 
         }
 
         [HttpDelete]
         [Route("{sifra:int}")]
+        [Produces("application/json")]
         public IActionResult Delete(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                var s = _context.Udomitelji.Find(sifra);
-                if (s == null)
+                Udomitelj? e;
+                try
                 {
-                    return NotFound();
+                    e = _context.Udomitelji.Find(sifra);
                 }
-                _context.Udomitelji.Remove(s);
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound("Udomitelj ne postoji u bazi");
+                }
+                _context.Udomitelji.Remove(e);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
-
-
 
 
     }

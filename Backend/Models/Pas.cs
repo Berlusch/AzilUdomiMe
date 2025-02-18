@@ -49,5 +49,7 @@ namespace Backend.Models
             Slobodan,
             PrivremeniSmjestaj
         }
+        public int? UdomiteljSifra { get; set; }
+        public Udomitelj Udomitelj { get; set; }
     }
 }

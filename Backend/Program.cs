@@ -1,5 +1,6 @@
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
+using Backend.Mapping;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,10 @@ builder.Services.AddCors(o =>
 
 });
 
+//automapper
+
+builder.Services.AddAutoMapper(typeof(BackendMappingProfile));
+
 
 
 var app = builder.Build();
@@ -50,6 +55,8 @@ app.UseSwaggerUI(o => {
 app.MapControllers();
 
 app.UseCors("CorsPolicy");
+
+//za potrebe produkcije
 
 app.UseStaticFiles();
 app.UseDefaultFiles();
