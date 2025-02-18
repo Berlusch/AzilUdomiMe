@@ -8,9 +8,7 @@ namespace Backend.Models.DTO
         string Pasmina,
         DateTime Datum_Rodjenja,
         Spol SpolVrsta,
-        Velicina VelicinaPsa,
-        Boja BojaPsa,
-        string MojaPrica,
+        string Opis,
         bool Kastracija,
         StatusEnum StatusOpis,
         int? UdomiteljSifra
@@ -19,21 +17,6 @@ namespace Backend.Models.DTO
     public class Enumi
     {
         public enum Spol { M, Ž }
-
-        public enum Velicina
-        {
-            Mali,
-            Srednji,
-            Veliki
-        }
-
-        public enum Boja
-        {
-            Bijeli,
-            Crni,
-            Smeđi,
-            Šareni
-        }
 
         public enum StatusEnum
         {

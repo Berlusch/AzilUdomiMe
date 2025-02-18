@@ -137,3 +137,18 @@ VALUES
 (10, 1, '2024-03-12', 'zaprimljen', 'nema napomene'),
 (4, 9, '2024-06-22', 'u obradi', 'nema napomene'),
 (6, 8, '2024-04-15', 'obrađen', 'odbijeno');
+
+
+DELETE FROM psi WHERE sifra IN (1, 2, 3, 4, 5, 6, 7, 8, 9);
+UPDATE psi  
+SET opis = 'Veličina: ' + v.naziv + ', Boja: ' + b.naziv + ', Priča: ' + mojaprica  
+FROM psi  
+JOIN velicine v ON psi.velicina = v.sifra  
+JOIN boje b ON psi.boja = b.sifra;
+
+ALTER TABLE psi DROP CONSTRAINT [FK__psi__boja__5070F446];  
+ALTER TABLE psi DROP CONSTRAINT [FK__psi__velicina__5070F447];  
+
+ALTER TABLE psi  
+DROP COLUMN boja, velicina, mojaprica;
+
