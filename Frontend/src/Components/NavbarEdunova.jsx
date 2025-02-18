@@ -22,8 +22,8 @@ export default function NavBarEdunova(){
                 ><img src="/logo-removebg-preview.png" alt="Logo" className="logo-navbar" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="d-flex w-100 justify-content-between"style={{ paddingBottom: '20px' }} >
-    <NavDropdown title={<span className="dropdown-title">Udomitelji</span>} id="basic-nav-dropdown">
+                <Nav className="d-flex w-100 justify-content-between"style={{ paddingBottom: '30px' }} >
+    <NavDropdown title={<span className="dropdown-title"><img src="/izbornik.png" alt="Izbornik" /></span>} id="basic-nav-dropdown">
         <NavDropdown.Item onClick={() => navigate(RouteNames.UDOMITELJ_PREGLED)}>
             Udomitelji
         </NavDropdown.Item>
@@ -32,8 +32,8 @@ export default function NavBarEdunova(){
     <Nav.Link
         href="https://blusch-001-site1.qtempurl.com/swagger"
         target="_blank"
-        style={{ backgroundColor: '#00ff00'}}
-        className="ms-auto"
+        style={{ display: 'inline-block' }}
+        
     >
         <strong>Swagger</strong>
     </Nav.Link>
