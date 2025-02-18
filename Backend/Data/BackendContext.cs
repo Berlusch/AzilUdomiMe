@@ -16,7 +16,10 @@ namespace Backend.Data
 
         public DbSet<Udomitelj> Udomitelji { get; set; }
 
-        
+        public DbSet<Status> Statusi { get; set; }
+        public DbSet<Upit> Upiti { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,13 +38,25 @@ namespace Backend.Data
 
             base.OnModelCreating(modelBuilder);
 
-            // Konfiguracija odnosa: jedan udomitelj može imati više pasa, ali pas ima samo jednog udomitelja
-            // Konfiguracija odnosa: jedan udomitelj može imati više pasa, ali pas može imati jednog udomitelja ili ne
+
+            //Jedan udomitelj može imati više pasa, ali pas može imati jednog udomitelja ili ne
             modelBuilder.Entity<Udomitelj>()
                 .HasMany(u => u.Psi)  // Jedan udomitelj može imati više pasa
-                .WithOne(p => p.Udomitelj)    // Svaki pas ima jednog udomitelja (ako postoji)
-                .HasForeignKey(p => p.UdomiteljSifra)  // UdomiteljSifra je strani ključ u entitetu Pas
-                .IsRequired(false);  // Pas ne mora imati udomitelja, pa nije obavezno
+                .WithOne(p => p.Udomitelj)    // Pas ima jednog udomitelja (ako postoji)
+                .HasForeignKey(p => p.UdomiteljSifra)
+                .IsRequired(false);  // Pas ne mora imati udomitelja pa nije obavezno
+
+            modelBuilder.Entity<Pas>()
+                .HasOne(p => p.StatusOpis)  // Pas može imati samo jedan status
+                .WithMany(s => s.Psi)  // Status može imati više pasa
+                .HasForeignKey(p => p.StatusSifra)
+                .IsRequired();
+
+            modelBuilder.Entity<Upit>()
+                .HasOne(u => u.Pas)  // Upit je povezan s jednim psom
+                .WithMany(p => p.Upiti)  // Pas može imati više upita
+                .HasForeignKey(u => u.PasSifra)
+                .IsRequired();
 
         }
 

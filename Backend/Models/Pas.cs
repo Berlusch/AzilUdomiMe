@@ -19,17 +19,11 @@ namespace Backend.Models
               
         public bool Kastracija { get; set; }
 
-
-        public StatusEnum StatusOpis { get; set; }
-
-        public enum StatusEnum
-        {
-            Udomljen,
-            Rezerviran,
-            Slobodan,
-            PrivremeniSmjestaj
-        }
+        public int StatusSifra { get; set; }  // Strani ključ prema statusu
+        public Status StatusOpis { get; set; }
+                
         public int? UdomiteljSifra { get; set; }
         public Udomitelj Udomitelj { get; set; }
+        public ICollection<Upit> Upiti { get; set; } = new List<Upit>();
     }
 }

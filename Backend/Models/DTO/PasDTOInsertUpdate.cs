@@ -10,7 +10,7 @@ namespace Backend.Models.DTO
         Spol SpolVrsta,
         string Opis,
         bool Kastracija,
-        StatusEnum StatusOpis,
+        Status StatusOpis,
         int? UdomiteljSifra
     );
 
@@ -18,12 +18,5 @@ namespace Backend.Models.DTO
     {
         public enum Spol { M, Ž }
 
-        public enum StatusEnum
-        {
-            Udomljen,
-            Rezerviran,
-            Slobodan,
-            PrivremeniSmjestaj
-        }
     }
 }

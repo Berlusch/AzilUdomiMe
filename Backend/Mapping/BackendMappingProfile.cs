@@ -16,7 +16,12 @@ namespace Backend.Mapping
             CreateMap<Pas, PasDTORead>();
             CreateMap<PasDTOInsertUpdate, Pas>();
 
-            
+            CreateMap<Status, StatusDTORead>();
+            CreateMap<StatusDTOInsertUpdate, Status>();
+
+            CreateMap<Upit, UpitDTORead>();
+            CreateMap<UpitDTOInsertUpdate, Upit>();
+
         }
     }
 }

@@ -1,0 +1,156 @@
+﻿using AutoMapper;
+using Backend.Data;
+using Backend.Models;
+using Backend.Models.DTO;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Backend.Controllers
+{
+    [ApiController]
+    [Route("api/v1/[controller]")]
+    public class UpitController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
+    {
+
+        [HttpGet]
+        public ActionResult<List<UpitDTORead>> Get()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                return Ok(_mapper.Map<List<UpitDTORead>>(_context.Upiti));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+
+        }
+        [HttpGet]
+        [Route("{sifra:int}")]
+        public ActionResult<UpitDTORead> GetBySifra(int sifra)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            Upit? e;
+            try
+            {
+                e = _context.Upiti.Find(sifra);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Upit ne postoji u bazi" });
+            }
+
+            return Ok(_mapper.Map<UpitDTORead>(e));
+        }
+
+
+        [HttpPost]
+        public IActionResult Post(UpitDTOInsertUpdate dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                var e = _mapper.Map<Upit>(dto);
+                _context.Upiti.Add(e);
+                _context.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<UdomiteljDTORead>(e));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+
+
+
+        }
+
+        [HttpPut]
+        [Route("{sifra:int}")]
+        [Produces("application/json")]
+        public IActionResult Put(int sifra, UpitDTOInsertUpdate dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                Upit? e;
+                try
+                {
+                    e = _context.Upiti.Find(sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Upit ne postoji u bazi" });
+                }
+
+                e = _mapper.Map(dto, e);
+
+                _context.Upiti.Update(e);
+                _context.SaveChanges();
+
+                return Ok(new { poruka = "Uspješno promijenjeno" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+
+        }
+
+        [HttpDelete]
+        [Route("{sifra:int}")]
+        [Produces("application/json")]
+        public IActionResult Delete(int sifra)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                Upit? e;
+                try
+                {
+                    e = _context.Upiti.Find(sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound("Upit ne postoji u bazi");
+                }
+                _context.Upiti.Remove(e);
+                _context.SaveChanges();
+                return Ok(new { poruka = "Uspješno obrisano" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+        }
+
+
+    }
+}
+
