@@ -9,7 +9,7 @@
 
         public DateTime DatumUpita { get; set; }
         public required Status StatusUpita { get; set; }
-        public string? SadrzajNapomene { get; set; }
+        public string SadrzajNapomene { get; set; } = "";
         
 
 

@@ -4,22 +4,10 @@
     string Ime,
     string BrojCipa,
     DateTime Datum_Rodjenja,
-    Spol SpolVrsta,
+    Spol Spol,
     string Opis,
     bool Kastracija,
-    StatusEnum StatusOpis
+    Status StatusOpis
 );
-    public enum Spol
-    {
-        M, // Muški
-        Ž  // Ženski
-    }
-
-    public enum StatusEnum
-    {
-        Udomljen,
-        Rezerviran,
-        Slobodan,
-        PrivremeniSmjestaj
-    }
+    
 }

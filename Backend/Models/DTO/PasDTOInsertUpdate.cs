@@ -3,20 +3,17 @@
 namespace Backend.Models.DTO
 {
     public record PasDTOInsertUpdate(
+        [Required(ErrorMessage = "Ime obavezno")]
         string Ime,
+        [Required(ErrorMessage = "Broj čipa obavezan")]
         string BrojCipa,
-        string Pasmina,
         DateTime Datum_Rodjenja,
-        Spol SpolVrsta,
+        Spol Spol,
         string Opis,
         bool Kastracija,
         Status StatusOpis,
         int? UdomiteljSifra
     );
 
-    public class Enumi
-    {
-        public enum Spol { M, Ž }
-
-    }
+    
 }

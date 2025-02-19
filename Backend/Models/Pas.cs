@@ -9,10 +9,7 @@ namespace Backend.Models
         public string BrojCipa { get; set; } = "";
         public DateTime Datum_Rodjenja { get; set; }
 
-        public Spol SpolVrsta { get; set; }
-
-        public enum Spol { M, Ž }
-
+        public Spol Spol { get; set; }
 
         public string Opis { get; set; } = "";  
                 
