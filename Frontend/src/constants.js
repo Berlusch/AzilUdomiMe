@@ -4,7 +4,12 @@ export const RouteNames={
     UDOMITELJ_PREGLED: '/udomitelji',
     UDOMITELJ_NOVI: '/udomitelji/dodaj',
     UDOMITELJ_PROMJENA: '/udomitelji/:sifra',
-    UDOMITELJ_BRISANJE: '/udomitelji/obrisi/:sifra'
+    UDOMITELJ_BRISANJE: '/udomitelji/obrisi/:sifra',
+
+    PAS_PREGLED: '/psi',
+    PAS_NOVI: '/psi/dodaj',
+    PAS_PROMJENA: '/psi/:sifra',
+    PAS_BRISANJE: '/psi/obrisi/:sifra'
 }
 
 

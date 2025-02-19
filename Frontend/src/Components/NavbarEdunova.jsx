@@ -24,6 +24,9 @@ export default function NavBarEdunova(){
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="d-flex w-100 justify-content-between"style={{ paddingBottom: '30px' }} >
     <NavDropdown title={<span className="dropdown-title"><img src="/izbornik.png" alt="Izbornik" /></span>} id="basic-nav-dropdown">
+        <NavDropdown.Item onClick={() => navigate(RouteNames.PAS_PREGLED)}>
+            Psi
+        </NavDropdown.Item>
         <NavDropdown.Item onClick={() => navigate(RouteNames.UDOMITELJ_PREGLED)}>
             Udomitelji
         </NavDropdown.Item>

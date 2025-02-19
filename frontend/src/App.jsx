@@ -10,6 +10,10 @@ import UdomiteljiPregled from './Pages/Udomitelji/UdomiteljiPregled'
 import UdomiteljiDodaj from './Pages/Udomitelji/UdomiteljiDodaj'
 import UdomiteljiPromjena from './Pages/Udomitelji/UdomiteljiPromjena'
 import UdomiteljiBrisanje from './Pages/Udomitelji/UdomiteljiBrisanje'
+import PsiPregled from './Pages/Psi/PsiPregled'
+import PsiDodaj from './Pages/Psi/PsiDodaj'
+import PsiPromjena from './Pages/Psi/PsiPromjena'
+import PsiBrisanje from './Pages/Psi/PsiBrisanje'
 
 
 
@@ -25,6 +29,10 @@ function App() {
           <Route path={RouteNames.UDOMITELJ_NOVI} element={<UdomiteljiDodaj />}/>
           <Route path={RouteNames.UDOMITELJ_PROMJENA} element={<UdomiteljiPromjena />} />
           <Route path={RouteNames.UDOMITELJ_BRISANJE} element={<UdomiteljiBrisanje/>} />
+          <Route path={RouteNames.PAS_PREGLED} element={<PsiPregled />} />
+          <Route path={RouteNames.PAS_NOVI} element={<PsiDodaj />}/>
+          <Route path={RouteNames.PAS_PROMJENA} element={<PsiPromjena />} />
+          <Route path={RouteNames.PAS_BRISANJE} element={<PsiBrisanje/>} />
         </Routes>
         <hr/>
     
