@@ -77,9 +77,9 @@ export default function PsiDodaj(){
             <Form.Check label="Kastracija" name="kastracija" />
             </Form.Group>
 
-        <Form.Group controlId="statusOpis">
+        <Form.Group controlId="statusNaziv">
             <Form.Label>Status (udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
-            <Form.Control type="text" name="statusOpis" required/>
+            <Form.Control type="text" name="statusNaziv" required/>
         </Form.Group>
 
         

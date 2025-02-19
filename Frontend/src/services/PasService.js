@@ -20,7 +20,7 @@ async function getBySifra(sifra){
 }
 
 async function dodaj(pas){
-    return HttpService.post('/Pas', pas)
+    return await HttpService.post('/Pas', pas)
     .then(()=>{return{greska:false, poruka: 'Dodano'}})
     .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
 }

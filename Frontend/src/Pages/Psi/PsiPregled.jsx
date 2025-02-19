@@ -29,7 +29,7 @@ export default function PsiPregled(){
     },[])
 
     
-    function formatirajDatum(datum_rodjenja){
+    function formatirajDatum(datum_Rodjenja){
         
         return moment.utc(datum_Rodjenja).format('DD. MM. YYYY.')
     }
@@ -56,7 +56,6 @@ export default function PsiPregled(){
                     <th>Opis</th>
                     <th>Kastracija</th>
                     <th>Status</th>
-                    <th>Opcije</th>
                     <th style={{ width: "120px", textAlign: "center" }}>Opcije</th>
                 </tr>
 
@@ -89,7 +88,7 @@ export default function PsiPregled(){
                             />                            
                         </td>
                         <td>
-                            {pas.statusOpis}
+                            {pas.statusNaziv}
                         </td>
                         
                         <td style={{ display: "flex", gap: "10px" }}>

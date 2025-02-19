@@ -41,12 +41,12 @@ export default function PsiPromjena(){
             {           
  
                 ime: podatci.get('ime'),
-                brojcipa: podatci.get('brojCipa'),
-                datum_rodjenja: podatci.get('datum_Rodjenja'),
+                brojCipa: podatci.get('brojCipa'),
+                datum_Rodjenja: podatci.get('datum_Rodjenja'),
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusOpis: podatci.get('statusOpis')
+                statusNaziv: podatci.get('statusNaziv')
             }
                 
         );
@@ -86,10 +86,10 @@ export default function PsiPromjena(){
                 <Form.Check label="Kastracija" name="kastracija" />
             </Form.Group>
 
-        <Form.Group controlId="statusOpis">
+        <Form.Group controlId="statusNaziv">
             <Form.Label>Status (Udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
-            <Form.Control type="number" name="status" required
-            defaultValue={pas.statusOpis}/>
+            <Form.Control type="number" name="statusNaziv" required
+            defaultValue={pas.statusNaziv}/>
         </Form.Group>
 
         <hr/>
