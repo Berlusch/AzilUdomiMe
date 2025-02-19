@@ -16,6 +16,10 @@ GO
 
 --TABLICA STATUS
 
+
+
+--TABLICA STATUS
+
 create table statusi(
 sifra int not null primary key identity(1,1),
 naziv varchar(30) not null
@@ -138,16 +142,17 @@ VALUES
 (4, 9, '2024-06-22', 'u obradi', 'nema napomene'),
 (6, 8, '2024-04-15', 'obrađen', 'odbijeno');
 
+ALTER TABLE psi add opis varchar(255);  
 
-DELETE FROM psi WHERE sifra IN (1, 2, 3, 4, 5, 6, 7, 8, 9);
+DELETE FROM psi WHERE sifra IN (11, 12, 13, 14, 15, 16, 17, 18, 19);
 UPDATE psi  
 SET opis = 'Veličina: ' + v.naziv + ', Boja: ' + b.naziv + ', Priča: ' + mojaprica  
 FROM psi  
 JOIN velicine v ON psi.velicina = v.sifra  
 JOIN boje b ON psi.boja = b.sifra;
 
-ALTER TABLE psi DROP CONSTRAINT [FK__psi__boja__5070F446];  
-ALTER TABLE psi DROP CONSTRAINT [FK__psi__velicina__5070F447];  
+ALTER TABLE psi DROP CONSTRAINT FK__psi__boja__3F466844;  
+ALTER TABLE psi DROP CONSTRAINT FK__psi__velicina__3E52440B;  
 
 ALTER TABLE psi  
 DROP COLUMN boja, velicina, mojaprica;

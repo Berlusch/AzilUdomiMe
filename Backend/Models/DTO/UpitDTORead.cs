@@ -2,12 +2,10 @@
 {
     public record UpitDTORead
     (
-        int PasSifra, 
-        Pas Pas, 
-        int UdomiteljSifra, 
-        Udomitelj Udomitelj, 
-
-        DateOnly DatumUpita, 
+        int Sifra,
+        string PasIme, 
+        string UdomiteljImePrezime, 
+        DateTime DatumUpita, 
         string StatusUpita,
         string SadrzajNapomene 
     );

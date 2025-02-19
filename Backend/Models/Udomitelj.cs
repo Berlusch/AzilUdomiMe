@@ -10,7 +10,6 @@ namespace Backend.Models
         public string Adresa { get; set; } = "";
         public string Telefon { get; set; } = "";
         public string Email { get; set; } = "";
-        public ICollection<Pas> Psi { get; set; }
 
     }
 }

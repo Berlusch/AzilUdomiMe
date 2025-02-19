@@ -3,6 +3,7 @@ using Backend.Data;
 using Backend.Models;
 using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -20,7 +21,7 @@ namespace Backend.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<UpitDTORead>>(_context.Upiti));
+                return Ok(_mapper.Map<List<UpitDTORead>>(_context.Upiti.Include(u=>u.Pas).Include(u=>u.Udomitelj)));
             }
             catch (Exception ex)
             {

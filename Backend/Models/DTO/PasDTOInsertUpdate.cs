@@ -8,11 +8,10 @@ namespace Backend.Models.DTO
         [Required(ErrorMessage = "Broj čipa je obavezan")]
         string BrojCipa,
         DateTime Datum_Rodjenja,
-        Spol Spol,
+        string Spol,
         string Opis,
         bool Kastracija,
-        Status StatusOpis,
-        int? UdomiteljSifra
+        int StatusSifra
     );
 
     
