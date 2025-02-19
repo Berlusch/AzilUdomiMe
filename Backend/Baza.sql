@@ -14,9 +14,6 @@ GO
 
 
 
---TABLICA STATUS
-
-
 
 --TABLICA STATUS
 
@@ -25,19 +22,9 @@ sifra int not null primary key identity(1,1),
 naziv varchar(30) not null
 );
 
---TABLICA VELIČINA
 
-create table velicine(
-sifra int not null primary key identity(1,1),
-naziv varchar(30)
-);
 
---TABLICA BOJA
 
-create table boje(
-sifra int not null primary key identity(1,1),
-naziv varchar(10)
-);
 
 --TABLICA PSI
 
@@ -48,9 +35,7 @@ ime varchar(20) not null,
 datum_rodjenja date not null,
 spol varchar(10) not null,
 CONSTRAINT chk_spol CHECK (spol IN ('muški', 'ženski')),
-velicina int not null references velicine(sifra),
-boja int not null references boje(sifra),
-mojaprica varchar(300) not null,
+opis varchar(500) not null,
 status int not null references statusi(sifra),
 kastracija bit not null,
 );
@@ -83,37 +68,18 @@ insert into statusi(naziv) values
 ('slobodan'),
 ('privremeni smještaj');
 
-insert into velicine(naziv) values
-('mali: do 5 kg'),
-('srednji: 5-25 kg'),
-('veliki: >25 kg');
 
-insert into boje(naziv) values
-('bijeli'),
-('crni'),
-('smeđi'),
-('šareni');
-
-insert into psi(brojcipa, ime, datum_rodjenja, spol, velicina, boja, mojaprica, kastracija, status) VALUES
-('HR123456789012345', 'Max', '2010-08-15', 'muški', 2, 1, 'Max je energičan pas koji voli igru i šetnje.', 1, 3),
-('HR234567890123456', 'Luna', '2015-01-20', 'ženski', 1, 2, 'Luna je mirna i nježna, voli biti u društvu ljudi.', 1, 3),
-('HR345678901234567', 'Leo', '2010-06-30', 'muški', 3, 3, 'Leo je veliki pas koji traži puno prostora i igre.', 1, 3),
-('HR456789012345678', 'Bella', '2013-03-12', 'ženski', 2, 4, 'Bella je vesela i hrabra, uvijek spremna za avanture.', 1, 1),
-('HR567890123456789', 'Rex', '2011-11-09', 'muški', 3, 3, 'Rex je zaštitnički nastrojen pas, idealan za obitelj.', 1, 3),
-('HR678901234567890', 'Maja', '2017-02-05', 'ženski', 1, 1, 'Maja je umiljata i voli biti u centru pažnje.', 1, 2),
-('HR789012345678901', 'Bruno', '2012-07-22', 'muški', 2, 2, 'Bruno je prijateljski nastrojen pas koji voli sve ljude.', 0, 3),
-('HR890123456789012', 'Zara', '2016-04-11', 'ženski', 1, 2, 'Zara je vesela i razigrana, često trči po dvorištu.', 1, 3),
-('HR901234567890123', 'Oscar', '2009-10-02', 'muški', 3, 3, 'Oscar je smiren pas koji voli dugi odmor.', 1, 4),
-('HR012345678901234', 'Nina', '2018-06-17', 'ženski', 1, 1, 'Nina je ljubazna i voli društvo drugih pasa.', 0, 1),
-('HR112345678901235', 'Dino', '2014-12-08', 'muški', 2, 2, 'Dino je odan pas koji se često igra s djecom.', 1, 3),
-('HR223456789012346', 'Kira', '2013-09-03', 'ženski', 2, 4, 'Kira je sramežljiva, ali odana prijateljica.', 1, 3),
-('HR334567890123457', 'Toby', '2016-11-10', 'muški', 1, 3, 'Toby je aktivan pas koji uživa u trčanju i lovu na lopticu.', 0, 3),
-('HR445678901234568', 'Rita', '2012-03-25', 'ženski', 2, 1, 'Rita je vesela, uvijek spremna za igru.', 1, 1),
-('HR556789012345679', 'Maks', '2011-07-15', 'muški', 3, 2, 'Maks je veliki, ljubazan pas koji se voli opuštati.', 1, 3),
-('HR667890123456780', 'Fiona', '2016-05-09', 'ženski', 2, 3, 'Fiona je smirena i vrlo pažljiva prema djeci.', 0, 2),
-('HR778901234567891', 'Gustav', '2013-04-17', 'muški', 2, 2, 'Gustav je veselo naravnog temperamenta, pravi pas za obitelj.', 1, 3),
-('HR889012345678902', 'Vera', '2014-01-30', 'ženski', 1, 1, 'Vera je nježna i voli biti u društvu svojih vlasnika.', 1, 3),
-('HR990123456789013', 'Vuk', '2010-09-05', 'muški', 3, 3, 'Vuk je vrlo energičan, voli biti vani i trčati po prirodi.', 0, 3);
+insert into psi(brojcipa, ime, datum_rodjenja, spol, opis, kastracija, status) VALUES
+('HR123456789012345', 'Max', '2010-08-15', 'muški', 'Max je energičan pas koji voli igru i šetnje.', 1, 3),
+('HR234567890123456', 'Luna', '2015-01-20', 'ženski',  'Luna je mirna i nježna, voli biti u društvu ljudi.', 1, 3),
+('HR345678901234567', 'Leo', '2010-06-30', 'muški',  'Leo je veliki pas koji traži puno prostora i igre.', 1, 3),
+('HR456789012345678', 'Bella', '2013-03-12', 'ženski',  'Bella je vesela i hrabra, uvijek spremna za avanture.', 1, 1),
+('HR567890123456789', 'Rex', '2011-11-09', 'muški',  'Rex je zaštitnički nastrojen pas, idealan za obitelj.', 1, 3),
+('HR678901234567890', 'Maja', '2017-02-05', 'ženski', 'Maja je umiljata i voli biti u centru pažnje.', 1, 2),
+('HR789012345678901', 'Bruno', '2012-07-22', 'muški',  'Bruno je prijateljski nastrojen pas koji voli sve ljude.', 0, 3),
+('HR890123456789012', 'Zara', '2016-04-11', 'ženski',  'Zara je vesela i razigrana, često trči po dvorištu.', 1, 3),
+('HR901234567890123', 'Oscar', '2009-10-02', 'muški',  'Oscar je smiren pas koji voli dugi odmor.', 1, 4),
+('HR012345678901234', 'Nina', '2018-06-17', 'ženski',  'Nina je ljubazna i voli društvo drugih pasa.', 0, 1);
 
 
 insert into udomitelji(ime, prezime, adresa, telefon, email)
@@ -141,19 +107,4 @@ VALUES
 (10, 1, '2024-03-12', 'zaprimljen', 'nema napomene'),
 (4, 9, '2024-06-22', 'u obradi', 'nema napomene'),
 (6, 8, '2024-04-15', 'obrađen', 'odbijeno');
-
-ALTER TABLE psi add opis varchar(255);  
-
-DELETE FROM psi WHERE sifra IN (11, 12, 13, 14, 15, 16, 17, 18, 19);
-UPDATE psi  
-SET opis = 'Veličina: ' + v.naziv + ', Boja: ' + b.naziv + ', Priča: ' + mojaprica  
-FROM psi  
-JOIN velicine v ON psi.velicina = v.sifra  
-JOIN boje b ON psi.boja = b.sifra;
-
-ALTER TABLE psi DROP CONSTRAINT FK__psi__boja__3F466844;  
-ALTER TABLE psi DROP CONSTRAINT FK__psi__velicina__3E52440B;  
-
-ALTER TABLE psi  
-DROP COLUMN boja, velicina, mojaprica;
 
