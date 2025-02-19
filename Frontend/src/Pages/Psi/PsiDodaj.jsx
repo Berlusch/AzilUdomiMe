@@ -2,7 +2,8 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import PasService from "../../services/PasService";
-import moment from "moment"
+import moment from "moment";
+import UdomiteljService from '../../services/UdomiteljService';
 
 export default function PsiDodaj(){
 
@@ -34,8 +35,9 @@ export default function PsiDodaj(){
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusOpis: parseInt(statusOpis),
+                statusNaziv: podatci.get('statusNaziv'),
                 udomiteljSifra: parseInt(udomiteljSifra)
+                
             }
              
         
@@ -81,6 +83,19 @@ export default function PsiDodaj(){
             <Form.Label>Status (udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
             <Form.Control type="text" name="statusNaziv" required/>
         </Form.Group>
+
+        <Form.Group controlId='udomitelj'>
+            <Form.Label>Udomitelj</Form.Label>
+            <Form.Select 
+            onChange={(e)=>{setUdomiteljSifra(e.target.value)}}
+            >
+            {udomitelji && udomitelji.map((u,index)=>(
+              <option key={index} value={u.sifra}>
+                {u.ime+" " + u.prezime}
+              </option>
+            ))}
+            </Form.Select>
+          </Form.Group>
 
         
         <hr/>

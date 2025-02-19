@@ -42,7 +42,7 @@ export default function PsiPromjena(){
  
                 ime: podatci.get('ime'),
                 brojCipa: podatci.get('brojCipa'),
-                datum_Rodjenja: podatci.get('datum_Rodjenja'),
+                datum_Rodjenja: moment.utc(podatci.get('datum_Rodjenja')),
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
@@ -58,6 +58,12 @@ export default function PsiPromjena(){
     <h2 className="naslov">Promjena psa</h2>
     <Form onSubmit={OdradiSubmit}>
 
+    <Form.Group controlId="ime">
+            <Form.Label>Ime</Form.Label>
+            <Form.Control type="text" name="ime" required
+            defaultValue={pas.ime}/>
+        </Form.Group>
+
     <Form.Group controlId="brojCipa">
             <Form.Label>Broj čipa</Form.Label>
             <Form.Control type="text" name="brojCipa" required
@@ -66,13 +72,13 @@ export default function PsiPromjena(){
 
         <Form.Group controlId="datum_Rodjenja">
             <Form.Label>Datum rođenja</Form.Label>
-            <Form.Control type="text" name="datum_Rodjenja" required
+            <Form.Control type="date" step={0.01}  name="datum_Rodjenja" required
             defaultValue={pas.datum_Rodjenja}/>
         </Form.Group>
 
         <Form.Group controlId="spol">
             <Form.Label>Spol (M/Ž)</Form.Label>
-            <Form.Control type="number" name="spol" required
+            <Form.Control type="text" name="spol" required
             defaultValue={pas.spol}/>
         </Form.Group>
 
@@ -88,7 +94,7 @@ export default function PsiPromjena(){
 
         <Form.Group controlId="statusNaziv">
             <Form.Label>Status (Udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
-            <Form.Control type="number" name="statusNaziv" required
+            <Form.Control type="text" name="statusNaziv" required
             defaultValue={pas.statusNaziv}/>
         </Form.Group>
 

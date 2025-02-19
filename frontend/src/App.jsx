@@ -25,12 +25,14 @@ function App() {
         <NavbarEdunova />
         <Routes>
           <Route path={RouteNames.HOME} element={<Pocetna />} />
+
           <Route path={RouteNames.UDOMITELJ_PREGLED} element={<UdomiteljiPregled />} />
           <Route path={RouteNames.UDOMITELJ_NOVI} element={<UdomiteljiDodaj />}/>
           <Route path={RouteNames.UDOMITELJ_PROMJENA} element={<UdomiteljiPromjena />} />
           <Route path={RouteNames.UDOMITELJ_BRISANJE} element={<UdomiteljiBrisanje/>} />
+          
           <Route path={RouteNames.PAS_PREGLED} element={<PsiPregled />} />
-          <Route path={RouteNames.PAS_NOVI} element={<PsiDodaj />}/>
+          <Route path={RouteNames.PAS_NOVI} element={<PsiDodaj />} />
           <Route path={RouteNames.PAS_PROMJENA} element={<PsiPromjena />} />
           <Route path={RouteNames.PAS_BRISANJE} element={<PsiBrisanje/>} />
         </Routes>
