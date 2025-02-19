@@ -6,9 +6,8 @@
         public required Pas Pas { get; set; }
         public int UdomiteljSifra { get; set; }
         public required Udomitelj Udomitelj { get; set; }
-
         public DateTime DatumUpita { get; set; }
-        public required Status StatusUpita { get; set; }
+        public string StatusUpita { get; set; }="";
         public string SadrzajNapomene { get; set; } = "";
         
 

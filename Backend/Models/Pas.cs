@@ -17,10 +17,10 @@ namespace Backend.Models
         public bool Kastracija { get; set; }
 
         public int StatusSifra { get; set; }  // Strani ključ prema statusu
-        public Status StatusOpis { get; set; }
+        public required Status StatusOpis { get; set; }
                 
         public int? UdomiteljSifra { get; set; }
-        public Udomitelj Udomitelj { get; set; }
+        public Udomitelj? Udomitelj { get; set; }
         public ICollection<Upit> Upiti { get; set; } = new List<Upit>();
     }
 }
