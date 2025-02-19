@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function PsiPromjena(){
 
     const navigate = useNavigate();
-    const [Pas,setPas]= useState({});
+    const [pas,setPas]= useState({});
     const routeParams= useParams();
 
     async function dohvatiPse(){
@@ -20,7 +20,7 @@ export default function PsiPromjena(){
         dohvatiPse();
     },[])
 
-    async function promijeni(Pas){
+    async function promijeni(pas){
         const odgovor= await PasService.promijeni(routeParams.sifra,pas);
         if(odgovor.greska){
             alert(odgovor.poruka)
@@ -41,12 +41,12 @@ export default function PsiPromjena(){
             {           
  
                 ime: podatci.get('ime'),
-                brojcipa: podatci.get('brojcipa'),
-                datum_rodjenja: podatci.get('datum_rodjenja'),
+                brojcipa: podatci.get('brojCipa'),
+                datum_rodjenja: podatci.get('datum_Rodjenja'),
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                status: podatci.get('statusOpis')
+                statusOpis: podatci.get('statusOpis')
             }
                 
         );
@@ -58,16 +58,16 @@ export default function PsiPromjena(){
     <h2 className="naslov">Promjena psa</h2>
     <Form onSubmit={OdradiSubmit}>
 
-    <Form.Group controlId="brojcipa">
+    <Form.Group controlId="brojCipa">
             <Form.Label>Broj čipa</Form.Label>
-            <Form.Control type="text" name="brojcipa" required
-            defaultValue={pas.brojcipa}/>
+            <Form.Control type="text" name="brojCipa" required
+            defaultValue={pas.brojCipa}/>
         </Form.Group>
 
-        <Form.Group controlId="datum_rodjenja">
+        <Form.Group controlId="datum_Rodjenja">
             <Form.Label>Datum rođenja</Form.Label>
-            <Form.Control type="text" name="datum_rodjenja" required
-            defaultValue={pas.datum_rodjenja}/>
+            <Form.Control type="text" name="datum_Rodjenja" required
+            defaultValue={pas.datum_Rodjenja}/>
         </Form.Group>
 
         <Form.Group controlId="spol">
@@ -86,10 +86,10 @@ export default function PsiPromjena(){
                 <Form.Check label="Kastracija" name="kastracija" />
             </Form.Group>
 
-        <Form.Group controlId="status">
+        <Form.Group controlId="statusOpis">
             <Form.Label>Status (Udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
             <Form.Control type="number" name="status" required
-            defaultValue={pas.status}/>
+            defaultValue={pas.statusOpis}/>
         </Form.Group>
 
         <hr/>

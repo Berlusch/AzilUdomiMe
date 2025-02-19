@@ -29,12 +29,12 @@ export default function PsiDodaj(){
             {            
  
                 ime: podatci.get('ime'),
-                brojcipa: podatci.get('brojcipa'),
-                datum_rodjenja: moment.utc(podatci.get('datum_rodjenja')),
+                brojcipa: podatci.get('brojCipa'),
+                datum_rodjenja: moment.utc(podatci.get('datum_Rodjenja')),
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusSifra: parseInt(statusSifra),
+                statusOpis: parseInt(statusOpis),
                 udomiteljSifra: parseInt(udomiteljSifra)
             }
              
@@ -53,14 +53,14 @@ export default function PsiDodaj(){
             <Form.Control type="text" name="ime" required/>
         </Form.Group>
 
-        <Form.Group controlId="brojcipa">
+        <Form.Group controlId="brojCipa">
             <Form.Label>Broj čipa</Form.Label>
-            <Form.Control type="text" name="brojcipa" required/>
+            <Form.Control type="text" name="brojCipa" required/>
         </Form.Group>
 
-        <Form.Group controlId="datum_rodjenja">
+        <Form.Group controlId="datum_Rodjenja">
             <Form.Label>Datum rođenja</Form.Label>
-            <Form.Control type="date" name="datum_rodjenja" required/>
+            <Form.Control type="date" name="datum_Rodjenja" required/>
         </Form.Group>
 
         <Form.Group controlId="spol">
@@ -77,9 +77,9 @@ export default function PsiDodaj(){
             <Form.Check label="Kastracija" name="kastracija" />
             </Form.Group>
 
-        <Form.Group controlId="status">
+        <Form.Group controlId="statusOpis">
             <Form.Label>Status (udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
-            <Form.Control type="text" name="status" required/>
+            <Form.Control type="text" name="statusOpis" required/>
         </Form.Group>
 
         

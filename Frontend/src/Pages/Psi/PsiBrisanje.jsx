@@ -40,12 +40,12 @@ export default function UdomiteljiBrisanje(){
             {           
  
                 ime: podatci.get('ime'),
-                brojcipa: podatci.get('brojcipa'),
-                datum_rodjenja: podatci.get('datum_rodjenja'),
+                brojcipa: podatci.get('brojCipa'),
+                datum_rodjenja: podatci.get('datum_Rodjenja'),
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                status: podatci.get('statusOpis')
+                statusOpis: podatci.get('statusOpis')
             }
 
         );           
@@ -64,17 +64,17 @@ export default function UdomiteljiBrisanje(){
             defaultValue={pas.ime}/>
         </Form.Group>
 
-        <Form.Group controlId="brojcipa">
+        <Form.Group controlId="brojCipa">
             <Form.Label>Broj čipa</Form.Label>
-            <Form.Control type="text" name="brojcipa" required
-            defaultValue={pas.brojcipa}
+            <Form.Control type="text" name="brojCipa" required
+            defaultValue={pas.brojCipa}
             readOnly/>
         </Form.Group>
 
-        <Form.Group controlId="datum_rodjenja">
+        <Form.Group controlId="datum_Rodjenja">
             <Form.Label>Datum rođenja</Form.Label>
-            <Form.Control type="text" name="datum_rodjenja" required
-            defaultValue={pas.datum_rodjenja}
+            <Form.Control type="text" name="datum_Rodjenja" required
+            defaultValue={pas.datum_Rodjenja}
             readOnly/>
         </Form.Group>
 
@@ -97,7 +97,7 @@ export default function UdomiteljiBrisanje(){
             readOnly/>
         </Form.Group>
 
-        <Form.Group controlId="status">
+        <Form.Group controlId="statusOpis">
             <Form.Label>Status (Udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
             <Form.Control type="number" name="status" required
             defaultValue={pas.statusOpis}

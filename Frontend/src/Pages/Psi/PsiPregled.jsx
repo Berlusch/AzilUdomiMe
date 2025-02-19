@@ -31,7 +31,7 @@ export default function PsiPregled(){
     
     function formatirajDatum(datum_rodjenja){
         
-        return moment.utc(datum_rodjenja).format('DD. MM. YYYY.')
+        return moment.utc(datum_Rodjenja).format('DD. MM. YYYY.')
     }
 
     function kastracija(k){
@@ -71,10 +71,10 @@ export default function PsiPregled(){
                             
                         </td>
                         <td>
-                            {pas.brojcipa}
+                            {pas.brojCipa}
                         </td>
                         <td>
-                            {formatirajDatum(pas.datum_rodjenja)}
+                            {formatirajDatum(pas.datum_Rodjenja)}
                         </td>
                         <td>
                             {pas.spol}
@@ -89,7 +89,7 @@ export default function PsiPregled(){
                             />                            
                         </td>
                         <td>
-                            {pas.status}
+                            {pas.statusOpis}
                         </td>
                         
                         <td style={{ display: "flex", gap: "10px" }}>
