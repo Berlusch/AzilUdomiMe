@@ -10,8 +10,9 @@ import { RouteNames } from "../../constants";
 
 export default function PsiPregled(){
 
-    const [psi, setPsi]= useState();
     const navigate=useNavigate();
+    const [psi, setPsi]= useState();
+    
 
 
     async function dohvatiPse(){
@@ -27,6 +28,7 @@ export default function PsiPregled(){
         
     },[])
 
+    
     function formatirajDatum(datum_rodjenja){
         
         return moment.utc(datum_rodjenja).format('DD. MM. YYYY.')
@@ -54,10 +56,13 @@ export default function PsiPregled(){
                     <th>Opis</th>
                     <th>Kastracija</th>
                     <th>Status</th>
+                    <th>Opcije</th>
                     <th style={{ width: "120px", textAlign: "center" }}>Opcije</th>
                 </tr>
 
             </thead>
+            
+
             <tbody>
                 {psi && psi.map((pas,index)=>(
                     <tr key={index}>
@@ -84,7 +89,7 @@ export default function PsiPregled(){
                             />                            
                         </td>
                         <td>
-                            {pas.statusOpis}
+                            {pas.status}
                         </td>
                         
                         <td style={{ display: "flex", gap: "10px" }}>
@@ -101,7 +106,7 @@ export default function PsiPregled(){
                             >
                                 Brisanje
                             </Button>
-                            </td> 
+                        </td> 
                                         
                     </tr>
                 ))}

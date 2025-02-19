@@ -34,7 +34,8 @@ export default function PsiDodaj(){
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                status: podatci.get('statusOpis')
+                statusSifra: parseInt(statusSifra),
+                udomiteljSifra: parseInt(udomiteljSifra)
             }
              
         
