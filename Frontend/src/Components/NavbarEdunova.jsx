@@ -30,6 +30,9 @@ export default function NavBarEdunova(){
         <NavDropdown.Item onClick={() => navigate(RouteNames.UDOMITELJ_PREGLED)}>
             Udomitelji
         </NavDropdown.Item>
+        <NavDropdown.Item onClick={() => navigate(RouteNames.STATUS_PREGLED)}>
+            Statusi
+        </NavDropdown.Item>
     </NavDropdown>
 
     <Nav.Link

@@ -9,7 +9,12 @@ export const RouteNames={
     PAS_PREGLED: '/psi',
     PAS_NOVI: '/psi/dodaj',
     PAS_PROMJENA: '/psi/:sifra',
-    PAS_BRISANJE: '/psi/obrisi/:sifra'
+    PAS_BRISANJE: '/psi/obrisi/:sifra',
+
+    STATUS_PREGLED: '/psi',
+    STATUS_NOVI: '/psi/dodaj',
+    STATUS_PROMJENA: '/psi/:sifra',
+    STATUS_BRISANJE: '/psi/obrisi/:sifra'
 }
 
 

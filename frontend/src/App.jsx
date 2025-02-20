@@ -14,6 +14,9 @@ import PsiPregled from './Pages/Psi/PsiPregled'
 import PsiDodaj from './Pages/Psi/PsiDodaj'
 import PsiPromjena from './Pages/Psi/PsiPromjena'
 import PsiBrisanje from './Pages/Psi/PsiBrisanje'
+import StatusiPregled from './Pages/Status/StatusiPregled'
+import StatusiDodaj from './Pages/Status/StatusiDodaj'
+import StatusiPromjena from './Pages/Status/StatusiPromjena'
 
 
 
@@ -35,6 +38,11 @@ function App() {
           <Route path={RouteNames.PAS_NOVI} element={<PsiDodaj />} />
           <Route path={RouteNames.PAS_PROMJENA} element={<PsiPromjena />} />
           <Route path={RouteNames.PAS_BRISANJE} element={<PsiBrisanje/>} />
+
+          <Route path={RouteNames.STATUS_PREGLED} element={<StatusiPregled />} />
+          <Route path={RouteNames.STATUS_NOVI} element={<StatusiDodaj />} />
+          <Route path={RouteNames.STATUS_PROMJENA} element={<StatusiPromjena />} />
+          
         </Routes>
         <hr/>
     

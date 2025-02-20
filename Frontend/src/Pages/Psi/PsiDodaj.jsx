@@ -3,7 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import PasService from "../../services/PasService";
 import moment from "moment";
-import UdomiteljService from '../../services/UdomiteljService';
+
+
 
 export default function PsiDodaj(){
 
@@ -16,8 +17,7 @@ export default function PsiDodaj(){
             return
         }
         navigate(RouteNames.PAS_PREGLED)
-        
-        
+             
 
     }
 
@@ -35,9 +35,8 @@ export default function PsiDodaj(){
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusNaziv: podatci.get('statusNaziv'),
-                udomiteljSifra: parseInt(udomiteljSifra)
-                
+                status: podatci.get('status'),
+                                
             }
              
         
@@ -79,19 +78,14 @@ export default function PsiDodaj(){
             <Form.Check label="Kastracija" name="kastracija" />
             </Form.Group>
 
-        <Form.Group controlId="statusNaziv">
-            <Form.Label>Status (udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
-            <Form.Control type="text" name="statusNaziv" required/>
-        </Form.Group>
-
-        <Form.Group controlId='udomitelj'>
-            <Form.Label>Udomitelj</Form.Label>
+        <Form.Group controlId='status'>
+            <Form.Label>Status</Form.Label>
             <Form.Select 
-            onChange={(e)=>{setUdomiteljSifra(e.target.value)}}
+            onChange={(e)=>{setStatusSifra(e.target.value)}}
             >
-            {udomitelji && udomitelji.map((u,index)=>(
+            {statusi && statusi.map((u,index)=>(
               <option key={index} value={u.sifra}>
-                {u.ime+" " + u.prezime}
+                {u.statusNaziv}
               </option>
             ))}
             </Form.Select>
