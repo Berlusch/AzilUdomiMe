@@ -24,9 +24,17 @@ export default function StatusiPregled(){
         
     },[])
 
+        
+    function obrisi(sifra){
+        if(!confirm('Sigurno obrisati')){
+            return;
+        }
+        brisanjeStatusa(sifra)
+    }
+
     async function brisanjeStatusa(sifra) {
         
-        const odgovor = await StatusService.brisanje(sifra);
+        const odgovor = await SmjerService.brisanje(sifra);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
@@ -66,7 +74,7 @@ export default function StatusiPregled(){
                             
                             <Button
                             style={{ backgroundColor: '#9c989a', color: "white" }}
-                            onClick={() => navigate(`/statusi/obrisi/${status.sifra}`)}
+                            onClick={()=>obrisi(smjer.sifra)}
                             >
                                 Brisanje
                             </Button>

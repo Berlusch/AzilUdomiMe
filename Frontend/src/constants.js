@@ -11,10 +11,15 @@ export const RouteNames={
     PAS_PROMJENA: '/psi/:sifra',
     PAS_BRISANJE: '/psi/obrisi/:sifra',
 
-    STATUS_PREGLED: '/psi',
-    STATUS_NOVI: '/psi/dodaj',
-    STATUS_PROMJENA: '/psi/:sifra',
-    STATUS_BRISANJE: '/psi/obrisi/:sifra'
+    UPIT_PREGLED: '/upiti',
+    UPIT_NOVI: '/upiti/dodaj',
+    UPIT_PROMJENA: '/upiti/:sifra',
+    UPIT_BRISANJE: '/upiti/obrisi/:sifra',
+
+    STATUS_PREGLED: '/statusi',
+    STATUS_NOVI: '/statusi/dodaj',
+    STATUS_PROMJENA: '/statusi/:sifra',
+    STATUS_BRISANJE: '/statusi/obrisi/:sifra'
 }
 
 

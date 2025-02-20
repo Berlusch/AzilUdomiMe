@@ -14,9 +14,13 @@ import PsiPregled from './Pages/Psi/PsiPregled'
 import PsiDodaj from './Pages/Psi/PsiDodaj'
 import PsiPromjena from './Pages/Psi/PsiPromjena'
 import PsiBrisanje from './Pages/Psi/PsiBrisanje'
-import StatusiPregled from './Pages/Status/StatusiPregled'
-import StatusiDodaj from './Pages/Status/StatusiDodaj'
-import StatusiPromjena from './Pages/Status/StatusiPromjena'
+import StatusiPregled from './Pages/Statusi/StatusiPregled'
+import StatusiDodaj from './Pages/Statusi/StatusiDodaj'
+import StatusiPromjena from './Pages/Statusi/StatusiPromjena'
+import UpitiPregled from './Pages/Upiti/UpitiPregled'
+import UpitiDodaj from './Pages/Upiti/UpitiDodaj'
+import UpitiPromjena from './Pages/Upiti/UpitiPromjena'
+import UpitiBrisanje from './Pages/Upiti/UpitiBrisanje'
 
 
 
@@ -38,6 +42,11 @@ function App() {
           <Route path={RouteNames.PAS_NOVI} element={<PsiDodaj />} />
           <Route path={RouteNames.PAS_PROMJENA} element={<PsiPromjena />} />
           <Route path={RouteNames.PAS_BRISANJE} element={<PsiBrisanje/>} />
+
+          <Route path={RouteNames.UPIT_PREGLED} element={<UpitiPregled />} />
+          <Route path={RouteNames.UPIT_NOVI} element={<UpitiDodaj />} />
+          <Route path={RouteNames.UPIT_PROMJENA} element={<UpitiPromjena />} />
+          <Route path={RouteNames.UPIT_BRISANJE} element={<UpitiBrisanje/>} />
 
           <Route path={RouteNames.STATUS_PREGLED} element={<StatusiPregled />} />
           <Route path={RouteNames.STATUS_NOVI} element={<StatusiDodaj />} />
