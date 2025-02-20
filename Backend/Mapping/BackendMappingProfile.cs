@@ -18,7 +18,7 @@ namespace Backend.Mapping
             CreateMap<Udomitelj, UdomiteljDTORead>();
             CreateMap<UdomiteljDTOInsertUpdate, Udomitelj>();
 
-    
+
             CreateMap<Pas, PasDTORead>().ForCtorParam(
                    "StatusNaziv",
                    opt => opt.MapFrom(src => src.Status.Naziv)
@@ -32,7 +32,7 @@ namespace Backend.Mapping
             CreateMap<PasDTOInsertUpdate, Pas>();
 
 
-            CreateMap<Upit, UpitDTORead>().ConstructUsing(e=> new UpitDTORead(
+            CreateMap<Upit, UpitDTORead>().ConstructUsing(e => new UpitDTORead(
                 e.Sifra,
                 e.Pas.Ime,
                 e.Udomitelj.Ime + " " + e.Udomitelj.Prezime,
@@ -52,4 +52,3 @@ namespace Backend.Mapping
         }
     }
 }
-

@@ -10,5 +10,5 @@
     bool Kastracija,
     string StatusNaziv
 );
-    
+
 }

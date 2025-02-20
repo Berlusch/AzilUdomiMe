@@ -3,22 +3,16 @@ using Backend.Data;
 using Backend.Models;
 using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
-
 
 namespace Backend.Controllers
 {
-
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class PasController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
+    public class StatusController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
     {
 
-
-        // RUTE
         [HttpGet]
-        public ActionResult<List<PasDTORead>> Get()
+        public ActionResult<List<StatusDTORead>> Get()
         {
             if (!ModelState.IsValid)
             {
@@ -26,7 +20,7 @@ namespace Backend.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<PasDTORead>>(_context.Psi.Include(p => p.Status)));
+                return Ok(_mapper.Map<List<StatusDTORead>>(_context.Statusi));
             }
             catch (Exception ex)
             {
@@ -34,20 +28,18 @@ namespace Backend.Controllers
             }
 
         }
-
-
         [HttpGet]
         [Route("{sifra:int}")]
-        public ActionResult<PasDTORead> GetBySifra(int sifra)
+        public ActionResult<StatusDTORead> GetBySifra(int sifra)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { poruka = ModelState });
             }
-            Pas? e;
+            Status? e;
             try
             {
-                e = _context.Psi.Find(sifra);
+                e = _context.Statusi.Find(sifra);
             }
             catch (Exception ex)
             {
@@ -55,14 +47,15 @@ namespace Backend.Controllers
             }
             if (e == null)
             {
-                return NotFound(new { poruka = "Pas ne postoji u bazi" });
+                return NotFound(new { poruka = "Status ne postoji u bazi" });
             }
 
-            return Ok(_mapper.Map<PasDTORead>(e));
+            return Ok(_mapper.Map<StatusDTORead>(e));
         }
 
+
         [HttpPost]
-        public IActionResult Post(PasDTOInsertUpdate dto)
+        public IActionResult Post(StatusDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -70,10 +63,10 @@ namespace Backend.Controllers
             }
             try
             {
-                var e = _mapper.Map<Pas>(dto);
-                _context.Psi.Add(e);
+                var e = _mapper.Map<Status>(dto);
+                _context.Statusi.Add(e);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, _mapper.Map<PasDTORead>(e));
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<StatusDTORead>(e));
             }
             catch (Exception ex)
             {
@@ -87,7 +80,7 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, PasDTOInsertUpdate dto)
+        public IActionResult Put(int sifra, StatusDTOInsertUpdate dto)
         {
             if (!ModelState.IsValid)
             {
@@ -95,10 +88,10 @@ namespace Backend.Controllers
             }
             try
             {
-                Pas? e;
+                Status? e;
                 try
                 {
-                    e = _context.Psi.Find(sifra);
+                    e = _context.Statusi.Find(sifra);
                 }
                 catch (Exception ex)
                 {
@@ -106,12 +99,12 @@ namespace Backend.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound(new { poruka = "Pas ne postoji u bazi" });
+                    return NotFound(new { poruka = "Status ne postoji u bazi" });
                 }
 
                 e = _mapper.Map(dto, e);
 
-                _context.Psi.Update(e);
+                _context.Statusi.Update(e);
                 _context.SaveChanges();
 
                 return Ok(new { poruka = "Uspješno promijenjeno" });
@@ -134,10 +127,10 @@ namespace Backend.Controllers
             }
             try
             {
-                Pas? e;
+                Status? e;
                 try
                 {
-                    e = _context.Psi.Find(sifra);
+                    e = _context.Statusi.Find(sifra);
                 }
                 catch (Exception ex)
                 {
@@ -145,9 +138,9 @@ namespace Backend.Controllers
                 }
                 if (e == null)
                 {
-                    return NotFound("Pas ne postoji u bazi");
+                    return NotFound("Status ne postoji u bazi");
                 }
-                _context.Psi.Remove(e);
+                _context.Statusi.Remove(e);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
@@ -156,9 +149,7 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+
     }
 }
-
-
-
-

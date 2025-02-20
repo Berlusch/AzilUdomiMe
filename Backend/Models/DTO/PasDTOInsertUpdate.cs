@@ -14,5 +14,5 @@ namespace Backend.Models.DTO
         int StatusSifra
     );
 
-    
+
 }
