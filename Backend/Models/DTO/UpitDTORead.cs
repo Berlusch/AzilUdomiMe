@@ -7,6 +7,6 @@
         string UdomiteljImePrezime, 
         DateTime DatumUpita, 
         string StatusUpita,
-        string SadrzajNapomene 
+        string Napomene 
     );
 }

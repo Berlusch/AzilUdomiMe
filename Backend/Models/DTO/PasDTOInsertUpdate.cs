@@ -8,6 +8,7 @@ namespace Backend.Models.DTO
         [Required(ErrorMessage = "Broj čipa je obavezan")]
         string BrojCipa,
         DateTime Datum_Rodjenja,
+        [Required(ErrorMessage = "Unesite 'muški' ili 'ženski'.")]   
         string Spol,
         string Opis,
         bool Kastracija,

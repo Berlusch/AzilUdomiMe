@@ -10,7 +10,7 @@ namespace Backend.Controllers
     [Route("api/v1/[controller]")]
     public class UdomiteljController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
     {
-        
+
         [HttpGet]
         public ActionResult<List<UdomiteljDTORead>> Get()
         {

@@ -7,7 +7,7 @@
         int UdomiteljSifra,
         DateOnly DatumUpita,
         string StatusUpita,
-        string SadrzajNapomene
+        string Napomene
     );
     
 }

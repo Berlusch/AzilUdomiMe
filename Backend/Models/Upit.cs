@@ -13,7 +13,7 @@ namespace Backend.Models
         [Column(name: "status_upita")]
         public string StatusUpita { get; set; }="";
         [Column(name: "napomene")]
-        public string SadrzajNapomene { get; set; } = "";
+        public string Napomene { get; set; } = "";
         
 
 
