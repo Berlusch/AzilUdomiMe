@@ -12,6 +12,7 @@ namespace Backend.Models.DTO
         [Required(ErrorMessage = "Telefon obavezan")]
         string Telefon,
         [Required(ErrorMessage = "Email obavezan")]
+        [EmailAddress(ErrorMessage = "Email nije ispravan")]
         string Email
         );
 }

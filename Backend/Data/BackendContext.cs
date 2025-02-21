@@ -23,6 +23,7 @@ namespace Backend.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //implementacija 1:n veza
 
             modelBuilder.Entity<Pas>().HasOne(g => g.Status);
             modelBuilder.Entity<Upit>().HasOne(g => g.Pas);

@@ -5,7 +5,7 @@
         (
         int PasSifra,
         int UdomiteljSifra,
-        DateOnly DatumUpita,
+        DateTime DatumUpita,
         string StatusUpita,
         string Napomene
     );
