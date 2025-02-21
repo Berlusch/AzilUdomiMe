@@ -19,7 +19,7 @@ export const RouteNames={
     STATUS_PREGLED: '/statusi',
     STATUS_NOVI: '/statusi/dodaj',
     STATUS_PROMJENA: '/statusi/:sifra',
-    STATUS_BRISANJE: '/statusi/obrisi/:sifra'
+    
 }
 
 

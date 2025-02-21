@@ -4,6 +4,7 @@ import { HttpService } from "./HttpService";
 async function get(){
     return await HttpService.get('/Status')
     .then((odgovor)=>{
+        console.log("Dobiveni podaci:", odgovor.data);
         //console.table(odgovor.data)
         return odgovor.data;
     })

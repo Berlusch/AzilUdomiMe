@@ -74,7 +74,7 @@ export default function StatusiPregled(){
                             
                             <Button
                             style={{ backgroundColor: '#9c989a', color: "white" }}
-                            onClick={()=>obrisi(smjer.sifra)}
+                            onClick={()=>obrisi(status.sifra)}
                             >
                                 Brisanje
                             </Button>
