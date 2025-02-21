@@ -33,7 +33,7 @@ async function promijeni(sifra,status){
 }
 
 async function obrisi(sifra){
-    return await HttpService.delete('/Smjer/' + sifra)
+    return await HttpService.delete('/Status/' + sifra)
     .then(()=>{
         return {greska: false, poruka: 'Obrisano'}
     })

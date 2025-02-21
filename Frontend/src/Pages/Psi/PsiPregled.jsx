@@ -20,6 +20,13 @@ export default function PsiPregled(){
         setPsi(odgovor)
 
     }
+
+    function obrisi(sifra){
+        if (!confirm(`Jeste li sigurni da želite obrisati psa ${pas.ime}`)) {
+            return;
+        }
+        obrisiPsa(sifra);
+    }
     async function obrisiPsa(sifra) {
         const odgovor = await PasService.obrisi(sifra);
         //console.log(odgovor);
@@ -110,7 +117,7 @@ export default function PsiPregled(){
                             
                             <Button
                             style={{ backgroundColor: '#9c989a', color: "white" }}
-                            onClick={() => obrisiPsa(pas.sifra)}>
+                            onClick={() => obrisi(pas.sifra)}>
                             
                                 Brisanje
                             </Button>

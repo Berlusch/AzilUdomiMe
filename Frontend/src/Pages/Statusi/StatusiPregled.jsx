@@ -34,7 +34,7 @@ export default function StatusiPregled(){
 
     async function brisanjeStatusa(sifra) {
         
-        const odgovor = await SmjerService.brisanje(sifra);
+        const odgovor = await StatusService.obrisi(sifra);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
