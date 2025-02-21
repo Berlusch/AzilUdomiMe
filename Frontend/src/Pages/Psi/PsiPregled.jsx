@@ -20,6 +20,15 @@ export default function PsiPregled(){
         setPsi(odgovor)
 
     }
+    async function obrisiPsa(sifra) {
+        const odgovor = await PasService.obrisi(sifra);
+        //console.log(odgovor);
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+        }
+        dohvatiPse();
+    }
 
     
     //hooks (kuka) se izvodi prilikom dolaska na stranicu Psi
@@ -101,8 +110,8 @@ export default function PsiPregled(){
                             
                             <Button
                             style={{ backgroundColor: '#9c989a', color: "white" }}
-                            onClick={() => navigate(`/psi/obrisi/${pas.sifra}`)}
-                            >
+                            onClick={() => obrisiPsa(pas.sifra)}>
+                            
                                 Brisanje
                             </Button>
                         </td> 

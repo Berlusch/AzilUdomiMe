@@ -2,40 +2,61 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import moment from "moment";
-import PasService from "../../services/PasService";
+import Service from "../../services/PasService";
 import { useEffect, useState } from "react";
+import StatusService from "../../services/StatusService";
 
 export default function PsiPromjena(){
-
     const navigate = useNavigate();
-    const [pas,setPas]= useState({});
     const routeParams= useParams();
 
-    async function dohvatiPse(){
-        const odgovor=await PasService.getBySifra(routeParams.sifra)
-        setPas(odgovor)
+    const[statusi, setStatusi]=useState([]);
+    const[statusNaziv, setStatusNaziv]=useState('')
+
+    const[pas, setPas]=useState({});
+
+    async function dohvatiStatuse(){
+        const odgovor=await StatusService.get();
+        setStatusi(odgovor.poruka)
     }
 
-    useEffect(()=>{
-        dohvatiPse();
-    },[])
+    async function dohvatiPas(){
+        const odgovor=await Service.getBySifra(routeParams.sifra)
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+    }
 
-    async function promijeni(pas){
-        const odgovor= await PasService.promijeni(routeParams.sifra,pas);
+    let pas=odgovor.poruka;
+    setPas(pas);
+    setStatusNaziv(pas.statusNaziv);
+    }
+
+    async function dohvatiInicijalnePodatke(){
+        await dohvatiStatuse();
+        await dohvatiPas();
+    }
+
+
+    useEffect(()=>{
+        dohvatiInicijalnePodatke();
+    },[]);
+   
+    async function promijeni(e){
+        const odgovor= await Service.promijeni(routeParams.sifra,e);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
         navigate(RouteNames.PAS_PREGLED)
-
-        
+       
         
     }
 
-    function OdradiSubmit(e){ // e je event
+    function obradiSubmit(e){ // e je event
         e.preventDefault(); //nemoj odraditi zahtjev na server na standardni način
         
-        let podatci = new FormData(e.target);
+        const podatci = new FormData(e.target);
 
         promijeni(
             {           
@@ -46,17 +67,17 @@ export default function PsiPromjena(){
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusNaziv: podatci.get('statusNaziv')
-            }
-                
-        );
+                statusNaziv: podatci.get(statusNaziv)
+            });
+               
+        
     }
 
     
     return(
     <>
     <h2 className="naslov">Promjena psa</h2>
-    <Form onSubmit={OdradiSubmit}>
+    <Form onSubmit={obradiSubmit}>
 
     <Form.Group controlId="ime">
             <Form.Label>Ime</Form.Label>
@@ -92,11 +113,19 @@ export default function PsiPromjena(){
                 <Form.Check label="Kastracija" name="kastracija" />
             </Form.Group>
 
-        <Form.Group controlId="statusNaziv">
-            <Form.Label>Status (Udomljen, rezerviran, slobodan, privremeni smještaj)</Form.Label>
-            <Form.Control type="text" name="statusNaziv" required
-            defaultValue={pas.statusNaziv}/>
-        </Form.Group>
+        <Form.Group className='mb-3' controlId='statusNaziv'>
+            <Form.Label>Status</Form.Label>
+            <Form.Select
+            value={statusNaziv}
+            onChange={(e)=>{setStatusNaziv(e.target.value)}}
+            >
+            {statusi && statusi.map((s,index)=>(
+              <option key={index} value={s.naziv}>
+                {s.sifra}
+              </option>
+            ))}
+            </Form.Select>
+          </Form.Group>
 
         <hr/>
     
@@ -107,23 +136,23 @@ export default function PsiPromjena(){
                 to={RouteNames.PAS_PREGLED}
                 className="btn btn-danger siroko"
                 style={{ backgroundColor: '#9c989a' }}
-                >Odustani<svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16" stroke="red"><g transform="translate(2, 0)">
+                >Odustani<svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="red" className="bi bi-x-lg" viewBox="0 0 16 16" stroke="red"><g transform="translate(2, 0)">
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/></g>
               </svg> </Link>
             </Col>
 
             <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
                 <Button variant="success" type="submit" className="siroko"style={{ backgroundColor: '#7d3d9b' }}>
-                    Promijeni Psa <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" fill="#00FF00" class="bi bi-check-lg" viewBox="0 0 16 16" stroke="#00FF00">
+                    Promijeni Psa <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" fill="#00FF00" className="bi bi-check-lg" viewBox="0 0 16 16" stroke="#00FF00">
   <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
 </svg>
                 </Button>
-            </Col>
+                </Col>
 
-        </Row>
+            </Row>
 
 
-    </Form>
+        </Form>
 
 
 

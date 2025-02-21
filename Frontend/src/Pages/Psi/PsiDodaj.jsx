@@ -1,17 +1,31 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { RouteNames } from "../../constants";
-import PasService from "../../services/PasService";
+import Service from "../../services/PasService";
 import moment from "moment";
-
-
+import StatusService from "../../services/StatusService";
+import { useEffect, useState } from 'react';
 
 export default function PsiDodaj(){
+    const navigate = useNavigate();   
+    
+    const [statusi, setStatusi]=useState([]);
+    const [statusNaziv, setStatusNaziv]=useState('');
+   
+    async function dohvatiStatuse(){
+        const odgovor=await StatusService.get();
+        setStatusi(odgovor.poruka);
+        setStatusNaziv(odgovor.poruka[{}].sifra)
+    }
 
-    const navigate = useNavigate();     
+    useEffect(()=>{
+        dohvatiStatuse();
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      },[]);
 
-    async function dodaj(pas){
-        const odgovor= await PasService.dodaj(pas);
+    async function dodaj(e){
+        const odgovor= await Service.dodaj(e);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
@@ -21,10 +35,10 @@ export default function PsiDodaj(){
 
     }
 
-    function odradiSubmit(e){ // e je event
+    function obradiSubmit(e){ // e je event
         e.preventDefault(); //nemoj odraditi zahtjev na server na standardni način
         
-        let podatci = new FormData(e.target);
+        const podatci = new FormData(e.target);
 
         dodaj(
             {            
@@ -35,7 +49,7 @@ export default function PsiDodaj(){
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                status: podatci.get('status'),
+                statusNaziv: podatci.get(statusNaziv)
                                 
             }
              
@@ -47,7 +61,7 @@ export default function PsiDodaj(){
     return(
     <>
     <h2 className="naslov">Dodavanje psa</h2>
-    <Form onSubmit={odradiSubmit}>
+    <Form onSubmit={obradiSubmit}>
 
         <Form.Group controlId="ime">
             <Form.Label>Ime</Form.Label>
@@ -75,17 +89,17 @@ export default function PsiDodaj(){
         </Form.Group>
 
         <Form.Group controlId="kastracija">
-            <Form.Check label="Kastracija" name="kastracija" />
+            <Form.Check label="Kastracija" name="kastracija"/>
             </Form.Group>
 
-        <Form.Group controlId='status'>
+        <Form.Group controlId="statusNaziv">
             <Form.Label>Status</Form.Label>
             <Form.Select 
-            onChange={(e)=>{setStatusSifra(e.target.value)}}
+            onChange={(e)=>{setStatusNaziv(e.target.value)}}
             >
-            {statusi && statusi.map((u,index)=>(
-              <option key={index} value={u.sifra}>
-                {u.statusNaziv}
+            {statusi && statusi.map((s,index)=>(
+              <option key={index} value={s.statusNaziv}>
+                {s.sifra}
               </option>
             ))}
             </Form.Select>
