@@ -2,33 +2,66 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import moment from "moment";
-import UpitService from "../../services/UpitService";
+import Service from "../../services/UpitService";
 import { useEffect, useState } from "react";
+import UdomiteljService from '../../services/UdomiteljService';
+import PasService from '../../services/PasService';
 
 export default function UpitiPromjena(){
 
     const navigate = useNavigate();
-    const [upit,setUpit]= useState({});
     const routeParams= useParams();
 
-    async function dohvatiUpite(){
-        const odgovor=await UpitService.getBySifra(routeParams.sifra)
-        setUpit(odgovor)
+    const[udomitelji, setUdomitelji]=useState([]);
+    const[udomiteljImePrezime, setUdomiteljImePrezime]=useState('');
+    
+    const[psi, setPsi]=useState([]);
+    const[pasIme, setPasIme]=useState();
+
+    const [upit,setUpit]= useState({});
+
+    async function dohvatiUdomitelje(){
+        const odgovor=await UdomiteljService.get(selected);
+               
     }
 
+    async function dohvatiPse(){
+        const odgovor=await PasService.get();
+        setPsi(odgovor, poruka);
+       
+    }
+
+    async function dohvatiUpite(){
+        const odgovor=await Service.getBySifra(routeParams.sifra);
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+        
+        }
+        let upit=odgovor.poruka;
+        setUpit(upit);
+        setUdomiteljImePrezime(upit.udomiteljImePrezime);
+        setPasIme(upit.pasIme);
+    }
+    async function dohvatiInicijalnePodatke(){
+        await dohvatiUdomitelje();
+        await dohvatiPse();
+        await dohvatiUpite();
+    }
+
+    
     useEffect(()=>{
-        dohvatiUpite();
+        dohvatiInicijalnePodatke();        
     },[])
 
-    async function promijeni(upit){
-        const odgovor= await UpitService.promijeni(routeParams.sifra,upit);
+    async function promijeni(e){
+        const odgovor= await Service.promijeni(routeParams.sifra,e);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
         navigate(RouteNames.UPIT_PREGLED)
-
-        
+       
         
     }
 
@@ -40,8 +73,8 @@ export default function UpitiPromjena(){
         promijeni(
             {           
  
-                pasIme: podatci.get('pasIme'),
-                udomiteljImePrezime: podatci.get('udomiteljImePrezime'),
+                pasIme: podatci.get(pasIme),
+                udomiteljImePrezime: podatci.get(udomiteljImePrezime),
                 datumUpita: moment.utc(podatci.get('datumUpita')),
                 statusUpita: podatci.get('statusUpita'),
                 napomene: podatci.get('napomene')
@@ -56,28 +89,23 @@ export default function UpitiPromjena(){
     <h2 className="naslov">Promjena upita</h2>
     <Form onSubmit={OdradiSubmit}>
 
-        <Form.Group controlId="pasIme">
-            <Form.Label>Ime psa</Form.Label>
-            <Form.Control type="text" name="pasIme" required
-            defaultValue={upit.pasIme}/>
-        </Form.Group>
+            <Form.Group controlId="pasIme">
+                <Form.Label>Pas</Form.Label>
+                <Form.Control type="text" name="pasIme" 
+                defaultValue={pasIme}/>
+            </Form.Group>
 
-        <Form.Group controlId="udomiteljImePrezime">
-            <Form.Label>Ime i prezime udomitelja</Form.Label>
-            <Form.Control type="text" name="udomiteljImePrezime" required
-            defaultValue={upit.udomiteljImePrezime}/>
-        </Form.Group>
-
-        <Form.Group controlId="datumUpita">
-            <Form.Label>Datum upita (napomena: datum nije moguće promijeniti!)</Form.Label>
-            <Form.Control type="date" name="datumUpita" required
-            defaultValue={upit.datumUpita}/>
-            
-        </Form.Group>
+          <Form.Group controlId="udomiteljImePrezime">
+                <Form.Label>Udomitelj</Form.Label>
+                <Form.Control type="text" name="udomiteljImePrezime"
+                defaultValue={udomiteljImePrezime} />
+          </Form.Group>
+         
 
         <Form.Group controlId="datumUpita">
                 <Form.Label>Datum upita</Form.Label>
-                <Form.Control type="date" name="datumUpita" />
+                <Form.Control type="date" name="datumUpita"
+                defaultValue={upit.datumUpita} />
             </Form.Group>
 
         <Form.Group controlId="statusUpita">
