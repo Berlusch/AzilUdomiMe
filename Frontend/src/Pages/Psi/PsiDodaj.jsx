@@ -9,13 +9,23 @@ import { useEffect, useState } from 'react';
 export default function PsiDodaj(){
     const navigate = useNavigate();   
     
-    const [statusi, setStatusi]=useState([]);
-    const [statusNaziv, setStatusNaziv]=useState('');
+    const [statusi,setStatusi]=useState([]);
+    const [statusSifra, setStatusSifra]=useState(1);
    
     async function dohvatiStatuse(){
-        const odgovor=await StatusService.get();
-        setStatusi(odgovor.poruka);
-        setStatusNaziv(odgovor.poruka[{}].sifra)
+        try {
+            const odgovor = await StatusService.get();
+            console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
+    
+            if (Array.isArray(odgovor) && odgovor.length > 0) {
+                setStatusi(odgovor);  // Postavi niz statusa
+                setStatusSifra(odgovor[1]?.sifra);  // Sigurno pristupanje drugom statusu (indeks 1)
+            } else {
+                console.error("Nema statusa u odgovoru ili odgovor nije niz");
+            }
+        } catch (error) {
+            console.error("Greška prilikom dohvaćanja statusa:", error);
+        }
     }
 
     useEffect(()=>{
@@ -42,14 +52,13 @@ export default function PsiDodaj(){
 
         dodaj(
             {            
- 
                 ime: podatci.get('ime'),
                 brojcipa: podatci.get('brojCipa'),
                 datum_rodjenja: moment.utc(podatci.get('datum_Rodjenja')),
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusNaziv: podatci.get(statusNaziv)
+                statusSifra: parseInt(statusSifra)
                                 
             }
              
@@ -92,19 +101,18 @@ export default function PsiDodaj(){
             <Form.Check label="Kastracija" name="kastracija"/>
             </Form.Group>
 
-        <Form.Group controlId="statusNaziv">
+            <Form.Group className='mb-3' controlId='status'>
             <Form.Label>Status</Form.Label>
             <Form.Select 
-            onChange={(e)=>{setStatusNaziv(e.target.value)}}
+            onChange={(e)=>{setStatusSifra(e.target.value)}}
             >
             {statusi && statusi.map((s,index)=>(
-              <option key={index} value={s.statusNaziv}>
-                {s.sifra}
+              <option key={index} value={s.sifra}>
+                {s.naziv}
               </option>
             ))}
             </Form.Select>
-          </Form.Group>
-
+            </Form.Group>
         
         <hr/>
     
@@ -115,14 +123,14 @@ export default function PsiDodaj(){
                 to={RouteNames.PAS_PREGLED}
                 className="btn btn-danger siroko"
                 style={{ backgroundColor: '#9c989a' }}
-                >Odustani  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16" stroke="red"><g transform="translate(2, 0)">
+                >Odustani  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="red" className="bi bi-x-lg" viewBox="0 0 16 16" stroke="red"><g transform="translate(2, 0)">
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/></g>
               </svg></Link>
             </Col>
 
             <Col xs={6} sm={12} md={9} lg={6} xl={6} xxl={6}>
                 <Button variant="success" type="submit" className="siroko" style={{ backgroundColor: '#7d3d9b' }}>
-                    Dodaj Psa  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" fill="#00FF00" class="bi bi-check-lg" viewBox="0 0 16 16" stroke="#00FF00">
+                    Dodaj Psa  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" fill="#00FF00" className="bi bi-check-lg" viewBox="0 0 16 16" stroke="#00FF00">
   <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
 </svg>
                 </Button>

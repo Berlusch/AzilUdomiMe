@@ -22,7 +22,7 @@ export default function PsiPregled(){
     }
 
     function obrisi(sifra){
-        if (!confirm(`Jeste li sigurni da želite obrisati psa ${pas.ime}`)) {
+        if (!confirm(`Jeste li sigurni da želite obrisati psa?`)) {
             return;
         }
         obrisiPsa(sifra);

@@ -19,20 +19,20 @@ async function getBySifra(sifra){
     .catch((e)=>{})
 }
 
-async function dodaj(pas){
-    return await HttpService.post('/Pas', pas)
+async function dodaj(Pas){
+    return HttpService.post('/Pas', Pas)
     .then(()=>{return{greska:false, poruka: 'Dodano'}})
     .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
 }
 
-async function promijeni(sifra,pas){
-    return await HttpService.put('/Pas/'+sifra, pas)
+async function promijeni(sifra,Pas){
+    return await HttpService.put('/Pas/'+sifra, Pas)
     .then(()=>{return{greska:false, poruka: 'Dodano'}})
     .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
 }
 
-async function obrisi(sifra,pas){
-    return await HttpService.delete('/Pas/'+sifra, pas)
+async function obrisi(sifra,Pas){
+    return await HttpService.delete('/Pas/'+sifra, Pas)
     .then(()=>{return{greska:false, poruka: 'Obrisano'}})
     .catch(()=>{return{greska:true, poruka:'Problem kod brisanja.'}})
 }
