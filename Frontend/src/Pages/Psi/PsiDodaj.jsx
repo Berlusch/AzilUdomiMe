@@ -10,7 +10,7 @@ export default function PsiDodaj(){
     const navigate = useNavigate();   
     
     const [statusi,setStatusi]=useState([]);
-    const [statusSifra, setStatusSifra]=useState(1);
+    const [statusSifra, setStatusSifra]=useState();
    
     async function dohvatiStatuse(){
         try {
@@ -29,9 +29,8 @@ export default function PsiDodaj(){
     }
 
     useEffect(()=>{
-        dohvatiStatuse();
-        
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        dohvatiStatuse();       
+       
       },[]);
 
     async function dodaj(e){
@@ -88,7 +87,7 @@ export default function PsiDodaj(){
         </Form.Group>
 
         <Form.Group controlId="spol">
-            <Form.Label>Spol (M/Ž)</Form.Label>
+            <Form.Label>Spol (muški/ženski)</Form.Label>
             <Form.Control type="text" name="spol" required/>
         </Form.Group>
 

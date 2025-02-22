@@ -34,7 +34,7 @@ async function promijeni(sifra,Pas){
 async function obrisi(sifra,Pas){
     return await HttpService.delete('/Pas/'+sifra, Pas)
     .then(()=>{return{greska:false, poruka: 'Obrisano'}})
-    .catch(()=>{return{greska:true, poruka:'Problem kod brisanja.'}})
+    .catch(()=>{return{greska:true, poruka:'Problem kod brisanja'}})
 }
 
 export default{
