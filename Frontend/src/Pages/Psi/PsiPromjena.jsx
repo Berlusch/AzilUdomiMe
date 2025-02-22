@@ -2,73 +2,68 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import moment from "moment";
-import Service from "../../services/PasService";
+import PasService from "../../services/PasService";
 import { useEffect, useState } from "react";
-import StatusService from "../../services/StatusService";
+
+
+
 
 export default function PsiPromjena(){
     const navigate = useNavigate();
+    
     const routeParams= useParams();
 
-    const[statusi, setStatusi]=useState([]);
-    const[statusNaziv, setStatusNaziv]=useState('')
-
     const[pas, setPas]=useState({});
-
-    async function dohvatiStatuse(){
-        const odgovor=await StatusService.get();
-        setStatusi(odgovor.poruka)
-    }
-
-    async function dohvatiPas(){
-        const odgovor=await Service.getBySifra(routeParams.sifra)
+    const [kastracija,setKastracija] = useState(false);
+             
+    
+    async function dohvatiPsa(){
+        const odgovor= await PasService.getBySifra(routeParams.sifra);
+        console.log(odgovor); //koji su podatci dohvaćeni
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
     }
 
-    let pas=odgovor.poruka;
-    setPas(pas);
-    setStatusNaziv(pas.statusNaziv);
-    }
-
-    async function dohvatiInicijalnePodatke(){
-        await dohvatiStatuse();
-        await dohvatiPas();
-    }
-
-
+    let p = odgovor.poruka
+        setKastracija(p.kastracija);
+        p.datum_Rodjenja = moment.utc(p.datum_Rodjenja).format('yyyy-MM-DD');
+        setPas(p);
+                   
+    }     
+     
     useEffect(()=>{
-        dohvatiInicijalnePodatke();
+        dohvatiPsa();
+        
     },[]);
    
-    async function promijeni(e){
-        const odgovor= await Service.promijeni(routeParams.sifra,e);
+    async function promijeni(pas){
+        const odgovor= PasService.promijeni(routeParams.sifra,pas);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
         navigate(RouteNames.PAS_PREGLED)
-       
+     
         
     }
 
     function obradiSubmit(e){ // e je event
         e.preventDefault(); //nemoj odraditi zahtjev na server na standardni način
         
-        const podatci = new FormData(e.target);
+        let podatci = new FormData(e.target);
 
         promijeni(
-            {           
- 
+            {
                 ime: podatci.get('ime'),
                 brojCipa: podatci.get('brojCipa'),
                 datum_Rodjenja: moment.utc(podatci.get('datum_Rodjenja')),
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusNaziv: podatci.get(statusNaziv)
-            });
+                statusNaziv: podatci.get('statusNaziv')
+            }
+        );     
                
         
     }
@@ -82,50 +77,47 @@ export default function PsiPromjena(){
     <Form.Group controlId="ime">
             <Form.Label>Ime</Form.Label>
             <Form.Control type="text" name="ime" required
-            defaultValue={pas.ime}/>
+            defaultValue={pas?.ime || ''}/>
         </Form.Group>
 
     <Form.Group controlId="brojCipa">
             <Form.Label>Broj čipa</Form.Label>
             <Form.Control type="text" name="brojCipa" required
-            defaultValue={pas.brojCipa}/>
+            defaultValue={pas?.brojCipa || ''}/>
         </Form.Group>
 
         <Form.Group controlId="datum_Rodjenja">
             <Form.Label>Datum rođenja</Form.Label>
             <Form.Control type="date" step={0.01}  name="datum_Rodjenja" required
-            defaultValue={pas.datum_Rodjenja}/>
+            defaultValue={pas?.datum_Rodjenja || ''}/>
         </Form.Group>
 
         <Form.Group controlId="spol">
             <Form.Label>Spol (M/Ž)</Form.Label>
             <Form.Control type="text" name="spol" required
-            defaultValue={pas.spol}/>
+            defaultValue={pas?.spol || ''}/>
         </Form.Group>
 
         <Form.Group controlId="opis">
             <Form.Label>Opis</Form.Label>
             <Form.Control type="text" name="opis" required
-            defaultValue={pas.opis}/>
+            defaultValue={pas?.opis || ''}/>
         </Form.Group>
 
         <Form.Group controlId="kastracija">
-                <Form.Check label="Kastracija" name="kastracija" />
-            </Form.Group>
+            <Form.Check 
+            label="Kastracija" 
+            name="kastracija" 
+            onChange={(e) => setKastracija(e.target.checked)}
+            checked={kastracija}  
+            />
+        </Form.Group>
 
-        <Form.Group className='mb-3' controlId='statusNaziv'>
+            <Form.Group controlId="statusNaziv">
             <Form.Label>Status</Form.Label>
-            <Form.Select
-            value={statusNaziv}
-            onChange={(e)=>{setStatusNaziv(e.target.value)}}
-            >
-            {statusi && statusi.map((s,index)=>(
-              <option key={index} value={s.naziv}>
-                {s.sifra}
-              </option>
-            ))}
-            </Form.Select>
-          </Form.Group>
+            <Form.Control type="text" name="statusNaziv" required
+            defaultValue={pas?.statusNaziv || ''}/>
+        </Form.Group>
 
         <hr/>
     
