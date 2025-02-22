@@ -26,7 +26,7 @@ export default function StatusiPregled(){
 
         
     function obrisi(sifra){
-        if(!confirm('Sigurno obrisati')){
+        if(!confirm('Sigurno želite obrisati status?')){
             return;
         }
         brisanjeStatusa(sifra)
