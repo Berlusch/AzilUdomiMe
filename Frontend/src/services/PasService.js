@@ -26,9 +26,9 @@ async function dodaj(Pas){
 }
 
 async function promijeni(sifra,Pas){
-    return await HttpService.put('/Pas/'+sifra, Pas)
-    .then(()=>{return{greska:false, poruka: 'Dodano'}})
-    .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
+    return HttpService.put('/Pas/'+sifra, Pas)
+    .then(()=>{return{greska:false, poruka: 'Promijenjeno'}})
+    .catch(()=>{return{greska:true, poruka:'Problem kod promjene'}})
 }
 
 async function obrisi(sifra,Pas){
