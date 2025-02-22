@@ -27,8 +27,8 @@ async function dodaj(udomitelj){
 
 async function promijeni(sifra,udomitelj){
     return HttpService.put('/Udomitelj/'+sifra, udomitelj)
-    .then(()=>{return{greska:false, poruka: 'Dodano'}})
-    .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
+    .then(()=>{return{greska:false, poruka: 'Promijenjeno'}})
+    .catch(()=>{return{greska:true, poruka:'Problem kod promjene'}})
 }
 
 async function obrisi(sifra,udomitelj){
