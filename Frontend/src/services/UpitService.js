@@ -19,11 +19,16 @@ async function getBySifra(sifra){
     .catch((e)=>{})
 }
 
-async function dodaj(upit){
-    return await HttpService.post('/Upit', upit)
-    .then(()=>{return{greska:false, poruka: 'Dodano'}})
-    .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
+async function dodaj(upit) {
+    try {
+        await HttpService.post('/Upit', upit);
+        return { greska: false, poruka: 'Dodano' };
+    } catch (error) {
+        console.error("Greška kod dodavanja:", error); // Dodaj detaljnu poruku
+        return { greska: true, poruka: 'Problem kod dodavanja' };
+    }
 }
+
 
 async function promijeni(sifra,upit){
     return await HttpService.put('/Upit/'+sifra, upit)

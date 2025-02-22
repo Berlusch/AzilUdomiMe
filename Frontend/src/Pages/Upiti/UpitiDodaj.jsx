@@ -1,35 +1,82 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import UpitService from "../../services/UpitService";
+import Service from "../../services/UpitService";
 import moment from "moment"
+import PasService from "../../services/PasService";
+import UdomiteljService from "../../services/UdomiteljService";
+import { useEffect, useState } from 'react';
 
 export default function UpitiDodaj(){
 
-    const navigate = useNavigate();     
+    const navigate = useNavigate();   
+    
+    const [psi,setPsi]=useState([]);
+    const [pasSifra, setPasSifra]=useState({});
 
-    async function dodaj(upit){
-        const odgovor= await UpitService.dodaj(upit);
+    const [udomitelji,setUdomitelji]=useState([]);
+    const [udomiteljSifra, setUdomiteljSifra]=useState({});
+
+    async function dohvatiPse(){
+            try {
+                const odgovor = await PasService.get();
+                console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
+        
+                if (Array.isArray(odgovor) && odgovor.length > 0) {
+                    setPsi(odgovor);  // Postavi niz pasa
+                    setPasSifra(odgovor[0]?.sifra);  
+                } else {
+                    console.error("Nema pasa u odgovoru ili odgovor nije niz");
+                }
+            } catch (error) {
+                console.error("Greška prilikom dohvaćanja pasa:", error);
+            }
+        }
+
+    async function dohvatiUdomitelje(){
+            try {
+                const odgovor = await UdomiteljService.get();
+                console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
+        
+                if (Array.isArray(odgovor) && odgovor.length > 0) {
+                    setUdomitelji(odgovor);  // Postavi niz udomitelja
+                    setUdomiteljSifra(odgovor[1]?.sifra);  
+                        console.log("Postavljen udomitelj:", odgovor[0]?.ime, odgovor[0]?.prezime);
+                } 
+                else {
+                    console.error("Nema udomitelja u odgovoru ili odgovor nije niz");
+                }
+            } catch (error) {
+                console.error("Greška prilikom dohvaćanja udomitelja:", error);
+            }
+        }
+    useEffect(()=>{
+            dohvatiPse();
+            dohvatiUdomitelje();           
+            
+          },[]);
+
+    async function dodaj(e){
+        const odgovor= await Service.dodaj(e);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
-        navigate(RouteNames.UPIT_PREGLED)
-        
-        
+        navigate(RouteNames.UPIT_PREGLED)     
+       
 
     }
 
     function odradiSubmit(e){ // e je event
         e.preventDefault(); //nemoj odraditi zahtjev na server na standardni način
         
-        let podatci = new FormData(e.target);
+        const podatci = new FormData(e.target);
 
         dodaj(
             {            
  
-                pasIme: podatci.get('pasIme'),
-                udomiteljImePrezime: podatci.get('udomiteljImePrezime'),
+                pasSifra: podatci.get(pasSifra),
+                udomiteljSifra: podatci.get(udomiteljSifra),
                 datumUpita: moment.utc(podatci.get('datumUpita')),
                 statusUpita: podatci.get('statusUpita'),
                 napomene: podatci.get('napomene')
@@ -45,16 +92,32 @@ export default function UpitiDodaj(){
     <h2 className="naslov">Dodavanje upita</h2>
     <Form onSubmit={odradiSubmit}>
 
-        <Form.Group controlId="pasIme">
-            <Form.Label>Ime psa</Form.Label>
-            <Form.Control type="text" name="pasIme" required/>
+        <Form.Group className='mb-3' controlId='pasIme'>
+            <Form.Label>Pas</Form.Label>
+            <Form.Select 
+            onChange={(e)=>{setPasIme(e.target.value)}}
+            >
+            {psi && psi.map((p,index)=>(
+            <option key={index} value={p.sifra}>
+            {p.ime}
+            </option>
+            ))}
+            </Form.Select>
         </Form.Group>
 
-        <Form.Group controlId="udomiteljImePrezime">
-            <Form.Label>Ime i prezime udomitelja</Form.Label>
-            <Form.Control type="text" name="udomiteljImePrezime" required/>
+        <Form.Group className='mb-3' controlId='udomiteljImePrezime'>
+            <Form.Label>Udomitelj</Form.Label>
+            <Form.Select 
+            onChange={(e)=>{setUdomiteljSifra(e.target.value)}}
+            >
+            {udomitelji && udomitelji.map((u,index)=>(
+            <option key={index} value={u.sifra}>
+            {u.ime+" "+u.prezime}
+            </option>
+            ))}
+            </Form.Select>
         </Form.Group>
-
+        
         <Form.Group controlId="datumUpita">
                 <Form.Label>Datum upita</Form.Label>
                 <Form.Control type="date" name="datumUpita" />
