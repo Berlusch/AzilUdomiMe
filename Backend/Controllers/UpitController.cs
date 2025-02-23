@@ -62,12 +62,43 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { poruka = ModelState });
             }
+            Pas? p;
+            try
+            {
+                p = _context.Psi.Find(dto.PasSifra);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+            if (p == null)
+            {
+                return NotFound(new { poruka = "Pas ne postoji u bazi" });
+            }
+
+            Udomitelj? u;
+            try
+            {
+                u = _context.Udomitelji.Find(dto.UdomiteljSifra);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+            if (u == null)
+            {
+                return NotFound(new { poruka = "Udomitelj ne postoji u bazi" });
+            }
+
+
             try
             {
                 var e = _mapper.Map<Upit>(dto);
+                e.Pas = p;
+                e.Udomitelj = u;
                 _context.Upiti.Add(e);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, _mapper.Map<UdomiteljDTORead>(e));
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<UpitDTORead>(e));
             }
             catch (Exception ex)
             {
