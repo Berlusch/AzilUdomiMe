@@ -2,11 +2,8 @@ import { useEffect, useState } from "react"
 import UpitService from "../../services/UpitService"
 import { Button, Table } from "react-bootstrap";
 import moment from "moment"
-//import { GrValidate } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-
-
 
 
 export default function UpitiPregled(){

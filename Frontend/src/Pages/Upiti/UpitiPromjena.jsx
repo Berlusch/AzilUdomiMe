@@ -54,8 +54,8 @@ export default function UpitiPromjena(){
         dohvatiInicijalnePodatke();        
     },[])
 
-    async function promijeni(e){
-        const odgovor= await Service.promijeni(routeParams.sifra,e);
+    async function promijeni(upit){
+        const odgovor= await Service.promijeni(routeParams.sifra,upit);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return

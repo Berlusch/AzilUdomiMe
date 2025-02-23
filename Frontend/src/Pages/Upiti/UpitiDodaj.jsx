@@ -95,10 +95,10 @@ export default function UpitiDodaj(){
         <Form.Group className='mb-3' controlId='pasIme'>
             <Form.Label>Pas</Form.Label>
             <Form.Select 
-            onChange={(e)=>{setPasIme(e.target.value)}}
+            onChange={(e)=>{setPasSifra(e.target.value)}}
             >
-            {psi && psi.map((p,index)=>(
-            <option key={index} value={p.sifra}>
+            {psi && psi.map((p,sifra)=>(
+            <option key={sifra} value={p.sifra}>
             {p.ime}
             </option>
             ))}
@@ -110,9 +110,9 @@ export default function UpitiDodaj(){
             <Form.Select 
             onChange={(e)=>{setUdomiteljSifra(e.target.value)}}
             >
-            {udomitelji && udomitelji.map((u,index)=>(
-            <option key={index} value={u.sifra}>
-            {u.ime+" "+u.prezime}
+            {udomitelji && udomitelji.map((u,sifra)=>(
+            <option key={sifra} value={u.sifra}>
+            {u.ime +" "+ u.prezime}
             </option>
             ))}
             </Form.Select>
