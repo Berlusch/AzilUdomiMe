@@ -65,11 +65,11 @@
 }
 
 .sirokostatus{
-  width:14%;
+  width:58%;
   background-color: #b681da;
   transition: background-color 0.3s ease;
-  padding-left:15px;
-  margin-left:10px;
+  
+ 
 }
 .sirokostatus:hover, .siroko:active {
 background-color: #7d3d9b; 

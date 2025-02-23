@@ -62,7 +62,7 @@ export default function StatusiPregled(){
                     <tr key={index}>
                         <td>
                             {status.naziv}
-                            
+                        </td>  
                         
                         <td style={{ display: "flex", gap: "10px" }}>
                             <Button
@@ -78,7 +78,7 @@ export default function StatusiPregled(){
                             >
                                 Brisanje
                             </Button>
-                            </td> 
+                            
                         </td>    
                                         
                     </tr>
