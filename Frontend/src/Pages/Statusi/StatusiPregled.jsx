@@ -47,7 +47,7 @@ export default function StatusiPregled(){
 
         <Link
         to={RouteNames.STATUS_NOVI}
-        className="btn btn-success siroko"
+        className="btn btn-success sirokostatus"
         >Dodaj novi status</Link>
         <Table striped bordered hover responsive>
             <thead>
