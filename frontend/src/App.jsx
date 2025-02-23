@@ -19,7 +19,7 @@ import StatusiPromjena from './Pages/Statusi/StatusiPromjena'
 import UpitiPregled from './Pages/Upiti/UpitiPregled'
 import UpitiDodaj from './Pages/Upiti/UpitiDodaj'
 import UpitiPromjena from './Pages/Upiti/UpitiPromjena'
-import UpitiBrisanje from './Pages/Upiti/UpitiBrisanje'
+
 
 
 
@@ -44,8 +44,7 @@ function App() {
           <Route path={RouteNames.UPIT_PREGLED} element={<UpitiPregled />} />
           <Route path={RouteNames.UPIT_NOVI} element={<UpitiDodaj />} />
           <Route path={RouteNames.UPIT_PROMJENA} element={<UpitiPromjena />} />
-          <Route path={RouteNames.UPIT_BRISANJE} element={<UpitiBrisanje/>} />
-
+          
           <Route path={RouteNames.STATUS_PREGLED} element={<StatusiPregled />} />
           <Route path={RouteNames.STATUS_NOVI} element={<StatusiDodaj />} />
           <Route path={RouteNames.STATUS_PROMJENA} element={<StatusiPromjena />} />

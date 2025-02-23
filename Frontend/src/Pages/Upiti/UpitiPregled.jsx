@@ -21,6 +21,21 @@ export default function UpitiPregled(){
 
     }
 
+    function obrisi(sifra){
+            if (!confirm(`Jeste li sigurni da želite obrisati upit?`)) {
+                return;
+            }
+            obrisiUpit(sifra);
+        }
+        async function obrisiUpit(sifra) {
+            const odgovor = await UpitService.obrisi(sifra);
+            //console.log(odgovor);
+            if(odgovor.greska){
+                alert(odgovor.poruka);
+                return;
+            }
+            dohvatiUpite();
+        }
     
     //hooks (kuka) se izvodi prilikom dolaska na stranicu Upiti
     useEffect(()=>{
@@ -72,7 +87,7 @@ export default function UpitiPregled(){
                             
                             <Button
                             style={{ backgroundColor: '#9c989a', color: "white" }}
-                            onClick={() => navigate(`/upiti/obrisi/${upit.sifra}`)}
+                            onClick={() => obrisi(upit.sifra)}
                             >
                                 Brisanje
                             </Button>

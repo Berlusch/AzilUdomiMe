@@ -14,7 +14,7 @@ export const RouteNames={
     UPIT_PREGLED: '/upiti',
     UPIT_NOVI: '/upiti/dodaj',
     UPIT_PROMJENA: '/upiti/:sifra',
-    UPIT_BRISANJE: '/upiti/obrisi/:sifra',
+    
 
     STATUS_PREGLED: '/statusi',
     STATUS_NOVI: '/statusi/dodaj',
