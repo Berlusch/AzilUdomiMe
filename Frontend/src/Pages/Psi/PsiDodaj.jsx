@@ -11,6 +11,8 @@ export default function PsiDodaj(){
     
     const [statusi,setStatusi]=useState([]);
     const [statusSifra, setStatusSifra]=useState();
+    const[psi, setPsi]=useState([])
+    const [pasSpol, setPasSpol]=useState({});
    
     async function dohvatiStatuse(){
         try {
@@ -28,8 +30,25 @@ export default function PsiDodaj(){
         }
     }
 
+    async function dohvatiSpolove(){
+        try {
+            const odgovor = await Service.get();
+            console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
+                if (Array.isArray(odgovor) && odgovor.length > 0) {
+                setPsi(odgovor);  
+                setPasSpol(odgovor[0].spol);  
+            } else {
+                console.error("Nema spola u odgovoru ili odgovor nije niz");
+            }
+        } catch (error) {
+            console.error("Greška prilikom dohvaćanja spola:", error);
+        }
+
+    }
+
     useEffect(()=>{
-        dohvatiStatuse();       
+        dohvatiStatuse();  
+        dohvatiSpolove();     
        
       },[]);
 
@@ -39,8 +58,7 @@ export default function PsiDodaj(){
             alert(odgovor.poruka)
             return
         }
-        navigate(RouteNames.PAS_PREGLED)
-             
+        navigate(RouteNames.PAS_PREGLED)            
 
     }
 
@@ -54,7 +72,7 @@ export default function PsiDodaj(){
                 ime: podatci.get('ime'),
                 brojcipa: podatci.get('brojCipa'),
                 datum_rodjenja: moment.utc(podatci.get('datum_Rodjenja')),
-                spol: podatci.get('spol'),
+                spol: pasSpol,
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
                 statusSifra: parseInt(statusSifra)
@@ -65,7 +83,6 @@ export default function PsiDodaj(){
         );
     }
 
-    
     return(
     <>
     <h2 className="naslov">Dodavanje psa</h2>
@@ -86,9 +103,22 @@ export default function PsiDodaj(){
             <Form.Control type="date" name="datum_Rodjenja" required/>
         </Form.Group>
 
-        <Form.Group controlId="spol">
-            <Form.Label>Spol (muški/ženski)</Form.Label>
-            <Form.Control type="text" name="spol" required/>
+        <Form.Group className='mb-3' controlId="spol">
+            <Form.Label>Spol</Form.Label>
+            <Form.Select 
+                value={pasSpol} // Dodajte value da bi bila kontrolirana komponenta
+                onChange={(e) => { setPasSpol(e.target.value) }}
+                required // Dodajte required atribut
+            >
+                <option value="">Odaberite spol</option>
+                <option value="muški">muški</option>
+                <option value="ženski">ženski</option>
+                {psi && psi.filter((s) => s.spol !== "muški" && s.spol !== "ženski").map((s, index) => (
+                    <option key={index} value={s.spol}>
+                        {s.spol}
+                    </option>
+                ))}
+            </Form.Select>
         </Form.Group>
 
         <Form.Group controlId="opis">
@@ -105,6 +135,7 @@ export default function PsiDodaj(){
             <Form.Select 
             onChange={(e)=>{setStatusSifra(e.target.value)}}
             >
+            <option value="">Odaberite status</option>
             {statusi && statusi.map((s,index)=>(
               <option key={index} value={s.sifra}>
                 {s.naziv}
