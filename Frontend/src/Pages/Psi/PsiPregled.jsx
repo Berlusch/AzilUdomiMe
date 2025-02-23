@@ -21,11 +21,13 @@ export default function PsiPregled(){
 
     }
 
-    function obrisi(sifra){
-        if (!confirm(`Jeste li sigurni da želite obrisati psa?`)) {
+    function obrisi(sifra) {
+        const pas = psi.find(p => p.sifra === sifra); 
+        const imePsa = pas.ime; 
+    
+        if (!confirm(`Jeste li sigurni da želite obrisati psa ${imePsa}?`)) {
             return;
         }
-        obrisiPsa(sifra);
     }
     async function obrisiPsa(sifra) {
         const odgovor = await PasService.obrisi(sifra);
