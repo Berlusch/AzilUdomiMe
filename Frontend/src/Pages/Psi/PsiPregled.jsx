@@ -28,6 +28,7 @@ export default function PsiPregled(){
         if (!confirm(`Jeste li sigurni da želite obrisati psa ${imePsa}?`)) {
             return;
         }
+        obrisiPsa(sifra)
     }
     async function obrisiPsa(sifra) {
         const odgovor = await PasService.obrisi(sifra);
