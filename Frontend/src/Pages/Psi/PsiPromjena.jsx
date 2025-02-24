@@ -126,7 +126,7 @@ export default function PsiPromjena(){
         <Form.Group className='mb-3' controlId='statusNaziv'>
             <Form.Label>Status</Form.Label>
             <Form.Select
-            value={statusSifra}
+            value={pas?.statusSifra}
             onChange={(e)=>{setStatusSifra(e.target.value)}}
             >
             {statusi && statusi.map((s,index)=>(
