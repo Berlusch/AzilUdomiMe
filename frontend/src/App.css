@@ -81,4 +81,30 @@ background-color: #7d3d9b; /* Ostaje ljubičasta kad je gumb pritisnut */
 background-color: #7d3d9b;
 }
 
+.ikona {
+  position: relative; /* Potrebno za pozicioniranje tooltip-a u odnosu na ikonu */
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  background-color: #f8f8f8;
+  color: #aa13e6;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  z-index: 1;
+  bottom: 100%; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  
+}
+
+.ikona:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
  

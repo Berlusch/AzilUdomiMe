@@ -69,6 +69,7 @@ export default function PsiPregled(){
             <thead>
                 <tr>
                     <th>Ime</th>
+                    <th>Slika</th>
                     <th>Broj čipa</th>
                     <th>Datum rođenja</th>
                     <th>Spol</th>
@@ -82,12 +83,26 @@ export default function PsiPregled(){
             
 
             <tbody>
-                {psi && psi.map((pas,index)=>(
+                    {psi && psi.map((pas, index) => (
                     <tr key={index}>
-                        <td>
-                            {pas.ime}
-                            
+                        <td className="pas-td">
+                        {pas.ime}
                         </td>
+                        <td>
+                    {/* Ikona s hover efektom */}
+                    <div className="ikona">
+                        <img
+                        src="ikonicaSlika.png"
+                        alt={pas.ime}
+                        width="40"
+                        />
+                        {/* Tooltip koji će biti prikazan na hover */}
+                        <div className="tooltip">
+                        {pas.ime}<br />
+                        slika
+                        </div>
+                    </div>
+                    </td>
                         <td>
                             {pas.brojCipa}
                         </td>
