@@ -27,7 +27,7 @@ async function dodaj(status){
 }
 
 async function promijeni(sifra,status){
-    return HttpService.put('/Status/'+sifra, status)
+    return await HttpService.put('/Status/'+sifra, status)
     .then(()=>{return{greska:false, poruka: 'Dodano'}})
     .catch(()=>{return{greska:true, poruka:'Problem kod dodavanja'}})
 }

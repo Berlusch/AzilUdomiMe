@@ -2,56 +2,67 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import moment from "moment";
-import PasService from "../../services/PasService";
+import Service from "../../services/PasService";
 import { useEffect, useState } from "react";
+import StatusService from "../../services/StatusService";
 
 
 
 
 export default function PsiPromjena(){
     const navigate = useNavigate();
-    
     const routeParams= useParams();
+
+    const [statusi, setStatusi] = useState([]);
+    const[statusSifra, setStatusSifra]=useState(1)
 
     const[pas, setPas]=useState({});
     const [kastracija,setKastracija] = useState(false);
-             
+    
+    async function dohvatiStatuse(){
+        const odgovor=await StatusService.get()
+        setStatusi(odgovor.poruka);
+    }             
     
     async function dohvatiPsa(){
-        const odgovor= await PasService.getBySifra(routeParams.sifra);
+        const odgovor= await Service.getBySifra(routeParams.sifra);
         console.log(odgovor); //koji su podatci dohvaćeni
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
     }
-
+  
     let p = odgovor.poruka
-        setKastracija(p.kastracija);
-        p.datum_Rodjenja = moment.utc(p.datum_Rodjenja).format('yyyy-MM-DD');
-        setPas(p);
+    setPas(p);
+    setKastracija(p.kastracija);
+    p.datum_Rodjenja = moment.utc(p.datum_Rodjenja).format('yyyy-MM-DD');
+    setStatusSifra(p.statusSifra);      
                    
-    }     
+    }  
+    
+    async function dohvatiInicijalnePodatke() {
+        await dohvatiStatuse();
+        await dohvatiPsa();
+      }
      
     useEffect(()=>{
-        dohvatiPsa();
-        
+        dohvatiInicijalnePodatke();        
     },[]);
    
-    async function promijeni(pas){
-        const odgovor= PasService.promijeni(routeParams.sifra,pas);
+    async function promijeni(e){
+        const odgovor= await Service.promijeni(routeParams.sifra,e);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
         }
-        navigate(RouteNames.PAS_PREGLED)
-     
+        navigate(RouteNames.PAS_PREGLED)     
         
     }
 
     function obradiSubmit(e){ // e je event
         e.preventDefault(); //nemoj odraditi zahtjev na server na standardni način
         
-        let podatci = new FormData(e.target);
+        const podatci = new FormData(e.target);
 
         promijeni(
             {
@@ -61,7 +72,7 @@ export default function PsiPromjena(){
                 spol: podatci.get('spol'),
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
-                statusNaziv: podatci.get('statusNaziv')
+                statusSifra: parseInt(statusSifra)
             }
         );     
                
@@ -112,12 +123,19 @@ export default function PsiPromjena(){
             checked={kastracija}  
             />
         </Form.Group>
-
-            <Form.Group controlId="statusNaziv">
+        <Form.Group className='mb-3' controlId='statusNaziv'>
             <Form.Label>Status</Form.Label>
-            <Form.Control type="text" name="statusNaziv" required
-            defaultValue={pas?.statusNaziv || ''}/>
-        </Form.Group>
+            <Form.Select
+            value={statusSifra}
+            onChange={(e)=>{setStatusSifra(e.target.value)}}
+            >
+            {statusi && statusi.map((s,index)=>(
+              <option key={index} value={s.sifra}>
+                {s.statusNaziv}
+              </option>
+            ))}
+            </Form.Select>
+          </Form.Group>
 
         <hr/>
     
