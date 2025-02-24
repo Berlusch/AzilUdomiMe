@@ -96,11 +96,13 @@ export default function PsiPregled(){
                         alt={pas.ime}
                         width="40"
                         />
-                        {/* Tooltip koji će biti prikazan na hover */}
                         <div className="tooltip">
-                        {pas.ime}<br />
-                        slika
-                        </div>
+                        <img 
+                            src={`/pas${pas.sifra}.jpg`}  
+                            alt={pas.ime}
+                            width="220" // Prilagodi veličinu prema potrebi
+                        />
+                    </div>
                     </div>
                     </td>
                         <td>
