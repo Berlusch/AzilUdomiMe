@@ -62,14 +62,15 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { poruka = ModelState });
             }
+
             Pas? p;
             try
             {
                 p = _context.Psi.Find(dto.PasSifra);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(new { poruka = ex.Message });
+                return BadRequest(new { poruka = e.Message });
             }
             if (p == null)
             {
@@ -81,9 +82,9 @@ namespace Backend.Controllers
             {
                 u = _context.Udomitelji.Find(dto.UdomiteljSifra);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(new { poruka = ex.Message });
+                return BadRequest(new { poruka = e.Message });
             }
             if (u == null)
             {
@@ -100,12 +101,11 @@ namespace Backend.Controllers
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status201Created, _mapper.Map<UpitDTORead>(e));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(new { poruka = ex.Message });
+                return BadRequest(new { poruka = e.Message });
             }
-
-
+            
 
         }
 
