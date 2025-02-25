@@ -38,6 +38,7 @@ export default function UpitiPromjena(){
         setUpit(upit);
         setUdomiteljSifra(upit.udomiteljSifra);
         setPasSifra(upit.pasSifra);
+        upit.DatumUpita = moment.utc(upit.datumUpita).format('yyyy-MM-DD')
     }
     async function dohvatiInicijalnePodatke(){
         await dohvatiUdomitelje();
@@ -118,7 +119,7 @@ export default function UpitiPromjena(){
 
         <Form.Group controlId="datumUpita">
                 <Form.Label>Datum upita</Form.Label>
-                <Form.Control type="date" name="datumUpita"
+                <Form.Control type="date" step={0.01} name="datumUpita"
                 defaultValue={upit.datumUpita} />
             </Form.Group>
 
