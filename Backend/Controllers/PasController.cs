@@ -38,7 +38,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("{sifra:int}")]
-        public ActionResult<PasDTORead> GetBySifra(int sifra)
+        public ActionResult<PasDTOInsertUpdate> GetBySifra(int sifra)
         {
             if (!ModelState.IsValid)
             {
@@ -47,7 +47,7 @@ namespace Backend.Controllers
             Pas? e;
             try
             {
-                e = _context.Psi.Find(sifra);
+                e = _context.Psi.Include(g => g.Status).FirstOrDefault(g => g.Sifra == sifra);
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace Backend.Controllers
                 return NotFound(new { poruka = "Pas ne postoji u bazi" });
             }
 
-            return Ok(_mapper.Map<PasDTORead>(e));
+            return Ok(_mapper.Map<PasDTOInsertUpdate>(e));
         }
 
         [HttpPost]

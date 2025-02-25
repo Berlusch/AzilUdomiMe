@@ -31,7 +31,7 @@ namespace Backend.Controllers
         }
         [HttpGet]
         [Route("{sifra:int}")]
-        public ActionResult<UpitDTORead> GetBySifra(int sifra)
+        public ActionResult<UpitDTOInsertUpdate> GetBySifra(int sifra)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +51,7 @@ namespace Backend.Controllers
                 return NotFound(new { poruka = "Upit ne postoji u bazi" });
             }
 
-            return Ok(_mapper.Map<UpitDTORead>(e));
+            return Ok(_mapper.Map<UpitDTOInsertUpdate>(e));
         }
 
 
