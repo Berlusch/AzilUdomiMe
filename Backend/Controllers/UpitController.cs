@@ -40,7 +40,7 @@ namespace Backend.Controllers
             Upit? e;
             try
             {
-                e = _context.Upiti.Find(sifra);
+                e = _context.Upiti.Include(g => g.Pas).Include(g=>g.Udomitelj).FirstOrDefault(g => g.Sifra == sifra);
             }
             catch (Exception ex)
             {
@@ -123,7 +123,7 @@ namespace Backend.Controllers
                 Upit? e;
                 try
                 {
-                    e = _context.Upiti.Find(sifra);
+                    e = _context.Upiti.Include(g => g.Pas).Include(g => g.Udomitelj).FirstOrDefault(g => g.Sifra == sifra);
                 }
                 catch (Exception ex)
                 {
@@ -135,6 +135,36 @@ namespace Backend.Controllers
                 }
 
                 e = _mapper.Map(dto, e);
+
+                Pas? p;
+                try
+                {
+                    p = _context.Psi.Find(dto.PasSifra);
+                }
+                catch (Exception e1)
+                {
+                    return BadRequest(new { poruka = e1.Message });
+                }
+                if (p == null)
+                {
+                    return NotFound(new { poruka = "Pas ne postoji u bazi" });
+                }
+
+                Udomitelj? u;
+                try
+                {
+                    u = _context.Udomitelji.Find(dto.UdomiteljSifra);
+                }
+                catch (Exception e1)
+                {
+                    return BadRequest(new { poruka = e1.Message });
+                }
+                if (u == null)
+                {
+                    return NotFound(new { poruka = "Udomitelj ne postoji u bazi" });
+                }
+                e.Pas = p; 
+                e.Udomitelj = u;
 
                 _context.Upiti.Update(e);
                 _context.SaveChanges();

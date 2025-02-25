@@ -142,7 +142,7 @@ namespace Backend.Controllers
                 // 🔄 Ažurirati svojstva
                 _mapper.Map(dto, pas); // Mapira DTO u postojeći objekt
                 pas.Status = s;
-
+                _context.Psi.Update(pas);
                 _context.SaveChanges();
                 return Ok(new
                 {
