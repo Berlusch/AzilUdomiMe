@@ -14,7 +14,7 @@ async function getBySifra(sifra){
     return await HttpService.get('/Pas/'+sifra)
     .then((odgovor)=>{
         //console.table(odgovor.data)
-        return odgovor.data;
+        return {greska:false, poruka: odgovor.data};
     })
     .catch((e)=>{})
 }

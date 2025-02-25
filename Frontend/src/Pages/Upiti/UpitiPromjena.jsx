@@ -13,35 +13,31 @@ export default function UpitiPromjena(){
     const routeParams= useParams();
 
     const[udomitelji, setUdomitelji]=useState([]);
-    const[udomiteljImePrezime, setUdomiteljImePrezime]=useState('');
+    const[udomiteljSifra, setUdomiteljSifra]=useState(1);
     
     const[psi, setPsi]=useState([]);
-    const[pasIme, setPasIme]=useState();
+    const[pasSifra, setPasSifra]=useState(1);
 
     const [upit,setUpit]= useState({});
 
     async function dohvatiUdomitelje(){
-        const odgovor=await UdomiteljService.get(selected);
-               
+        const odgovor=await UdomiteljService.get();
+        setUdomitelji(odgovor)
     }
 
     async function dohvatiPse(){
         const odgovor=await PasService.get();
-        setPsi(odgovor, poruka);
+        setPsi(odgovor);
        
     }
 
     async function dohvatiUpite(){
         const odgovor=await Service.getBySifra(routeParams.sifra);
-        if(odgovor.greska){
-            alert(odgovor.poruka);
-            return;
-        
-        }
-        let upit=odgovor.poruka;
+       
+        let upit=odgovor;
         setUpit(upit);
-        setUdomiteljImePrezime(upit.udomiteljImePrezime);
-        setPasIme(upit.pasIme);
+        setUdomiteljSifra(upit.udomiteljSifra);
+        setPasSifra(upit.pasSifra);
     }
     async function dohvatiInicijalnePodatke(){
         await dohvatiUdomitelje();
@@ -73,8 +69,8 @@ export default function UpitiPromjena(){
         promijeni(
             {           
  
-                pasIme: podatci.get(pasIme),
-                udomiteljImePrezime: podatci.get(udomiteljImePrezime),
+                pasSifra: pasSifra,
+                udomiteljSifra: udomiteljSifra,
                 datumUpita: moment.utc(podatci.get('datumUpita')),
                 statusUpita: podatci.get('statusUpita'),
                 napomene: podatci.get('napomene')
@@ -89,17 +85,35 @@ export default function UpitiPromjena(){
     <h2 className="naslov">Promjena upita</h2>
     <Form onSubmit={OdradiSubmit}>
 
-            <Form.Group controlId="pasIme">
-                <Form.Label>Pas</Form.Label>
-                <Form.Control type="text" name="pasIme" 
-                defaultValue={pasIme}/>
-            </Form.Group>
-
-          <Form.Group controlId="udomiteljImePrezime">
-                <Form.Label>Udomitelj</Form.Label>
-                <Form.Control type="text" name="udomiteljImePrezime"
-                defaultValue={udomiteljImePrezime} />
+    <Form.Group className='mb-3' controlId='statusNaziv'>
+            <Form.Label>Pas</Form.Label>
+            <Form.Select
+            value={pasSifra}
+            onChange={(e)=>{setPasSifra(e.target.value)}}
+            >
+            {psi && psi.map((s,index)=>(
+              <option key={index} value={s.sifra}>
+                {s.ime}
+              </option>
+            ))}
+            </Form.Select>
           </Form.Group>
+
+          <Form.Group className='mb-3' controlId='statusNaziv'>
+            <Form.Label>Udomitelj</Form.Label>
+            <Form.Select
+            value={udomiteljSifra}
+            onChange={(e)=>{setUdomiteljSifra(e.target.value)}}
+            >
+            {udomitelji && udomitelji.map((s,index)=>(
+              <option key={index} value={s.sifra}>
+                {s.ime} {s.prezime}
+              </option>
+            ))}
+            </Form.Select>
+          </Form.Group>
+
+
          
 
         <Form.Group controlId="datumUpita">
@@ -126,7 +140,7 @@ export default function UpitiPromjena(){
         <Row>
             <Col xs={6} sm={12} md={3} lg={6} xl={6} xxl={6}>
                 <Link
-                to={RouteNames.Upit_PREGLED}
+                to={RouteNames.UPIT_PREGLED}
                 className="btn btn-danger siroko"
                 style={{ backgroundColor: '#9c989a' }}
                 >Odustani<svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="red" className="bi bi-x-lg" viewBox="0 0 16 16" stroke="red"><g transform="translate(2, 0)">

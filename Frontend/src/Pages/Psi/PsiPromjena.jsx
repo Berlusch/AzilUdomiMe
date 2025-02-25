@@ -21,7 +21,7 @@ export default function PsiPromjena(){
     
     async function dohvatiStatuse(){
         const odgovor=await StatusService.get()
-        setStatusi(odgovor.poruka);
+        setStatusi(odgovor);
     }             
     
     async function dohvatiPsa(){
@@ -30,13 +30,13 @@ export default function PsiPromjena(){
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
-    }
+        }
   
-    let p = odgovor.poruka
-    setPas(p);
-    setKastracija(p.kastracija);
-    p.datum_Rodjenja = moment.utc(p.datum_Rodjenja).format('yyyy-MM-DD');
-    setStatusSifra(p.statusSifra);      
+        let p = odgovor.poruka
+        setPas(p);
+        setKastracija(p.kastracija);
+        p.datum_Rodjenja = moment.utc(p.datum_Rodjenja).format('yyyy-MM-DD');
+        setStatusSifra(p.statusSifra);      
                    
     }  
     
@@ -126,12 +126,12 @@ export default function PsiPromjena(){
         <Form.Group className='mb-3' controlId='statusNaziv'>
             <Form.Label>Status</Form.Label>
             <Form.Select
-            value={pas?.statusSifra}
+            value={statusSifra}
             onChange={(e)=>{setStatusSifra(e.target.value)}}
             >
             {statusi && statusi.map((s,index)=>(
               <option key={index} value={s.sifra}>
-                {s.statusNaziv}
+                {s.naziv}
               </option>
             ))}
             </Form.Select>

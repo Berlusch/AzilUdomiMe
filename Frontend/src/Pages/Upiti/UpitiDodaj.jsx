@@ -75,8 +75,8 @@ export default function UpitiDodaj(){
         dodaj(
             {            
  
-                pasSifra: podatci.get(pasSifra),
-                udomiteljSifra: podatci.get(udomiteljSifra),
+                pasSifra: pasSifra,
+                udomiteljSifra: udomiteljSifra,
                 datumUpita: moment.utc(podatci.get('datumUpita')),
                 statusUpita: podatci.get('statusUpita'),
                 napomene: podatci.get('napomene')
