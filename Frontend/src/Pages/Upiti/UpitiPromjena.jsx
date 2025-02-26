@@ -34,11 +34,11 @@ export default function UpitiPromjena(){
     async function dohvatiUpite(){
         const odgovor=await Service.getBySifra(routeParams.sifra);
        
-        let upit=odgovor;
-        setUpit(upit);
-        setUdomiteljSifra(upit.udomiteljSifra);
-        setPasSifra(upit.pasSifra);
-        upit.DatumUpita = moment.utc(upit.datumUpita).format('yyyy-MM-DD')
+        let u=odgovor;
+        setUpit(u);
+        setUdomiteljSifra(u.udomiteljSifra);
+        setPasSifra(u.pasSifra);
+        u.datumUpita = moment.utc(u.datumUpita).format('dd/MM/yyyy');
     }
     async function dohvatiInicijalnePodatke(){
         await dohvatiUdomitelje();
@@ -119,8 +119,8 @@ export default function UpitiPromjena(){
 
         <Form.Group controlId="datumUpita">
                 <Form.Label>Datum upita</Form.Label>
-                <Form.Control type="date" step={0.01} name="datumUpita"
-                defaultValue={upit.datumUpita} />
+                <Form.Control type="date" step={0.01} name="datumUpita" required
+                defaultValue={upit?.datumUpita || ''}/>
             </Form.Group>
 
         <Form.Group controlId="statusUpita">
