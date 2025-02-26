@@ -37,6 +37,15 @@ async function obrisi(sifra,Pas){
     .catch(()=>{return{greska:true, poruka:'Problem kod brisanja'}})
 }
 
+async function traziPsa(uvjet){
+    return await HttpService.get('/Pas/trazi/'+uvjet)
+    .then((odgovor)=>{
+        //console.table(odgovor.data);
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{return {greska: true, poruka: 'Problem kod traženja polaznika'}})
+}
+
 export default{
     get,
     getBySifra,

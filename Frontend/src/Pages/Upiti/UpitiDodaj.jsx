@@ -6,6 +6,7 @@ import moment from "moment"
 import PasService from "../../services/PasService";
 import UdomiteljService from "../../services/UdomiteljService";
 import { useEffect, useState } from 'react';
+import{AsyncTypeahead} from 'react-bootstrap-typeahead';
 
 export default function UpitiDodaj(){
 
@@ -13,9 +14,11 @@ export default function UpitiDodaj(){
     
     const [psi,setPsi]=useState([]);
     const [pasSifra, setPasSifra]=useState({});
+    const [pronadeniPsi, setPronadeniPsi]= useState([]);
 
     const [udomitelji,setUdomitelji]=useState([]);
     const [udomiteljSifra, setUdomiteljSifra]=useState({});
+    //const[pronadeniUdomitelji, setPronadeniUdomitelji]= useState({});
 
     async function dohvatiPse(){
             try {
@@ -50,6 +53,32 @@ export default function UpitiDodaj(){
                 console.error("Greška prilikom dohvaćanja udomitelja:", error);
             }
         }
+    
+
+        async function traziPsa(uvjet) {
+            const odgovor= await PasService.traziPsa(uvjet);
+            if(odgovor.greska){
+                alert(odgovor.poruka);
+                return;
+              }
+              setPronadeniPsi(odgovor.poruka);
+            }
+
+        
+
+        async function traziUdomitelja(uvjet){
+
+            const odgovor= await UpitService.traziUdomitelja(uvjet);
+            if(odgovor.greska){
+                alert(odgovor.poruka);
+                return;
+              }
+              setPronadeniUdomitelji(odgovor.poruka);
+
+        }
+    }
+
+
     useEffect(()=>{
             dohvatiPse();
             dohvatiUdomitelje();           
@@ -92,18 +121,31 @@ export default function UpitiDodaj(){
     <h2 className="naslov">Dodavanje upita</h2>
     <Form onSubmit={odradiSubmit}>
 
-        <Form.Group className='mb-3' controlId='pasIme'>
-            <Form.Label>Pas</Form.Label>
-            <Form.Select 
-            onChange={(e)=>{setPasSifra(e.target.value)}}
-            >
-            {psi && psi.map((p,sifra)=>(
-            <option key={sifra} value={p.sifra}>
-            {p.ime}
-            </option>
-            ))}
-            </Form.Select>
-        </Form.Group>
+    <Form.Group className='mb-3' controlId='uvjet'>
+          <Form.Label>Traži psa</Form.Label>
+            <AsyncTypeahead
+            className='autocomplete'
+            id='uvjet'
+            emptyLabel='Nema rezultata'
+            searchText='Tražim...'
+            labelKey={(pas) => `${pas.prezime} ${pas.ime}`}
+            minLength={3}
+            options={pronadeniPsi}
+            onSearch={traziPsa}
+            placeholder='dio imena ili prezimena'
+            renderMenuItemChildren={(pas) => (
+              <>
+                <span>
+                   {pas.ime}
+                </span>
+              </>
+            )}
+            onChange={dodajPsa}
+            ref={typeaheadRef}
+            />
+          </Form.Group>
+      
+        
 
         <Form.Group className='mb-3' controlId='udomiteljImePrezime'>
             <Form.Label>Udomitelj</Form.Label>
@@ -166,3 +208,4 @@ export default function UpitiDodaj(){
     )
 
 }
+
