@@ -100,7 +100,7 @@ export default function PsiPromjena(){
         <Form.Group controlId="datum_Rodjenja">
             <Form.Label>Datum rođenja</Form.Label>
             <Form.Control type="date" step={0.01}  name="datum_Rodjenja" required
-            defaultValue={pas?.datum_Rodjenja || ''}/>
+            defaultValue={pas.datum_Rodjenja}/>
         </Form.Group>
 
         <Form.Group controlId="spol">

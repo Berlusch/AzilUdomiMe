@@ -38,7 +38,7 @@ export default function UpitiPromjena(){
         setUpit(u);
         setUdomiteljSifra(u.udomiteljSifra);
         setPasSifra(u.pasSifra);
-        u.datumUpita = moment.utc(u.datumUpita).format('dd/MM/yyyy');
+        u.datumUpita = moment.utc(u.datumUpita).format('yyyy-MM-DD');
     }
     async function dohvatiInicijalnePodatke(){
         await dohvatiUdomitelje();
@@ -113,27 +113,25 @@ export default function UpitiPromjena(){
             ))}
             </Form.Select>
           </Form.Group>
+      
 
+            <Form.Group controlId="datumUpita">
+                    <Form.Label>Datum upita</Form.Label>
+                    <Form.Control type="date" step={0.01} name="datumUpita" required
+                    defaultValue={upit.datumUpita}/>
+                </Form.Group>
 
-         
-
-        <Form.Group controlId="datumUpita">
-                <Form.Label>Datum upita</Form.Label>
-                <Form.Control type="date" step={0.01} name="datumUpita" required
-                defaultValue={upit?.datumUpita || ''}/>
+            <Form.Group controlId="statusUpita">
+                <Form.Label>Status upita</Form.Label>
+                <Form.Control type="text" name="statusUpita" required
+                defaultValue={upit.statusUpita}/>
             </Form.Group>
 
-        <Form.Group controlId="statusUpita">
-            <Form.Label>Status upita</Form.Label>
-            <Form.Control type="text" name="statusUpita" required
-            defaultValue={upit.statusUpita}/>
-        </Form.Group>
-
-        <Form.Group controlId="napomene">
-            <Form.Label>Napomene</Form.Label>
-            <Form.Control type="text" name="napomene" required
-            defaultValue={upit.napomene}/>
-        </Form.Group>
+            <Form.Group controlId="napomene">
+                <Form.Label>Napomene</Form.Label>
+                <Form.Control type="text" name="napomene" required
+                defaultValue={upit.napomene}/>
+            </Form.Group>
 
         <hr/>
     
