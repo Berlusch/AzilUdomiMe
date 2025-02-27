@@ -17,6 +17,7 @@ namespace Backend.Mapping
 
             CreateMap<Udomitelj, UdomiteljDTORead>();
             CreateMap<UdomiteljDTOInsertUpdate, Udomitelj>();
+            CreateMap<Udomitelj, UdomiteljDTOInsertUpdate>();
 
 
             CreateMap<Pas, PasDTORead>().ForCtorParam(
@@ -30,6 +31,7 @@ namespace Backend.Mapping
                 );
 
             CreateMap<PasDTOInsertUpdate, Pas>();
+            CreateMap<Pas, PasDTOInsertUpdate>();
 
 
             CreateMap<Upit, UpitDTORead>().ConstructUsing(e => new UpitDTORead(

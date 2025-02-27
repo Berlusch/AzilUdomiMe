@@ -190,6 +190,31 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("trazi/{uvjet}")]
+        public ActionResult<List<PasDTORead>> TraziPsa(string uvjet)
+        {
+            if (uvjet == null || uvjet.Length < 3)
+            {
+                return BadRequest("Uvjet mora sadržavati barem 3 slova!");
+            }
+            uvjet = uvjet.ToLower();
+            try
+            {
+                IEnumerable<Pas> query = _context.Psi;
+                var niz = uvjet.Split(" ");
+                foreach (var s in uvjet.Split(" ")) { 
+                    query = query.Where(p => p.Ime.ToLower().Contains(s));
+                }               
+                var psi = query.ToList();
+                return Ok(_mapper.Map<List<PasDTORead>>(psi));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { poruka = e.Message });
+            }
+        }
     }
 }
 

@@ -51,5 +51,6 @@ export default{
     getBySifra,
     promijeni,
     dodaj,
-    obrisi
+    obrisi,
+    traziPsa
 }

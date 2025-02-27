@@ -37,11 +37,21 @@ async function obrisi(sifra,udomitelj){
     .catch(()=>{return{greska:true, poruka:'Udomitelj ima aktualan upit te ga stoga nije moguće obrisati.'}})
 }
 
+async function traziUdomitelja(uvjet){
+    return await HttpService.get('/Udomitelj/trazi/'+uvjet)
+    .then((odgovor)=>{
+        //console.table(odgovor.data);
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{return {greska: true, poruka: 'Problem kod traženja udomitelja.'}})
+}
+
 export default{
     get,
     getBySifra,
     promijeni,
     dodaj,
-    obrisi
+    obrisi,
+    traziUdomitelja
 }
 

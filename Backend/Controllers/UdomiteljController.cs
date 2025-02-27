@@ -150,6 +150,32 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("trazi/{uvjet}")]
+        public ActionResult<List<UdomiteljDTORead>> TraziUdomitelja(string uvjet)
+        {
+            if (uvjet == null || uvjet.Length < 3)
+            {
+                return BadRequest(ModelState);
+            }
+            uvjet = uvjet.ToLower();
+            try
+            {
+                IEnumerable<Udomitelj> query = _context.Udomitelji;
+                var niz = uvjet.Split(" ");
+                foreach (var s in uvjet.Split(" "))
+                {
+                    query = query.Where(u => u.Ime.ToLower().Contains(s) || u.Prezime.ToLower().Contains(s));
+                }
+                var udomitelji = query.ToList();
+                return Ok(_mapper.Map<List<UdomiteljDTORead>>(udomitelji));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { poruka = e.Message });
+            }
+        }
+
 
     }
 }

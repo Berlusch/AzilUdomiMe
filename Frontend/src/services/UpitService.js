@@ -42,11 +42,14 @@ async function obrisi(sifra,upit){
     .catch(()=>{return{greska:true, poruka:'Problem kod brisanja.'}})
 }
 
+
+
 export default{
     get,
     getBySifra,
     promijeni,
     dodaj,
     obrisi
+    
 }
 
