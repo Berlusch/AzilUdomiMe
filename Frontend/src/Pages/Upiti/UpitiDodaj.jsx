@@ -14,11 +14,13 @@ export default function UpitiDodaj(){
     
     const [psi,setPsi]=useState([]);
     const [pasSifra, setPasSifra]=useState({});
-    const [pronadeniPsi, setPronadeniPsi]= useState([]);
+    const [pronadjeniPsi, setPronadjeniPsi]= useState([]);
 
     const [udomitelji,setUdomitelji]=useState([]);
     const [udomiteljSifra, setUdomiteljSifra]=useState({});
-    //const[pronadeniUdomitelji, setPronadeniUdomitelji]= useState({});
+    //const[pronadjeniUdomitelji, setPronadjeniUdomitelji]= useState({});
+
+    const typeaheadRef = useRef(null);
 
     async function dohvatiPse(){
             try {
@@ -33,8 +35,27 @@ export default function UpitiDodaj(){
                 }
             } catch (error) {
                 console.error("Greška prilikom dohvaćanja pasa:", error);
-            }
+            
         }
+
+    async function traziPsa(uvjet) {
+        const odgovor= await PasService.traziPsa(uvjet);
+        if(odgovor.greska){
+        alert(odgovor.poruka);
+        return;
+        }
+        setPronadjeniPsi(odgovor.poruka);
+    }
+
+    async function dodajPsa(e) {
+        const odgovor = await Service.dodajPsa(routeParams.sifra, e[0].sifra);
+        if(odgovor.greska){
+          alert(odgovor.poruka);
+          return;
+        }
+          await dohvatiPse();
+          typeaheadRef.current.clear();
+      }
 
     async function dohvatiUdomitelje(){
             try {
@@ -52,19 +73,7 @@ export default function UpitiDodaj(){
             } catch (error) {
                 console.error("Greška prilikom dohvaćanja udomitelja:", error);
             }
-        }
-    
-
-        async function traziPsa(uvjet) {
-            const odgovor= await PasService.traziPsa(uvjet);
-            if(odgovor.greska){
-                alert(odgovor.poruka);
-                return;
-              }
-              setPronadeniPsi(odgovor.poruka);
-            }
-
-        
+        }            
 
         async function traziUdomitelja(uvjet){
 
@@ -73,15 +82,26 @@ export default function UpitiDodaj(){
                 alert(odgovor.poruka);
                 return;
               }
-              setPronadeniUdomitelji(odgovor.poruka);
+              setPronadjeniUdomitelji(odgovor.poruka);
 
         }
+
+        async function dodajUdomitelja(e) {
+            const odgovor = await Service.dodajUdomitelja(routeParams.sifra, e[0].sifra);
+            if(odgovor.greska){
+              alert(odgovor.poruka);
+              return;
+            }
+              await dohvatiUdomitelje();
+              typeaheadRef.current.clear();
+          }
     }
 
 
     useEffect(()=>{
             dohvatiPse();
-            dohvatiUdomitelje();           
+            dohvatiUdomitelje();   
+                    
             
           },[]);
 
@@ -128,11 +148,11 @@ export default function UpitiDodaj(){
             id='uvjet'
             emptyLabel='Nema rezultata'
             searchText='Tražim...'
-            labelKey={(pas) => `${pas.prezime} ${pas.ime}`}
+            labelKey={(pas) => `{pas.ime}`}
             minLength={3}
-            options={pronadeniPsi}
+            options={pronadjeniPsi}
             onSearch={traziPsa}
-            placeholder='dio imena ili prezimena'
+            placeholder='dio imena'
             renderMenuItemChildren={(pas) => (
               <>
                 <span>
@@ -143,22 +163,33 @@ export default function UpitiDodaj(){
             onChange={dodajPsa}
             ref={typeaheadRef}
             />
-          </Form.Group>
+    </Form.Group>
       
         
 
-        <Form.Group className='mb-3' controlId='udomiteljImePrezime'>
-            <Form.Label>Udomitelj</Form.Label>
-            <Form.Select 
-            onChange={(e)=>{setUdomiteljSifra(e.target.value)}}
-            >
-            {udomitelji && udomitelji.map((u,sifra)=>(
-            <option key={sifra} value={u.sifra}>
-            {u.ime +" "+ u.prezime}
-            </option>
-            ))}
-            </Form.Select>
-        </Form.Group>
+    <Form.Group className='mb-3' controlId='uvjet'>
+          <Form.Label>Traži udomitelja</Form.Label>
+            <AsyncTypeahead
+            className='autocomplete'
+            id='uvjet'
+            emptyLabel='Nema rezultata'
+            searchText='Tražim...'
+            labelKey={(udomitelj) => `{udomitelj.ime}`}
+            minLength={3}
+            options={pronadjeniUdomitelji}
+            onSearch={traziUdomitelja}
+            placeholder='dio imena'
+            renderMenuItemChildren={(udomitelj) => (
+              <>
+                <span>
+                   {udomitelj.ime}
+                </span>
+              </>
+            )}
+            onChange={dodajUdomitelja}
+            ref={typeaheadRef}
+            />
+    </Form.Group>
         
         <Form.Group controlId="datumUpita">
                 <Form.Label>Datum upita</Form.Label>

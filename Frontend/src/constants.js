@@ -23,4 +23,4 @@ export const RouteNames={
 }
 
 
-export const BACKEND_URL='https://blusch-001-site1.qtempurl.com/api/v1';
+export const PRODUKCIJA ='https://blusch-001-site1.qtempurl.com/api/v1';

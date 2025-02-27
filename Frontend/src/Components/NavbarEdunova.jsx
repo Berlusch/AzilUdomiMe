@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
-import { RouteNames } from '../constants';
+import { PRODUKCIJA, RouteNames } from '../constants';
 
 
 
@@ -38,14 +38,9 @@ export default function NavBarEdunova(){
         </NavDropdown.Item>
     </NavDropdown>
 
-    <Nav.Link
-        href="https://blusch-001-site1.qtempurl.com/swagger"
-        target="_blank"
-        style={{ display: 'inline-block' }}
-        
-    >
-        <strong>Swagger</strong>
-    </Nav.Link>
+    <Nav.Link href={PRODUKCIJA + '/swagger'} target='_blank'
+    style={{ display: 'inline-block' }}><strong>Swagger</strong></Nav.Link>            
+    
 </Nav>
                 
                 </Navbar.Collapse>

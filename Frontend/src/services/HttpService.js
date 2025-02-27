@@ -1,8 +1,8 @@
 import axios from "axios";
-import { BACKEND_URL } from "../constants";
+import { PRODUKCIJA } from "../constants";
 
 export const HttpService=axios.create({
-    baseURL:BACKEND_URL,
+    baseURL:PRODUKCIJA,
     headers:{
         'Content-Type':'application/json'
     }
