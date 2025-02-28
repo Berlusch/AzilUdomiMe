@@ -19,6 +19,8 @@ export const RouteNames={
     STATUS_PREGLED: '/statusi',
     STATUS_NOVI: '/statusi/dodaj',
     STATUS_PROMJENA: '/statusi/:sifra',
+
+    ERA_DIJAGRAM: '/era-dijagram'
     
 }
 

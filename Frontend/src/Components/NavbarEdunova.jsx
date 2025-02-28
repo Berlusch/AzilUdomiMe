@@ -36,7 +36,11 @@ export default function NavBarEdunova(){
         <NavDropdown.Item onClick={() => navigate(RouteNames.STATUS_PREGLED)}>
             Statusi
         </NavDropdown.Item>
+        <NavDropdown.Item onClick={() => navigate(RouteNames.ERA_DIJAGRAM)}>
+            ERA
+        </NavDropdown.Item>
     </NavDropdown>
+    
 
     <Nav.Link href={PRODUKCIJA + '/swagger'} target='_blank'
     style={{ display: 'inline-block' }}><strong>Swagger</strong></Nav.Link>            

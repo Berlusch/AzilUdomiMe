@@ -111,4 +111,23 @@ background-color: #7d3d9b;
   opacity: 1;
 }
 
+.era {
+  display: block;
+  margin: 0 auto; 
+  border: 1px solid #7d3d9b; 
+  box-shadow: 7px 7px 13px #7f7e80;
+}
+
+.slika-container {
+  text-align: center; 
+  
+}
+
+h4 {
+  font-size: 24px;
+  color: #7d3d9b; 
+  margin-bottom: 30px;
+  margin-top: 20px; 
+}
+
  

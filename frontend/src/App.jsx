@@ -19,6 +19,7 @@ import StatusiPromjena from './Pages/Statusi/StatusiPromjena'
 import UpitiPregled from './Pages/Upiti/UpitiPregled'
 import UpitiDodaj from './Pages/Upiti/UpitiDodaj'
 import UpitiPromjena from './Pages/Upiti/UpitiPromjena'
+import EraDijagram from './Pages/Era/EraDijagram'
 
 
 
@@ -48,6 +49,8 @@ function App() {
           <Route path={RouteNames.STATUS_PREGLED} element={<StatusiPregled />} />
           <Route path={RouteNames.STATUS_NOVI} element={<StatusiDodaj />} />
           <Route path={RouteNames.STATUS_PROMJENA} element={<StatusiPromjena />} />
+
+          <Route path={RouteNames.ERA_DIJAGRAM} element={<EraDijagram/>} />
           
         </Routes>
         <hr/>
