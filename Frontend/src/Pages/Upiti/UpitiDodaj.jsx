@@ -5,38 +5,23 @@ import Service from "../../services/UpitService";
 import moment from "moment"
 import PasService from "../../services/PasService";
 import UdomiteljService from "../../services/UdomiteljService";
-import { useEffect, useState } from 'react';
 import{AsyncTypeahead} from 'react-bootstrap-typeahead';
+import { useState } from "react";
 
 export default function UpitiDodaj(){
 
     const navigate = useNavigate();   
     
-    const [psi,setPsi]=useState([]);
-    const [pasSifra, setPasSifra]=useState({});
+    const [pasSifra, setPasSifra]=useState(1);
+    const [pasIme, setPasIme]=useState('');
     const [pronadjeniPsi, setPronadjeniPsi]= useState([]);
 
-    const [udomitelji,setUdomitelji]=useState([]);
-    const [udomiteljSifra, setUdomiteljSifra]=useState({});
-    //const[pronadjeniUdomitelji, setPronadjeniUdomitelji]= useState({});
+    const [udomiteljSifra, setUdomiteljSifra]=useState(1);
+    const [udomiteljIme, setUdomiteljIme]=useState('');
+    const[pronadjeniUdomitelji, setPronadjeniUdomitelji]= useState([]);
 
-    const typeaheadRef = useRef(null);
-
-    async function dohvatiPse(){
-            try {
-                const odgovor = await PasService.get();
-                console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
-        
-                if (Array.isArray(odgovor) && odgovor.length > 0) {
-                    setPsi(odgovor);  // Postavi niz pasa
-                    setPasSifra(odgovor[0]?.sifra);  
-                } else {
-                    console.error("Nema pasa u odgovoru ili odgovor nije niz");
-                }
-            } catch (error) {
-                console.error("Greška prilikom dohvaćanja pasa:", error);
-            
-        }
+    const typeaheadRefPas = useRef(null);
+    const typeaheadRefUdomitelj = useRef(null);
 
     async function traziPsa(uvjet) {
         const odgovor= await PasService.traziPsa(uvjet);
@@ -48,36 +33,15 @@ export default function UpitiDodaj(){
     }
 
     async function dodajPsa(e) {
-        const odgovor = await Service.dodajPsa(routeParams.sifra, e[0].sifra);
-        if(odgovor.greska){
-          alert(odgovor.poruka);
-          return;
-        }
-          await dohvatiPse();
-          typeaheadRef.current.clear();
+       setPasSifra(e[0].sifra)
+       setPasIme(e[0].ime)
+       typeaheadRefPas.current.clear();
       }
-
-    async function dohvatiUdomitelje(){
-            try {
-                const odgovor = await UdomiteljService.get();
-                console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
-        
-                if (Array.isArray(odgovor) && odgovor.length > 0) {
-                    setUdomitelji(odgovor);  // Postavi niz udomitelja
-                    setUdomiteljSifra(odgovor[1]?.sifra);  
-                        console.log("Postavljen udomitelj:", odgovor[0]?.ime, odgovor[0]?.prezime);
-                } 
-                else {
-                    console.error("Nema udomitelja u odgovoru ili odgovor nije niz");
-                }
-            } catch (error) {
-                console.error("Greška prilikom dohvaćanja udomitelja:", error);
-            }
-        }            
+          
 
         async function traziUdomitelja(uvjet){
 
-            const odgovor= await UpitService.traziUdomitelja(uvjet);
+            const odgovor= await UdomiteljService.traziUdomitelja(uvjet);
             if(odgovor.greska){
                 alert(odgovor.poruka);
                 return;
@@ -87,23 +51,12 @@ export default function UpitiDodaj(){
         }
 
         async function dodajUdomitelja(e) {
-            const odgovor = await Service.dodajUdomitelja(routeParams.sifra, e[0].sifra);
-            if(odgovor.greska){
-              alert(odgovor.poruka);
-              return;
-            }
-              await dohvatiUdomitelje();
-              typeaheadRef.current.clear();
+            setUdomiteljSifra(e[0].sifra)
+            setUdomiteljIme(e[0].ime + ' ' + e[0].prezime)
+            typeaheadRefUdomitelj.current.clear();
           }
-    }
+    
 
-
-    useEffect(()=>{
-            dohvatiPse();
-            dohvatiUdomitelje();   
-                    
-            
-          },[]);
 
     async function dodaj(e){
         const odgovor= await Service.dodaj(e);
@@ -148,7 +101,7 @@ export default function UpitiDodaj(){
             id='uvjet'
             emptyLabel='Nema rezultata'
             searchText='Tražim...'
-            labelKey={(pas) => `{pas.ime}`}
+            labelKey={(pas) => `${pas.ime}`}
             minLength={3}
             options={pronadjeniPsi}
             onSearch={traziPsa}
@@ -161,8 +114,11 @@ export default function UpitiDodaj(){
               </>
             )}
             onChange={dodajPsa}
-            ref={typeaheadRef}
+            ref={typeaheadRefPas}
             />
+            <p>
+                {pasIme}
+            </p>
     </Form.Group>
       
         
@@ -174,7 +130,7 @@ export default function UpitiDodaj(){
             id='uvjet'
             emptyLabel='Nema rezultata'
             searchText='Tražim...'
-            labelKey={(udomitelj) => `{udomitelj.ime}`}
+            labelKey={(udomitelj) => `${udomitelj.ime} ${udomitelj.prezime}`}
             minLength={3}
             options={pronadjeniUdomitelji}
             onSearch={traziUdomitelja}
@@ -187,8 +143,11 @@ export default function UpitiDodaj(){
               </>
             )}
             onChange={dodajUdomitelja}
-            ref={typeaheadRef}
+            ref={typeaheadRefUdomitelj}
             />
+            <p>
+                {udomiteljImePrezime}
+            </p>
     </Form.Group>
         
         <Form.Group controlId="datumUpita">
@@ -239,4 +198,3 @@ export default function UpitiDodaj(){
     )
 
 }
-
