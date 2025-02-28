@@ -6,7 +6,7 @@ import moment from "moment"
 import PasService from "../../services/PasService";
 import UdomiteljService from "../../services/UdomiteljService";
 import{AsyncTypeahead} from 'react-bootstrap-typeahead';
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function UpitiDodaj(){
 
@@ -17,7 +17,7 @@ export default function UpitiDodaj(){
     const [pronadjeniPsi, setPronadjeniPsi]= useState([]);
 
     const [udomiteljSifra, setUdomiteljSifra]=useState(1);
-    const [udomiteljIme, setUdomiteljIme]=useState('');
+    const [udomiteljImePrezime, setUdomiteljImePrezime]=useState('');
     const[pronadjeniUdomitelji, setPronadjeniUdomitelji]= useState([]);
 
     const typeaheadRefPas = useRef(null);
@@ -52,7 +52,7 @@ export default function UpitiDodaj(){
 
         async function dodajUdomitelja(e) {
             setUdomiteljSifra(e[0].sifra)
-            setUdomiteljIme(e[0].ime + ' ' + e[0].prezime)
+            setUdomiteljImePrezime(e[0].ime + ' ' + e[0].prezime)
             typeaheadRefUdomitelj.current.clear();
           }
     
