@@ -82,13 +82,10 @@ export default function UpitiDodaj(){
                 datumUpita: moment.utc(podatci.get('datumUpita')),
                 statusUpita: podatci.get('statusUpita'),
                 napomene: podatci.get('napomene')
-            }
-             
+            }            
         
         );
-    }
-
-    
+    }    
     return(
     <>
     <h2 className="naslov">Dodavanje upita</h2>
@@ -134,7 +131,7 @@ export default function UpitiDodaj(){
             minLength={3}
             options={pronadjeniUdomitelji}
             onSearch={traziUdomitelja}
-            placeholder='dio imena'
+            placeholder='dio imena ili prezimena'
             renderMenuItemChildren={(udomitelj) => (
               <>
                 <span>
