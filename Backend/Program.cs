@@ -1,6 +1,7 @@
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Backend.Mapping;
+using Backend.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,58 +9,61 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-// dodati ovu liniju za swagger
-builder.Services.AddSwaggerGen();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddBackendSwaggerGen();
+builder.Services.AddBackendCORS();
 
-//dodavanje konteksta baze
 
-builder.Services.AddDbContext<BackendContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BackendContext"));
-});
-
-builder.Services.AddCors(o =>
-{
-    o.AddPolicy("CorsPolicy", builder =>
+// dodavanje baze podataka
+builder.Services.AddDbContext<BackendContext>(
+    opcije =>
     {
-        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-    });
-
-});
+        opcije.UseSqlServer(builder.Configuration.GetConnectionString("BackendContext"));
+    }
+    );
 
 //automapper
 
 builder.Services.AddAutoMapper(typeof(BackendMappingProfile));
 
-
+// SECURITY
+builder.Services.AddBackendSecurity();
+builder.Services.AddAuthorization();
+// END SECURITY
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.MapOpenApi();
+//if (app.Environment.IsDevelopment())
+//{
+app.UseSwagger();
+app.UseSwaggerUI(opcije => {
+    opcije.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
+    opcije.EnableTryItOutByDefault();
+    opcije.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+});
+//}
 
 app.UseHttpsRedirection();
 
+// SECURITY
+app.UseAuthentication();
 app.UseAuthorization();
+// ENDSECURITY
 
-// dodati ove dvije linije za swagger
-app.UseSwagger();
-
-app.UseSwaggerUI(o => {
-    o.EnableTryItOutByDefault();
-    o.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
-});
 
 app.MapControllers();
 
-app.UseCors("CorsPolicy");
+
 
 //za potrebe produkcije
 
 app.UseStaticFiles();
 app.UseDefaultFiles();
 app.MapFallbackToFile("index.html");
+
+app.UseCors("CorsPolicy");
+//završio za potrebe produkcije
 
 app.Run();
