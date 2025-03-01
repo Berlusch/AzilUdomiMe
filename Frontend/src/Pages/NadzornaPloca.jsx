@@ -1,0 +1,1 @@
+<img src="pas1.jpg" alt="Zasad samo ovo, poslije možda bude nešto pametnije..." class="centered-image"></img>

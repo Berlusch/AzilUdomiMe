@@ -20,7 +20,9 @@ export const RouteNames={
     STATUS_NOVI: '/statusi/dodaj',
     STATUS_PROMJENA: '/statusi/:sifra',
 
-    ERA_DIJAGRAM: '/era-dijagram'
+    ERA_DIJAGRAM: '/era-dijagram',
+    LOGIN: '/login',
+    NADZORNA_PLOCA: '/nadzornaploca'
     
 }
 

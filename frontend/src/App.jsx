@@ -19,19 +19,31 @@ import StatusiPromjena from './Pages/Statusi/StatusiPromjena'
 import UpitiPregled from './Pages/Upiti/UpitiPregled'
 import UpitiDodaj from './Pages/Upiti/UpitiDodaj'
 import UpitiPromjena from './Pages/Upiti/UpitiPromjena'
+
 import EraDijagram from './Pages/Era/EraDijagram'
+import Login from "./Pages/Login"
+import useAuth from "./hooks/useAuth"
+import NadzornaPloca from './Pages/NadzornaPloca'
+import useError from "./hooks/useError"
+
 
 
 
 
 function App() {
+
+  const { isLoggedIn } = useAuth();
+  const { errors, prikaziErrorModal, sakrijError } = useError();
   
   return (
     <>
       <Container>
         <NavbarEdunova />
         <Routes>
-          <Route path={RouteNames.HOME} element={<Pocetna />} />
+        <Route path={RouteNames.HOME} element={<Pocetna />} />
+          {isLoggedIn ? (
+        <>
+          <Route path={RouteNames.NADZORNA_PLOCA} element={<NadzornaPloca />} />
 
           <Route path={RouteNames.UDOMITELJ_PREGLED} element={<UdomiteljiPregled />} />
           <Route path={RouteNames.UDOMITELJ_NOVI} element={<UdomiteljiDodaj />}/>
@@ -52,14 +64,19 @@ function App() {
 
           <Route path={RouteNames.ERA_DIJAGRAM} element={<EraDijagram/>} />
           
+          </>
+        ) : (
+          <>
+            <Route path={RouteNames.LOGIN} element={<Login />} />
+          </>
+        )}  
         </Routes>
         <hr/>
     
 
         <img src="/paw.png" alt="Logo" className="logo-centered" />
-        
-            
-        
+
+
       </Container>
       <div style={{ textAlign: 'center', paddingRight: '30px' }}>
   &copy; Udomi me 2025.
