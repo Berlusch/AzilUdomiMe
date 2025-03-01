@@ -215,6 +215,81 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = e.Message });
             }
         }
+
+        /// <summary>
+        /// Traži pse s paginacijom.
+        /// </summary>
+        /// <param name="stranica">Broj stranice.</param>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Lista pasa.</returns>
+        [HttpGet]
+        [Route("traziStranicenje/{stranica}")]
+        public IActionResult TraziPasStranicenje(int stranica, string uvjet = "")
+        {
+            var poStranici = 7;
+            uvjet = uvjet.ToLower();
+            try
+            {
+                IEnumerable<Pas> query = _context.Psi;
+
+                var niz = uvjet.Split(" ");
+                foreach (var s in uvjet.Split(" "))
+                {
+                    query = query.Where(p => p.Ime.ToLower().Contains(s));
+                }
+                query
+                    .OrderBy(p => p.Ime);
+                var psi = query.ToList();
+                return Ok(_mapper.Map<List<PasDTORead>>(psi.Skip((poStranici * stranica) - poStranici)).Take(poStranici));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Postavlja sliku za psa.
+        /// </summary>
+        /// <param name="sifra">Šifra psa.</param>
+        /// <param name="slika">Podatci o slici.</param>
+        /// <returns>Status postavljanja slike.</returns>
+        /*[HttpPut]
+        [Route("postaviSliku/{sifra:int}")]
+        public IActionResult PostaviSliku(int sifra, SlikaDTO slika)
+        {
+            if (sifra <= 0)
+            {
+                return BadRequest("Šifra mora biti veća od nula (0)");
+            }
+            if (slika.Base64 == null || slika.Base64?.Length == 0)
+            {
+                return BadRequest("Slika nije postavljena");
+            }
+            var p = _context.Psi.Find(sifra);
+            if (p == null)
+            {
+                return BadRequest("Ne postoji pas s šifrom " + sifra + ".");
+            }
+            try
+            {
+                var ds = Path.DirectorySeparatorChar;
+                string dir = Path.Combine(Directory.GetCurrentDirectory()
+                    + ds + "wwwroot" + ds + "slike" + ds + "psi");
+
+                if (!System.IO.Directory.Exists(dir))
+                {
+                    System.IO.Directory.CreateDirectory(dir);
+                }
+                var putanja = Path.Combine(dir + ds + sifra + ".png");
+                System.IO.File.WriteAllBytes(putanja, Convert.FromBase64String(slika.Base64!));
+                return Ok("Uspješno pohranjena slika");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }*/
     }
 }
 

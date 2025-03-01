@@ -176,6 +176,38 @@ namespace Backend.Controllers
             }
         }
 
+        /// <summary>
+        /// Traži udomitelje s paginacijom.
+        /// </summary>
+        /// <param name="stranica">Broj stranice.</param>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Lista udomitelja.</returns>
+        [HttpGet]
+        [Route("traziStranicenje/{stranica}")]
+        public IActionResult TraziUdomiteljStranicenje(int stranica, string uvjet = "")
+        {
+            var poStranici = 7;
+            uvjet = uvjet.ToLower();
+            try
+            {
+                IEnumerable<Udomitelj> query = _context.Udomitelji;
+
+                var niz = uvjet.Split(" ");
+                foreach (var s in uvjet.Split(" "))
+                {
+                    query = query.Where(p => p.Ime.ToLower().Contains(s) || p.Prezime.ToLower().Contains(s));
+                }
+                query
+                    .OrderBy(p => p.Prezime);
+                var udomitelji = query.ToList();
+                return Ok(_mapper.Map<List<UdomiteljDTORead>>(udomitelji.Skip((poStranici * stranica) - poStranici)).Take(poStranici));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 }
