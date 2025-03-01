@@ -6,11 +6,16 @@ import moment from "moment"
 import PasService from "../../services/PasService";
 import UdomiteljService from "../../services/UdomiteljService";
 import{AsyncTypeahead} from 'react-bootstrap-typeahead';
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+
+
 
 export default function UpitiDodaj(){
 
     const navigate = useNavigate();   
+    
+    const [upiti,setUpiti]=useState([]);
+    const [statusUpita, setStatusUpita]=useState({});
     
     const [pasSifra, setPasSifra]=useState(1);
     const [pasIme, setPasIme]=useState('');
@@ -23,6 +28,23 @@ export default function UpitiDodaj(){
     const typeaheadRefPas = useRef(null);
     const typeaheadRefUdomitelj = useRef(null);
 
+    async function dohvatiStatuseUpita(){
+            try {
+                const odgovor = await Service.get();
+                console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
+                    if (Array.isArray(odgovor) && odgovor.length > 0) {
+                    setUpiti(odgovor);  
+                    setStatusUpita(odgovor[0].statusUpita);  
+                } else {
+                    console.error("Nema statusa upita u odgovoru ili odgovor nije niz");
+                }
+            } catch (error) {
+                console.error("Greška prilikom dohvaćanja statusa upita:", error);
+            }
+    
+        }
+
+    
     async function traziPsa(uvjet) {
         const odgovor= await PasService.traziPsa(uvjet);
         if(odgovor.greska){
@@ -55,7 +77,11 @@ export default function UpitiDodaj(){
             setUdomiteljImePrezime(e[0].ime + ' ' + e[0].prezime)
             typeaheadRefUdomitelj.current.clear();
           }
-    
+    useEffect(()=>{
+        
+            dohvatiStatuseUpita();  
+                       
+          },[]);
 
 
     async function dodaj(e){
@@ -80,7 +106,7 @@ export default function UpitiDodaj(){
                 pasSifra: pasSifra,
                 udomiteljSifra: udomiteljSifra,
                 datumUpita: moment.utc(podatci.get('datumUpita')),
-                statusUpita: podatci.get('statusUpita'),
+                statusUpita: statusUpita,
                 napomene: podatci.get('napomene')
             }            
         
@@ -102,7 +128,7 @@ export default function UpitiDodaj(){
             minLength={3}
             options={pronadjeniPsi}
             onSearch={traziPsa}
-            placeholder='dio imena'
+            placeholder='Upišite najmanje 3 slova imena psa za pretraživanje.'
             renderMenuItemChildren={(pas) => (
               <>
                 <span>
@@ -131,11 +157,11 @@ export default function UpitiDodaj(){
             minLength={3}
             options={pronadjeniUdomitelji}
             onSearch={traziUdomitelja}
-            placeholder='dio imena ili prezimena'
+            placeholder='Upišite najmanje 3 slova imena ili prezimena udomitelja za pretraživanje.'
             renderMenuItemChildren={(udomitelj) => (
               <>
                 <span>
-                   {udomitelj.ime}
+                   {udomitelj.ime+" "+udomitelj.prezime}
                 </span>
               </>
             )}
@@ -152,10 +178,28 @@ export default function UpitiDodaj(){
                 <Form.Control type="date" name="datumUpita" />
             </Form.Group>
 
-        <Form.Group controlId="statusUpita">
-            <Form.Label>Status upita</Form.Label>
-            <Form.Control type="text" name="statusUpita" required/>
-        </Form.Group>
+            <Form.Group className='mb-3' controlId='statusUpita'>
+                <Form.Label>Status upita</Form.Label>
+                <Form.Select onChange={(e) => setStatusUpita(e.target.value)} required>
+                    <option value="">Odaberite status upita</option>
+                    <option value="zaprimljen">zaprimljen</option>
+                    <option value="u obradi">u obradi</option>
+                    <option value="obrađen">obrađen</option>                    
+
+                    {upiti && 
+                        upiti
+                            .filter((s) => s.statusUpita !== "zaprimljen" && s.statusUpita !== "u obradi" && s.statusUpita !== "obrađen")
+                            .map((s, index, self) => (
+                                // Filtriranje duplića
+                                self.findIndex((item) => item.statusUpita === s.statusUpita) === index && (
+                                    <option key={index} value={s.statusUpita}>
+                                        {s.statusUpita}
+                                    </option>
+                                )
+                            ))
+                    }
+                </Form.Select>
+            </Form.Group>
 
         <Form.Group controlId="napomene">
             <Form.Label>Napomene</Form.Label>
