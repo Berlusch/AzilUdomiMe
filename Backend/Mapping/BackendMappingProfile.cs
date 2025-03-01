@@ -1,13 +1,18 @@
 ﻿using AutoMapper;
 using Backend.Models;
 using Backend.Models.DTO;
-using System.Text.RegularExpressions;
 
 
 namespace Backend.Mapping
 {
+    /// <summary>
+    /// Klasa za definiranje mapiranja između modela i DTO objekata.
+    /// </summary>
     public class BackendMappingProfile : Profile
     {
+        /// <summary>
+        /// Konstruktor u kojem se definiraju mapiranja.
+        /// </summary>
         public BackendMappingProfile()
         {
             // kreiramo mapiranja: izvor, odredište
@@ -52,5 +57,24 @@ namespace Backend.Mapping
             CreateMap<UpitDTOInsertUpdate, Upit>();
 
         }
+        /// <summary>
+        /// Metoda za dobivanje putanje do slike psa.
+        /// </summary>
+        /// <param name="e">Objekt polaznika.</param>
+        /// <returns>Putanja do slike ili null ako slika ne postoji.</returns>
+        /*private static string? PutanjaDatoteke(Pas e)
+        {
+            try
+            {
+                var ds = Path.DirectorySeparatorChar;
+                string slika = Path.Combine(Directory.GetCurrentDirectory()
+                    + ds + "wwwroot" + ds + "slike" + ds + "psi" + ds + e.Sifra + ".png");
+                return File.Exists(slika) ? "/slike/psi/" + e.Sifra + ".png" : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }*/
     }
 }
