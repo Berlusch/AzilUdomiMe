@@ -6,10 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
+    /// <summary>
+    /// Kontroler za upravljanje udomiteljima u aplikaciji.
+    /// </summary>
+    /// <param name="context">Kontekst baze podataka.</param>
+    /// <param name="mapper">Mapper za mapiranje objekata.</param>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class UdomiteljController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
     {
+        /// <summary>
+        /// Dohvaća sve udomitelje.
+        /// </summary>
+        /// <returns>Lista udomitelja.</returns>
 
         [HttpGet]
         public ActionResult<List<UdomiteljDTORead>> Get()
@@ -28,6 +37,12 @@ namespace Backend.Controllers
             }
 
         }
+
+        /// <summary>
+        /// Dohvaća udomitelja prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra udomitelja.</param>
+        /// <returns>Udomitelj.</returns>
         [HttpGet]
         [Route("{sifra:int}")]
         public ActionResult<UdomiteljDTORead> GetBySifra(int sifra)
@@ -53,7 +68,11 @@ namespace Backend.Controllers
             return Ok(_mapper.Map<UdomiteljDTORead>(e));
         }
 
-
+        /// <summary>
+        /// Dodaje novog udomitelja.
+        /// </summary>
+        /// <param name="dto">Podaci o udomitelju.</param>
+        /// <returns>Status kreiranja.</returns>
         [HttpPost]
         public IActionResult Post(UdomiteljDTOInsertUpdate dto)
         {
@@ -71,11 +90,16 @@ namespace Backend.Controllers
             catch (Exception ex)
             {
                 return BadRequest(new { poruka = ex.Message });
-            }
-
-
+            }           
 
         }
+
+        /// <summary>
+        /// Ažurira udomitelja prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra udomitelja.</param>
+        /// <param name="dto">Podaci o udomitelju.</param>
+        /// <returns>Status ažuriranja.</returns>
 
         [HttpPut]
         [Route("{sifra:int}")]
@@ -116,6 +140,12 @@ namespace Backend.Controllers
 
         }
 
+        /// <summary>
+        /// Briše udomitelja prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra udomitelja.</param>
+        /// <returns>Status brisanja.</returns>
+
         [HttpDelete]
         [Route("{sifra:int}")]
         [Produces("application/json")]
@@ -149,6 +179,12 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Traži udomitelja prema uvjetu.
+        /// </summary>
+        /// <param name="uvjet">Uvjet</param>
+        /// <returns>Traženi udomitelj</returns>
 
         [HttpGet]
         [Route("trazi/{uvjet}")]

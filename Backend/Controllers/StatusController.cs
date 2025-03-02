@@ -6,11 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
+    /// <summary>
+    /// Kontroler za upravljanje statusima.
+    /// </summary>
+    /// <param name="context">Kontekst baze podataka.</param>
+    /// <param name="mapper">Mapper za mapiranje objekata.</param>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class StatusController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
     {
-
+        /// <summary>
+        /// Dohvaća sve statuse.
+        /// </summary>
+        /// <returns>Lista statusa.</returns>
         [HttpGet]
         public ActionResult<List<StatusDTORead>> Get()
         {
@@ -28,6 +36,12 @@ namespace Backend.Controllers
             }
 
         }
+
+        /// <summary>
+        /// Dohvaća status prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra statusa.</param>
+        /// <returns>Status.</returns>
         [HttpGet]
         [Route("{sifra:int}")]
         public ActionResult<StatusDTORead> GetBySifra(int sifra)
@@ -52,8 +66,11 @@ namespace Backend.Controllers
 
             return Ok(_mapper.Map<StatusDTORead>(e));
         }
-
-
+        /// <summary>
+        /// Dodaje novi status.
+        /// </summary>
+        /// <param name="dto">Podaci o statusu.</param>
+        /// <returns>Status kreiranja.</returns>
         [HttpPost]
         public IActionResult Post(StatusDTOInsertUpdate dto)
         {
@@ -73,10 +90,14 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
 
-
-
         }
 
+        /// <summary>
+        /// Ažurira status prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra statusa.</param>
+        /// <param name="dto">Podaci o statusu.</param>
+        /// <returns>Status ažuriranja.</returns>
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
@@ -116,6 +137,11 @@ namespace Backend.Controllers
 
         }
 
+        /// <summary>
+        /// Briše status prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra statusa.</param>
+        /// <returns>Status brisanja.</returns>
         [HttpDelete]
         [Route("{sifra:int}")]
         [Produces("application/json")]

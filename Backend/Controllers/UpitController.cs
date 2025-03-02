@@ -7,10 +7,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
+    /// <summary>
+    /// Kontroler za upravljanje upitima u aplikaciji.
+    /// </summary>
+    /// <param name="context">Instanca BackendContext klase koja se koristi za pristup bazi podataka.</param>
+    /// <param name="mapper">Instanca IMapper sučelja koja se koristi za mapiranje objekata.</param>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class UpitController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
     {
+        /// <summary>
+        /// Dohvaća sve upite.
+        /// </summary>
+        /// <returns>Lista upita.</returns>
 
         [HttpGet]
         public ActionResult<List<UpitDTORead>> Get()
@@ -29,6 +38,12 @@ namespace Backend.Controllers
             }
 
         }
+
+        /// <summary>
+        /// Dohvaća upit prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra upita.</param>
+        /// <returns>Upit sa zadanom šifrom.</returns>
         [HttpGet]
         [Route("{sifra:int}")]
         public ActionResult<UpitDTOInsertUpdate> GetBySifra(int sifra)
@@ -54,7 +69,11 @@ namespace Backend.Controllers
             return Ok(_mapper.Map<UpitDTOInsertUpdate>(e));
         }
 
-
+        /// <summary>
+        /// Dodaje novi upit.
+        /// </summary>
+        /// <param name="dto">Podaci o upitu.</param>
+        /// <returns>Status kreiranja.</returns>
         [HttpPost]
         public IActionResult Post(UpitDTOInsertUpdate dto)
         {
@@ -108,6 +127,13 @@ namespace Backend.Controllers
             
 
         }
+
+        /// <summary>
+        /// Ažurira postojeći upit.
+        /// </summary>
+        /// <param name="sifra">Šifra upita.</param>
+        /// <param name="dto">Podaci o upitu.</param>
+        /// <returns>Status ažuriranja.</returns>
 
         [HttpPut]
         [Route("{sifra:int}")]
@@ -178,6 +204,11 @@ namespace Backend.Controllers
 
         }
 
+        /// <summary>
+        /// Briše upit prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra upita.</param>
+        /// <returns>Status brisanja.</returns>
         [HttpDelete]
         [Route("{sifra:int}")]
         [Produces("application/json")]

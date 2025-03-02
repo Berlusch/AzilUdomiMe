@@ -9,14 +9,20 @@ using System.Text.RegularExpressions;
 
 namespace Backend.Controllers
 {
+    /// <summary>
+    /// Kontroler za upravljanje psima.
+    /// </summary>
+    /// <param name="context">Kontekst baze podataka.</param>
+    /// <param name="mapper">Mapper za mapiranje objekata.</param>
 
     [ApiController]
     [Route("api/v1/[controller]")]
     public class PasController(BackendContext context, IMapper mapper) : BackendController(context, mapper)
     {
-
-
-        // RUTE
+        /// <summary>
+        /// Dohvaća sve pse.
+        /// </summary>
+        /// <returns>Lista pasa.</returns>
         [HttpGet]
         public ActionResult<List<PasDTORead>> Get()
         {
@@ -35,7 +41,11 @@ namespace Backend.Controllers
 
         }
 
-
+        /// <summary>
+        /// Dohvaća psa prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra psa.</param>
+        /// <returns>Polaznik.</returns>
         [HttpGet]
         [Route("{sifra:int}")]
         public ActionResult<PasDTOInsertUpdate> GetBySifra(int sifra)
@@ -61,6 +71,11 @@ namespace Backend.Controllers
             return Ok(_mapper.Map<PasDTOInsertUpdate>(e));
         }
 
+        /// <summary>
+        /// Dodaje novog psa.
+        /// </summary>
+        /// <param name="dto">Podaci o psu.</param>
+        /// <returns>Status kreiranja.</returns>
         [HttpPost]
         public IActionResult Post(PasDTOInsertUpdate dto)
         {
@@ -102,6 +117,12 @@ namespace Backend.Controllers
 
         }
 
+        /// <summary>
+        /// Ažurira psa prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra psa.</param>
+        /// <param name="dto">Podaci o psu.</param>
+        /// <returns>Status ažuriranja.</returns>
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
@@ -132,14 +153,12 @@ namespace Backend.Controllers
 
             try
             {
-                // 📌 Prvo pronaći postojećeg psa
                 var pas = _context.Psi.Find(sifra);
                 if (pas == null)
                 {
                     return NotFound(new { poruka = "Pas ne postoji u bazi" });
                 }
-
-                // 🔄 Ažurirati svojstva
+                
                 _mapper.Map(dto, pas); // Mapira DTO u postojeći objekt
                 pas.Status = s;
                 _context.Psi.Update(pas);
@@ -156,7 +175,11 @@ namespace Backend.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Briše psa prema šifri.
+        /// </summary>
+        /// <param name="sifra">Šifra psa.</param>
+        /// <returns>Status brisanja.</returns>
         [HttpDelete]
         [Route("{sifra:int}")]
         [Produces("application/json")]
@@ -190,6 +213,12 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Traži pse prema uvjetu.
+        /// </summary>
+        /// <param name="uvjet">Uvjet pretrage.</param>
+        /// <returns>Lista pasa.</returns>
 
         [HttpGet]
         [Route("trazi/{uvjet}")]

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Backend.Data
 {
     /// <summary>
-    /// Kontekst baze podataka za aplikaciju Edunova.
+    /// Kontekst baze podataka za aplikaciju Udomi me.
     /// </summary>
     /// <remarks>
     /// Konstruktor koji prima opcije za konfiguraciju konteksta.
