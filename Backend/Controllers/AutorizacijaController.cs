@@ -32,8 +32,8 @@ namespace Backend.Controllers
         /// Primjer zahtjeva:
         /// <code lang="json">
         /// {
-        ///   "email": "bernarda.lusch@gmail.com",
-        ///   "password": "kadulja"
+        ///   "email": "pero.peric@gmail.com",
+        ///   "password": "nekalozinka"
         /// }
         /// </code>
         /// </remarks>

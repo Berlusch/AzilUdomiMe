@@ -124,7 +124,7 @@ background-color: #7d3d9b;
 }
 
 h4 {
-  font-size: 24px;
+  font-size: 20px;
   color: #7d3d9b; 
   margin-bottom: 30px;
   margin-top: 20px; 
@@ -138,6 +138,28 @@ h4 {
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3); /* Siva sjena dolje desno */
+}
+
+.brojUdomljenihPasa {
+  font-size: 5rem;
+  margin-top: -40px;
+  }
+
+  .psiGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px; 
+} 
+
+.pasItem {
+  text-align: center; 
+}
+
+.pasSlika {
+  width: 100%; /* Slika će zauzeti cijeli prostor unutar svoje ćelije */
+  max-width: 150px; /* Maksimalna širina slike */
+  height: auto; 
+  border-radius: 50%; 
 }
 
  

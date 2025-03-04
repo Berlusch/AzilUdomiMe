@@ -16,6 +16,7 @@
   - [Upiti](#P-Backend-Data-BackendContext-Upiti 'Backend.Data.BackendContext.Upiti')
   - [OnModelCreating(modelBuilder)](#M-Backend-Data-BackendContext-OnModelCreating-Microsoft-EntityFrameworkCore-ModelBuilder- 'Backend.Data.BackendContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)')
 - [BackendController](#T-Backend-Controllers-BackendController 'Backend.Controllers.BackendController')
+  - [#ctor(context,mapper)](#M-Backend-Controllers-BackendController-#ctor-Backend-Data-BackendContext,AutoMapper-IMapper- 'Backend.Controllers.BackendController.#ctor(Backend.Data.BackendContext,AutoMapper.IMapper)')
   - [_context](#F-Backend-Controllers-BackendController-_context 'Backend.Controllers.BackendController._context')
   - [_mapper](#F-Backend-Controllers-BackendController-_mapper 'Backend.Controllers.BackendController._mapper')
 - [BackendExtensions](#T-Backend-Extensions-BackendExtensions 'Backend.Extensions.BackendExtensions')
@@ -208,8 +209,8 @@ Primjer zahtjeva:
 
 ```json
 {
-  "email": "bernarda.lusch@gmail.com",
-  "password": "kadulja"
+  "email": "pero.peric@gmail.com",
+  "password": "nekalozinka"
 }
 ```
 
@@ -305,6 +306,30 @@ Konfiguracija modela prilikom kreiranja baze podataka.
 ##### Namespace
 
 Backend.Controllers
+
+##### Summary
+
+Apstraktna klasa BackendController koja služi kao osnovna klasa za sve kontrolere u aplikaciji.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [T:Backend.Controllers.BackendController](#T-T-Backend-Controllers-BackendController 'T:Backend.Controllers.BackendController') | Instanca BackendContext klase koja se koristi za pristup bazi podataka. |
+
+<a name='M-Backend-Controllers-BackendController-#ctor-Backend-Data-BackendContext,AutoMapper-IMapper-'></a>
+### #ctor(context,mapper) `constructor`
+
+##### Summary
+
+Apstraktna klasa BackendController koja služi kao osnovna klasa za sve kontrolere u aplikaciji.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [Backend.Data.BackendContext](#T-Backend-Data-BackendContext 'Backend.Data.BackendContext') | Instanca BackendContext klase koja se koristi za pristup bazi podataka. |
+| mapper | [AutoMapper.IMapper](#T-AutoMapper-IMapper 'AutoMapper.IMapper') | Instanca IMapper sučelja koja se koristi za mapiranje objekata. |
 
 <a name='F-Backend-Controllers-BackendController-_context'></a>
 ### _context `constants`
