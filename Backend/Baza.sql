@@ -25,6 +25,8 @@ lozinka varchar(200) not null
 insert into operateri values ('bernarda.lusch@gmail.com',
 '$2a$12$JxoxH7uwGv4ErLM7.aPAdenSouiqGwsAWKmTgzIerj3WOFZ6ZnCJm');
 
+insert into operateri values ('edunova@edunova.hr',
+'$2a$12$btGdO8IVkKJJX1szpX4S7ubofyBxUTx1A3yKigbDDFY.o0FXBo9nG');
 
 --TABLICA STATUS
 
