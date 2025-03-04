@@ -49,7 +49,6 @@
   - [GetBySifra(sifra)](#M-Backend-Controllers-PasController-GetBySifra-System-Int32- 'Backend.Controllers.PasController.GetBySifra(System.Int32)')
   - [Post(dto)](#M-Backend-Controllers-PasController-Post-Backend-Models-DTO-PasDTOInsertUpdate- 'Backend.Controllers.PasController.Post(Backend.Models.DTO.PasDTOInsertUpdate)')
   - [Put(sifra,dto)](#M-Backend-Controllers-PasController-Put-System-Int32,Backend-Models-DTO-PasDTOInsertUpdate- 'Backend.Controllers.PasController.Put(System.Int32,Backend.Models.DTO.PasDTOInsertUpdate)')
-  - [TraziPasStranicenje(stranica,uvjet)](#M-Backend-Controllers-PasController-TraziPasStranicenje-System-Int32,System-String- 'Backend.Controllers.PasController.TraziPasStranicenje(System.Int32,System.String)')
   - [TraziPsa(uvjet)](#M-Backend-Controllers-PasController-TraziPsa-System-String- 'Backend.Controllers.PasController.TraziPsa(System.String)')
 - [PasDTOInsertUpdate](#T-Backend-Models-DTO-PasDTOInsertUpdate 'Backend.Models.DTO.PasDTOInsertUpdate')
   - [#ctor(Ime,BrojCipa,Datum_Rodjenja,Spol,Opis,Kastracija,StatusSifra)](#M-Backend-Models-DTO-PasDTOInsertUpdate-#ctor-System-String,System-String,System-DateTime,System-String,System-String,System-Boolean,System-Int32- 'Backend.Models.DTO.PasDTOInsertUpdate.#ctor(System.String,System.String,System.DateTime,System.String,System.String,System.Boolean,System.Int32)')
@@ -71,8 +70,9 @@
   - [Spol](#P-Backend-Models-DTO-PasDTORead-Spol 'Backend.Models.DTO.PasDTORead.Spol')
   - [StatusNaziv](#P-Backend-Models-DTO-PasDTORead-StatusNaziv 'Backend.Models.DTO.PasDTORead.StatusNaziv')
 - [PocetnaController](#T-Backend-Controllers-PocetnaController 'Backend.Controllers.PocetnaController')
-  - [#ctor(_context)](#M-Backend-Controllers-PocetnaController-#ctor-Backend-Data-BackendContext- 'Backend.Controllers.PocetnaController.#ctor(Backend.Data.BackendContext)')
+  - [#ctor(_context)](#M-Backend-Controllers-PocetnaController-#ctor-Backend-Data-BackendContext,AutoMapper-IMapper- 'Backend.Controllers.PocetnaController.#ctor(Backend.Data.BackendContext,AutoMapper.IMapper)')
   - [DostupniPsi()](#M-Backend-Controllers-PocetnaController-DostupniPsi 'Backend.Controllers.PocetnaController.DostupniPsi')
+  - [TraziPasStranicenje(stranica,uvjet)](#M-Backend-Controllers-PocetnaController-TraziPasStranicenje-System-Int32- 'Backend.Controllers.PocetnaController.TraziPasStranicenje(System.Int32)')
 - [Status](#T-Backend-Models-Status 'Backend.Models.Status')
   - [Naziv](#P-Backend-Models-Status-Naziv 'Backend.Models.Status.Naziv')
 - [StatusController](#T-Backend-Controllers-StatusController 'Backend.Controllers.StatusController')
@@ -680,24 +680,6 @@ Status ažuriranja.
 | sifra | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Šifra psa. |
 | dto | [Backend.Models.DTO.PasDTOInsertUpdate](#T-Backend-Models-DTO-PasDTOInsertUpdate 'Backend.Models.DTO.PasDTOInsertUpdate') | Podaci o psu. |
 
-<a name='M-Backend-Controllers-PasController-TraziPasStranicenje-System-Int32,System-String-'></a>
-### TraziPasStranicenje(stranica,uvjet) `method`
-
-##### Summary
-
-Traži pse s paginacijom.
-
-##### Returns
-
-Lista pasa.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| stranica | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Broj stranice. |
-| uvjet | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Uvjet pretrage. |
-
 <a name='M-Backend-Controllers-PasController-TraziPsa-System-String-'></a>
 ### TraziPsa(uvjet) `method`
 
@@ -910,7 +892,7 @@ Kontroler za početne operacije.
 | ---- | ---- | ----------- |
 | _context | [T:Backend.Controllers.PocetnaController](#T-T-Backend-Controllers-PocetnaController 'T:Backend.Controllers.PocetnaController') | Kontekst baze podataka. |
 
-<a name='M-Backend-Controllers-PocetnaController-#ctor-Backend-Data-BackendContext-'></a>
+<a name='M-Backend-Controllers-PocetnaController-#ctor-Backend-Data-BackendContext,AutoMapper-IMapper-'></a>
 ### #ctor(_context) `constructor`
 
 ##### Summary
@@ -937,6 +919,23 @@ Popis pasa za udomljavanje.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='M-Backend-Controllers-PocetnaController-TraziPasStranicenje-System-Int32-'></a>
+### TraziPasStranicenje(stranica,uvjet) `method`
+
+##### Summary
+
+Traži pse s paginacijom.
+
+##### Returns
+
+Lista pasa.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| stranica | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Broj stranice. |
 
 <a name='T-Backend-Models-Status'></a>
 ## Status `type`

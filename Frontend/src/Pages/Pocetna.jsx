@@ -3,6 +3,8 @@ import {  Col, Row } from "react-bootstrap";
 import PasService from "../services/PasService";
 import useLoading from "../hooks/useLoading";
 import CountUp from "react-countup";
+import PocetnaService from "../services/PocetnaService";
+import { Link } from "react-router-dom";
 
 
 
@@ -11,21 +13,15 @@ export default function Pocetna(){
     
 const { showLoading, hideLoading } = useLoading();
 
-const[psi, setPsi]=useState([])
+
 const [udomljenihPasa, setUdomljenihPasa] = useState(0);
 const [slobodniPsi, setSlobodniPsi] = useState([]);
+const [stranica, setStranica] = useState(1);
 
-async function dohvatiSlobodnePse() {
+async function dohvatiSlobodnePse(stranica) {
             try {
-            const odgovor = await PasService.get();
-            console.log(psi);
-            setPsi(odgovor);         
-            const filtriraniPsi = odgovor.filter(pas => 
-                pas.statusNaziv === "slobodan" || pas.statusNaziv === "privremeni smještaj"
-              );
-        
-        console.log("Filtrirani psi (slobodni):", filtriraniPsi);
-        setSlobodniPsi(filtriraniPsi);
+            const odgovor = await PocetnaService.getPsi(stranica);
+        setSlobodniPsi(odgovor);
     } catch (e) {
         console.log(e);
     }
@@ -45,7 +41,7 @@ async function dohvatiBrojUdomljenihPasa() {
 
 async function ucitajPodatke() {
     showLoading();    
-    await dohvatiSlobodnePse();
+    await dohvatiSlobodnePse(stranica);
     await dohvatiBrojUdomljenihPasa();
     hideLoading();
   }
@@ -55,6 +51,12 @@ useEffect(()=>{
     ucitajPodatke()
 },[]);
 
+function sljedeca(){
+    let nova = stranica+1
+    setStranica(nova)
+    dohvatiSlobodnePse(nova);
+   console.log(nova)
+}
 
 
 return (
@@ -67,13 +69,15 @@ return (
       <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
         <h4>Oni traže svoj dom:</h4>
         <div className="psiGrid">
-            {psi && psi.filter(pas => pas.statusNaziv === "slobodan" || pas.statusNaziv === "privremeni smještaj").map((pas, index) => (
+            {slobodniPsi &&slobodniPsi.map((pas, index) => (
                 <div key={index} className="pasItem">
                 <img src={`/pas${pas.sifra}.jpg`} alt={pas.ime} className="pasSlika" />
                 <p>{pas.ime}</p>
             </div>            
             ))}
         </div>
+        <Link onClick={() => sljedeca()} >sljedeća</Link>
+    
     </Col>         
   
         <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6} className="text-end">

@@ -245,37 +245,7 @@ namespace Backend.Controllers
             }
         }
 
-        /// <summary>
-        /// Traži pse s paginacijom.
-        /// </summary>
-        /// <param name="stranica">Broj stranice.</param>
-        /// <param name="uvjet">Uvjet pretrage.</param>
-        /// <returns>Lista pasa.</returns>
-        [HttpGet]
-        [Route("traziStranicenje/{stranica}")]
-        public IActionResult TraziPasStranicenje(int stranica, string uvjet = "")
-        {
-            var poStranici = 7;
-            uvjet = uvjet.ToLower();
-            try
-            {
-                IEnumerable<Pas> query = _context.Psi;
-
-                var niz = uvjet.Split(" ");
-                foreach (var s in uvjet.Split(" "))
-                {
-                    query = query.Where(p => p.Ime.ToLower().Contains(s));
-                }
-                query
-                    .OrderBy(p => p.Ime);
-                var psi = query.ToList();
-                return Ok(_mapper.Map<List<PasDTORead>>(psi.Skip((poStranici * stranica) - poStranici)).Take(poStranici));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+      
 
         /// <summary>
         /// Postavlja sliku za psa.
