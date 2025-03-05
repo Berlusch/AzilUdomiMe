@@ -7,6 +7,12 @@
   - [#ctor(context)](#M-Backend-Controllers-AutorizacijaController-#ctor-Backend-Data-BackendContext- 'Backend.Controllers.AutorizacijaController.#ctor(Backend.Data.BackendContext)')
   - [_context](#F-Backend-Controllers-AutorizacijaController-_context 'Backend.Controllers.AutorizacijaController._context')
   - [GenerirajToken(operater)](#M-Backend-Controllers-AutorizacijaController-GenerirajToken-Backend-Models-DTO-OperaterDTO- 'Backend.Controllers.AutorizacijaController.GenerirajToken(Backend.Models.DTO.OperaterDTO)')
+- [AutorizacijaControllerTests](#T-Backend-Tests-Controllers-AutorizacijaControllerTests 'Backend.Tests.Controllers.AutorizacijaControllerTests')
+  - [#ctor()](#M-Backend-Tests-Controllers-AutorizacijaControllerTests-#ctor 'Backend.Tests.Controllers.AutorizacijaControllerTests.#ctor')
+  - [GenerirajToken_InvalidEmail_ReturnsForbidden()](#M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_InvalidEmail_ReturnsForbidden 'Backend.Tests.Controllers.AutorizacijaControllerTests.GenerirajToken_InvalidEmail_ReturnsForbidden')
+  - [GenerirajToken_InvalidModel_ReturnsBadRequest()](#M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_InvalidModel_ReturnsBadRequest 'Backend.Tests.Controllers.AutorizacijaControllerTests.GenerirajToken_InvalidModel_ReturnsBadRequest')
+  - [GenerirajToken_InvalidPassword_ReturnsForbidden()](#M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_InvalidPassword_ReturnsForbidden 'Backend.Tests.Controllers.AutorizacijaControllerTests.GenerirajToken_InvalidPassword_ReturnsForbidden')
+  - [GenerirajToken_ValidCredentials_ReturnsOkWithToken()](#M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_ValidCredentials_ReturnsOkWithToken 'Backend.Tests.Controllers.AutorizacijaControllerTests.GenerirajToken_ValidCredentials_ReturnsOkWithToken')
 - [BackendContext](#T-Backend-Data-BackendContext 'Backend.Data.BackendContext')
   - [#ctor(opcije)](#M-Backend-Data-BackendContext-#ctor-Microsoft-EntityFrameworkCore-DbContextOptions{Backend-Data-BackendContext}- 'Backend.Data.BackendContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Backend.Data.BackendContext})')
   - [Operateri](#P-Backend-Data-BackendContext-Operateri 'Backend.Data.BackendContext.Operateri')
@@ -213,6 +219,78 @@ Primjer zahtjeva:
   "password": "nekalozinka"
 }
 ```
+
+<a name='T-Backend-Tests-Controllers-AutorizacijaControllerTests'></a>
+## AutorizacijaControllerTests `type`
+
+##### Namespace
+
+Backend.Tests.Controllers
+
+##### Summary
+
+Testovi za AutorizacijaController.
+Ova klasa sadrži testove koji provjeravaju ispravnost generiranja JWT tokena za autorizaciju.
+
+<a name='M-Backend-Tests-Controllers-AutorizacijaControllerTests-#ctor'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Inicijalizira novu instancu klase AutorizacijaControllerTests.
+Konfigurira kontekst baze vrsta podataka i inicijalizira kontroler.
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_InvalidEmail_ReturnsForbidden'></a>
+### GenerirajToken_InvalidEmail_ReturnsForbidden() `method`
+
+##### Summary
+
+Testira slučaj kada uneseni email nije pronađen u bazi.
+Očekuje se povrat ObjectResult sa statusom Forbidden i odgovarajućom porukom.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_InvalidModel_ReturnsBadRequest'></a>
+### GenerirajToken_InvalidModel_ReturnsBadRequest() `method`
+
+##### Summary
+
+Testira slučaj kada je model operatera neispravan (npr. nedostaje email).
+Očekuje se povrat BadRequestObjectResult.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_InvalidPassword_ReturnsForbidden'></a>
+### GenerirajToken_InvalidPassword_ReturnsForbidden() `method`
+
+##### Summary
+
+Testira slučaj kada unesena lozinka ne odgovara pohranjenoj u bazi.
+Očekuje se povrat ObjectResult sa statusom Forbidden i odgovarajućom porukom.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Backend-Tests-Controllers-AutorizacijaControllerTests-GenerirajToken_ValidCredentials_ReturnsOkWithToken'></a>
+### GenerirajToken_ValidCredentials_ReturnsOkWithToken() `method`
+
+##### Summary
+
+Testira generiranje tokena za valjane vjerodajnice.
+Očekuje se povrat OkObjectResult s ne-praznim tokenom.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Backend-Data-BackendContext'></a>
 ## BackendContext `type`
