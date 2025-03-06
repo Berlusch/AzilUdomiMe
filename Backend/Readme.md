@@ -78,7 +78,8 @@
 - [PocetnaController](#T-Backend-Controllers-PocetnaController 'Backend.Controllers.PocetnaController')
   - [#ctor(_context)](#M-Backend-Controllers-PocetnaController-#ctor-Backend-Data-BackendContext,AutoMapper-IMapper- 'Backend.Controllers.PocetnaController.#ctor(Backend.Data.BackendContext,AutoMapper.IMapper)')
   - [DostupniPsi()](#M-Backend-Controllers-PocetnaController-DostupniPsi 'Backend.Controllers.PocetnaController.DostupniPsi')
-  - [TraziPasStranicenje(stranica,uvjet)](#M-Backend-Controllers-PocetnaController-TraziPasStranicenje-System-Int32- 'Backend.Controllers.PocetnaController.TraziPasStranicenje(System.Int32)')
+  - [TraziStranicenje(stranica)](#M-Backend-Controllers-PocetnaController-TraziStranicenje-System-Int32- 'Backend.Controllers.PocetnaController.TraziStranicenje(System.Int32)')
+  - [TraziUdomljenePse()](#M-Backend-Controllers-PocetnaController-TraziUdomljenePse 'Backend.Controllers.PocetnaController.TraziUdomljenePse')
 - [Status](#T-Backend-Models-Status 'Backend.Models.Status')
   - [Naziv](#P-Backend-Models-Status-Naziv 'Backend.Models.Status.Naziv')
 - [StatusController](#T-Backend-Controllers-StatusController 'Backend.Controllers.StatusController')
@@ -715,7 +716,7 @@ Dohvaća psa prema šifri.
 
 ##### Returns
 
-Polaznik.
+Pas.
 
 ##### Parameters
 
@@ -738,7 +739,7 @@ Status kreiranja.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| dto | [Backend.Models.DTO.PasDTOInsertUpdate](#T-Backend-Models-DTO-PasDTOInsertUpdate 'Backend.Models.DTO.PasDTOInsertUpdate') | Podaci o psu. |
+| dto | [Backend.Models.DTO.PasDTOInsertUpdate](#T-Backend-Models-DTO-PasDTOInsertUpdate 'Backend.Models.DTO.PasDTOInsertUpdate') | Podatci o psu. |
 
 <a name='M-Backend-Controllers-PasController-Put-System-Int32,Backend-Models-DTO-PasDTOInsertUpdate-'></a>
 ### Put(sifra,dto) `method`
@@ -988,32 +989,47 @@ Kontroler za početne operacije.
 
 ##### Summary
 
-Dohvaća pse za udomljavanje.
+Dohvaća sve pse iz baze.
 
 ##### Returns
 
-Popis pasa za udomljavanje.
+Popis svih pasa u bazi.
 
 ##### Parameters
 
 This method has no parameters.
 
-<a name='M-Backend-Controllers-PocetnaController-TraziPasStranicenje-System-Int32-'></a>
-### TraziPasStranicenje(stranica,uvjet) `method`
+<a name='M-Backend-Controllers-PocetnaController-TraziStranicenje-System-Int32-'></a>
+### TraziStranicenje(stranica) `method`
 
 ##### Summary
 
-Traži pse s paginacijom.
+Traži pse sa statusom "slobodan" ili "privremeni smještaj" te ih prikazuje s paginacijom.
 
 ##### Returns
 
-Lista pasa.
+Objekt koji sadrži listu pasa i ukupan broj stranica.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| stranica | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Broj stranice. |
+| stranica | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Broj stranice (počinje od 1). |
+
+<a name='M-Backend-Controllers-PocetnaController-TraziUdomljenePse'></a>
+### TraziUdomljenePse() `method`
+
+##### Summary
+
+Traži udomljene pse te utvrđuje njihov broj.
+
+##### Returns
+
+Broj udomljenih pasa.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Backend-Models-Status'></a>
 ## Status `type`
@@ -1389,7 +1405,7 @@ Status ažuriranja.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sifra | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Šifra udomitelja. |
-| dto | [Backend.Models.DTO.UdomiteljDTOInsertUpdate](#T-Backend-Models-DTO-UdomiteljDTOInsertUpdate 'Backend.Models.DTO.UdomiteljDTOInsertUpdate') | Podaci o udomitelju. |
+| dto | [Backend.Models.DTO.UdomiteljDTOInsertUpdate](#T-Backend-Models-DTO-UdomiteljDTOInsertUpdate 'Backend.Models.DTO.UdomiteljDTOInsertUpdate') | Podatci o udomitelju. |
 
 <a name='M-Backend-Controllers-UdomiteljController-TraziUdomiteljStranicenje-System-Int32,System-String-'></a>
 ### TraziUdomiteljStranicenje(stranica,uvjet) `method`

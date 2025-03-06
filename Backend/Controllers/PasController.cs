@@ -45,7 +45,7 @@ namespace Backend.Controllers
         /// Dohvaća psa prema šifri.
         /// </summary>
         /// <param name="sifra">Šifra psa.</param>
-        /// <returns>Polaznik.</returns>
+        /// <returns>Pas.</returns>
         [HttpGet]
         [Route("{sifra:int}")]
         public ActionResult<PasDTOInsertUpdate> GetBySifra(int sifra)
@@ -74,7 +74,7 @@ namespace Backend.Controllers
         /// <summary>
         /// Dodaje novog psa.
         /// </summary>
-        /// <param name="dto">Podaci o psu.</param>
+        /// <param name="dto">Podatci o psu.</param>
         /// <returns>Status kreiranja.</returns>
         [HttpPost]
         public IActionResult Post(PasDTOInsertUpdate dto)

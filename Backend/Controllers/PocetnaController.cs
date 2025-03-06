@@ -17,9 +17,9 @@ namespace Backend.Controllers
     public class PocetnaController(BackendContext _context, IMapper _mapper) : ControllerBase
     {
         /// <summary>
-        /// Dohvaća pse za udomljavanje.
+        /// Dohvaća sve pse iz baze.
         /// </summary>
-        /// <returns>Popis pasa za udomljavanje.</returns>
+        /// <returns>Popis svih pasa u bazi.</returns>
         [HttpGet]
         [Route("DostupniPsi")]
         public ActionResult<List<PasDTORead>>DostupniPsi()
@@ -43,27 +43,79 @@ namespace Backend.Controllers
 
 
         /// <summary>
-        /// Traži pse s paginacijom.
+        /// Traži pse sa statusom "slobodan" ili "privremeni smještaj" te ih prikazuje s paginacijom.
         /// </summary>
-        /// <param name="stranica">Broj stranice.</param>
-        /// <param name="uvjet">Uvjet pretrage.</param>
-        /// <returns>Lista pasa.</returns>
+        /// <param name="stranica">Broj stranice (počinje od 1).</param>
+        /// <returns>Objekt koji sadrži listu pasa i ukupan broj stranica.</returns>
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
-        public IActionResult TraziPasStranicenje(int stranica)
+        public IActionResult TraziStranicenje(int stranica)
         {
+            if (stranica < 1)
+            {
+                return BadRequest("Broj stranice mora biti 1 ili veći.");
+            }
+
             var poStranici = 5;
             try
             {
-                IEnumerable<Pas> query = _context.Psi.Include(p=>p.Status);
-                query = query.Where(p=>p.Status.Naziv=="slobodan" || p.Status.Naziv=="privremeni smještaj");
+                var query = _context.Psi.Include(p => p.Status)
+                    .Where(p => p.Status.Naziv == "slobodan" || p.Status.Naziv == "privremeni smještaj");
 
-                query.OrderBy(p => p.Ime);
-                var psi = query.ToList();
-                return Ok(_mapper.Map<List<PasDTORead>>(psi.Skip((poStranici * stranica) - poStranici)).Take(poStranici).ToList());
+                var ukupniBrojPasa = query.Count();
+                var ukupnoStranica = (int)Math.Ceiling((double)ukupniBrojPasa / poStranici);
+
+                var psi = query.OrderBy(p => p.Ime)
+                    .Skip((stranica - 1) * poStranici)
+                    .Take(poStranici)
+                    .ToList();
+
+                if (!psi.Any())
+                {
+                    return Ok(new
+                    {
+                        Poruka = "Trenutačno nema pasa sa statusom 'slobodan' ili 'privremeni smještaj'.",
+                        Psi = new List<PasDTORead>(),
+                        UkupnoStranica = ukupnoStranica,
+                        
+                    });
+                }
+
+                return Ok(new
+                {
+                    Psi = _mapper.Map<List<PasDTORead>>(psi),
+                    UkupnoStranica = ukupnoStranica
+                });
             }
             catch (Exception e)
             {
+                return BadRequest(e.Message);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Traži udomljene pse te utvrđuje njihov broj.
+        /// </summary>
+        /// <returns>Broj udomljenih pasa.</returns>
+        [HttpGet]
+        [Route("traziUdomljenePse")]
+        public IActionResult TraziUdomljenePse()
+        {
+            try
+            {                
+                IEnumerable<Pas> query = _context.Psi.Include(p => p.Status);
+
+                query = query.Where(p => p.Status.Naziv == "udomljen");
+
+                int brojUdomljenihPasa = query.Count();
+                                
+                return Ok(brojUdomljenihPasa);
+            }
+            catch (Exception e)
+            {
+                // Ako dođe do greške, vraćamo BadRequest sa porukom greške
                 return BadRequest(e.Message);
             }
         }

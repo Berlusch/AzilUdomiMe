@@ -98,7 +98,7 @@ namespace Backend.Controllers
         /// Ažurira udomitelja prema šifri.
         /// </summary>
         /// <param name="sifra">Šifra udomitelja.</param>
-        /// <param name="dto">Podaci o udomitelju.</param>
+        /// <param name="dto">Podatci o udomitelju.</param>
         /// <returns>Status ažuriranja.</returns>
 
         [HttpPut]

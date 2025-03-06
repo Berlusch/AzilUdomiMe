@@ -162,4 +162,20 @@ h4 {
   border-radius: 50%; 
 }
 
+.purpleButton {
+  background-color: #E6CCFF; 
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.purpleButton:hover {
+  background-color: #7d3d9b; 
+}
+
  
