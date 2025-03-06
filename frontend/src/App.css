@@ -30,7 +30,7 @@
 
 }
 .logo-navbar {
-    width: 160px;  
+    width: 200px;  
     height: auto;  
     cursor: pointer;
     padding-bottom:40px;
@@ -127,7 +127,7 @@ h4 {
   font-size: 20px;
   color: #7d3d9b; 
   margin-bottom: 30px;
-  margin-top: 20px; 
+  margin-top: 30px; 
 }
 
 .centered-image {
