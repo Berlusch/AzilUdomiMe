@@ -71,6 +71,12 @@ async function sljedeca()  {
         dohvatiSlobodnePse(stranica + 1);    
     
 };
+async function prethodna()  {    
+    
+    setStranica(stranica -1);
+    dohvatiSlobodnePse(stranica -1);    
+
+};
 
 
 return (
@@ -90,6 +96,12 @@ return (
             </div>            
             ))}
         </div>
+        {stranica >1 && (
+  <Link className="greyButton" onClick={() => prethodna()}>
+    Prethodna
+  </Link>
+)}
+
         {stranica < ukupnoStranica && (
   <Link className="purpleButton" onClick={() => sljedeca()}>
     Sljedeća

@@ -178,4 +178,19 @@ h4 {
   background-color: #7d3d9b; 
 }
 
+.greyButton {
+  background-color: #b0adb3; 
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.greyButton:hover {
+  background-color: #777477; 
+}
  
