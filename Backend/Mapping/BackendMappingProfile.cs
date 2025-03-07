@@ -57,12 +57,13 @@ namespace Backend.Mapping
             CreateMap<UpitDTOInsertUpdate, Upit>();
 
         }
-        /// <summary>
+
+        /*/// <summary>
         /// Metoda za dobivanje putanje do slike psa.
         /// </summary>
         /// <param name="e">Objekt polaznika.</param>
         /// <returns>Putanja do slike ili null ako slika ne postoji.</returns>
-        /*private static string? PutanjaDatoteke(Pas e)
+        private static string? PutanjaDatoteke(Pas e)
         {
             try
             {

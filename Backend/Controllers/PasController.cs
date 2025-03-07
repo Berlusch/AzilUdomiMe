@@ -245,15 +245,15 @@ namespace Backend.Controllers
             }
         }
 
-      
 
-        /// <summary>
+
+        /*/// <summary>
         /// Postavlja sliku za psa.
         /// </summary>
         /// <param name="sifra">Šifra psa.</param>
         /// <param name="slika">Podatci o slici.</param>
         /// <returns>Status postavljanja slike.</returns>
-        /*[HttpPut]
+        [HttpPut]
         [Route("postaviSliku/{sifra:int}")]
         public IActionResult PostaviSliku(int sifra, SlikaDTO slika)
         {
