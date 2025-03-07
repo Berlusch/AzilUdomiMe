@@ -22,8 +22,8 @@ namespace Backend.Controllers
         /// <param>sifra</param>
         /// <returns>Dohvaća podatke o psu po šifri.</returns>
         [HttpGet]
-        [Route("PasPoSifri{sifra:int}")]
-                public ActionResult<PasDTOInsertUpdate> GetPasPoSifri(int sifra)
+        [Route("PasPoSifri/{sifra:int}")]
+                public ActionResult<PasDTORead> GetPasPoSifri(int sifra)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +43,7 @@ namespace Backend.Controllers
                 return NotFound(new { poruka = "Pas ne postoji u bazi" });
             }
 
-            return Ok(_mapper.Map<PasDTOInsertUpdate>(e));
+            return Ok(_mapper.Map<PasDTORead>(e));
         }
 
 

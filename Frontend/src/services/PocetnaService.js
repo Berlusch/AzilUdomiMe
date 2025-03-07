@@ -19,7 +19,7 @@ export async function getPsi(stranica) {
 }
 
 async function getPasPoSifri(sifra){
-    return await HttpService.getPasPoSifri('/Pocetna/pasPoSifri/'+sifra)
+    return await HttpService.get('/Pocetna/pasPoSifri/'+sifra)
     .then((odgovor)=>{
         //console.table(odgovor.data)
         return {greska:false, poruka: odgovor.data};

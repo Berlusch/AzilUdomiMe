@@ -89,8 +89,8 @@ return (
           <div className="psiGrid">
             {slobodniPsi &&
               slobodniPsi.map((pas) => (
-                <Link to={`/pas-detalji/${pas.sifra}`} key={pas.sifra} className="pasItem">
-                  <img src={`/pas/${pas.sifra}.jpg`} alt={pas.ime} className="pasSlika" />
+                <Link to={`/detalji-psa/${pas.sifra}`} key={pas.sifra} className="pasItem">
+                  <img src={`/pas${pas.sifra}.jpg`} alt={pas.ime} className="pasSlika" />
                   <p>{pas.ime}</p>
                 </Link>
               ))}

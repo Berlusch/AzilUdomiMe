@@ -23,12 +23,12 @@ export const RouteNames={
     ERA_DIJAGRAM: '/era-dijagram',
     LOGIN: '/login',
     NADZORNA_PLOCA: '/nadzornaploca',
-    DETALJI_PSA: '/detalji-psa'
+    DETALJI_PSA: '/detalji-psa/:sifra'
     
 }
 
 
-export const PRODUKCIJA ='https://blusch-001-site1.qtempurl.com/api/v1';
+//export const PRODUKCIJA ='https://blusch-001-site1.qtempurl.com/api/v1';
 
-//export const PRODUKCIJA ='https://localhost:7015/api/v1';
+export const PRODUKCIJA ='https://localhost:7015/api/v1';
 

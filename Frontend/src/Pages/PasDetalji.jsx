@@ -1,10 +1,10 @@
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import PocetnaService from '../services/PocetnaService'; 
-import { useState } from 'react';
-import { RouteNames } from "../../constants";
+import { useEffect, useState } from 'react';
+import { RouteNames } from "../constants";
 import { Row, Col } from "react-bootstrap";
 
-async function PasDetalji() {
+export default function PasDetalji() {
   const [pas, setPas] = useState(null);
   const navigate = useNavigate();
   const routeParams = useParams();
@@ -12,7 +12,7 @@ async function PasDetalji() {
   async function DohvatiPsaPoSifri(sifra) {
     try {
       const odgovor = await PocetnaService.getPasPoSifri(sifra);
-      setPas(odgovor);
+      setPas(odgovor.poruka);
     } catch (e) {
       console.log(e);
     }
