@@ -19,6 +19,8 @@ export default function UpitiPromjena(){
     const[pasSifra, setPasSifra]=useState(1);
 
     const [upit,setUpit]= useState({});
+    const[upiti, setUpiti]=useState([])
+    const[statusUpita, setStatusUpita]=useState({})
 
     async function dohvatiUdomitelje(){
         const odgovor=await UdomiteljService.get();
@@ -32,9 +34,15 @@ export default function UpitiPromjena(){
     }
 
     async function dohvatiUpite(){
+        const odgovor = await Service.get();
+        setUpiti(odgovor);
+    }
+
+    async function dohvatiUpit(){
         const odgovor=await Service.getBySifra(routeParams.sifra);
        
         let u=odgovor;
+        setStatusUpita(u.statusUpita)
         setUpit(u);
         setUdomiteljSifra(u.udomiteljSifra);
         setPasSifra(u.pasSifra);
@@ -43,6 +51,7 @@ export default function UpitiPromjena(){
     async function dohvatiInicijalnePodatke(){
         await dohvatiUdomitelje();
         await dohvatiPse();
+        await dohvatiUpit();
         await dohvatiUpite();
     }
 
@@ -73,7 +82,7 @@ export default function UpitiPromjena(){
                 pasSifra: pasSifra,
                 udomiteljSifra: udomiteljSifra,
                 datumUpita: moment.utc(podatci.get('datumUpita')),
-                statusUpita: podatci.get('statusUpita'),
+                statusUpita: statusUpita,
                 napomene: podatci.get('napomene')
             }
                 
@@ -121,10 +130,26 @@ export default function UpitiPromjena(){
                     defaultValue={upit.datumUpita}/>
                 </Form.Group>
 
-            <Form.Group controlId="statusUpita">
+                <Form.Group className='mb-3' controlId='statusUpita'>
                 <Form.Label>Status upita</Form.Label>
-                <Form.Control type="text" name="statusUpita" required
-                defaultValue={upit.statusUpita}/>
+                <Form.Select onChange={(e) => setStatusUpita(e.target.value)} required>                    
+                    <option value="zaprimljen">zaprimljen</option>
+                    <option value="u obradi">u obradi</option>
+                    <option value="obrađen">obrađen</option>                    
+
+                    {upiti && 
+                        upiti
+                            .filter((s) => s.statusUpita !== "zaprimljen" && s.statusUpita !== "u obradi" && s.statusUpita !== "obrađen")
+                            .map((s, index, self) => (
+                                // Filtriranje duplića
+                                self.findIndex((item) => item.statusUpita === s.statusUpita) === index && (
+                                    <option key={index} value={s.statusUpita}>
+                                        {s.statusUpita}
+                                    </option>
+                                )
+                            ))
+                    }
+                </Form.Select>
             </Form.Group>
 
             <Form.Group controlId="napomene">
