@@ -17,7 +17,13 @@ export default function Login() {
   }
 
   return (
-    <Container className='mt-4'>        
+    <Container className='mt-4'>   
+     <p>
+            email: bernarda.lusch@gmail.com
+        </p>
+        <p>
+            lozinka: kadulja
+        </p>    
       <Form onSubmit={handleSubmit}>
         <Form.Group className='mb-3' controlId='email'>
           <Form.Label>Email</Form.Label>
