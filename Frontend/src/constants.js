@@ -27,7 +27,7 @@ export const RouteNames={
 }
 
 
-//export const PRODUKCIJA ='https://blusch-001-site1.qtempurl.com/api/v1';
+export const PRODUKCIJA ='https://blusch-001-site1.qtempurl.com/api/v1';
 
-export const PRODUKCIJA ='https://localhost:7015/api/v1';
+//export const PRODUKCIJA ='https://localhost:7015/api/v1';
 
