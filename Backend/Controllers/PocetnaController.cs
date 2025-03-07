@@ -17,27 +17,33 @@ namespace Backend.Controllers
     public class PocetnaController(BackendContext _context, IMapper _mapper) : ControllerBase
     {
         /// <summary>
-        /// Dohvaća sve pse iz baze.
+        /// Dohvaća psa po šifri.
         /// </summary>
-        /// <returns>Popis svih pasa u bazi.</returns>
+        /// <param>sifra</param>
+        /// <returns>Dohvaća podatke o psu po šifri.</returns>
         [HttpGet]
-        [Route("DostupniPsi")]
-        public ActionResult<List<PasDTORead>>DostupniPsi()
+        [Route("PasPoSifri{sifra:int}")]
+                public ActionResult<PasDTOInsertUpdate> GetPasPoSifri(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            Pas? e;
             try
             {
-                var psi = _context.Psi.ToList();
-                var lista = new List<object>();
-                foreach (var pas in psi)
-                {
-                    lista.Add(new { pas.Ime });
-                }
-                return Ok(lista);
+                e = _context.Psi.Include(g => g.Status).FirstOrDefault(g => g.Sifra == sifra);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { poruka = ex.Message });
             }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Pas ne postoji u bazi" });
+            }
+
+            return Ok(_mapper.Map<PasDTOInsertUpdate>(e));
         }
 
 
