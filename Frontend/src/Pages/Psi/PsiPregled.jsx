@@ -103,7 +103,7 @@ export default function PsiPregled(){
                         <img 
                             src={`/pas${pas.sifra}.jpg`}  
                             alt={pas.ime}
-                            width="220" // Prilagodi veličinu prema potrebi
+                            width="220" 
                         />
                     </div>
                     </div>

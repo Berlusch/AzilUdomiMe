@@ -3,16 +3,19 @@ import PocetnaService from '../services/PocetnaService';
 import { useEffect, useState } from 'react';
 import { RouteNames } from "../constants";
 import { Row, Col } from "react-bootstrap";
+import moment from 'moment';
 
 export default function PasDetalji() {
-  const [pas, setPas] = useState(null);
+  const [pas, setPas] = useState({});  
   const navigate = useNavigate();
   const routeParams = useParams();
+  const { sifra } = useParams(0);
+console.log(sifra);
 
   async function DohvatiPsaPoSifri(sifra) {
     try {
       const odgovor = await PocetnaService.getPasPoSifri(sifra);
-      setPas(odgovor.poruka);
+      setPas(odgovor.poruka);      
     } catch (e) {
       console.log(e);
     }
@@ -22,7 +25,12 @@ export default function PasDetalji() {
     if (routeParams.sifra) {
       DohvatiPsaPoSifri(routeParams.sifra);
     }
-  }, [routeParams.sifra]);
+  }, []);
+
+  function formatirajDatum(datum_Rodjenja){
+          
+          return moment.utc(datum_Rodjenja).format('DD. MM. YYYY.')
+      }
 
   if (!pas) {
     return <p>Učitavanje podataka o psu...</p>;
@@ -35,21 +43,21 @@ export default function PasDetalji() {
       </Link>
 
       <Row>
-        <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
-          <h4>{pas.ime}</h4>
+        <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}className="text-end">
+          
           <img
-            src={`/pas/${pas.sifra}.jpg`}
+            src={`/pas${sifra}.jpg`}
             alt={pas.ime}
             className="pasDetaljiSlika"
           />
-          <p>{pas.ime}</p>
+          
         </Col>
 
-        <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6} className="text-end">
+        <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6} className="text-start">
           <h4>Detalji psa {pas.ime}</h4>
           <div className="detaljiPsa">
             <p>Broj čipa: {pas.brojCipa}</p>
-            <p>Datum rođenja: {pas.datum_Rodjenja}</p>
+            <p>Datum rođenja: {formatirajDatum(pas.datum_Rodjenja)}</p>
             <p>Spol: {pas.spol}</p>
             <p>Opis: {pas.opis}</p>
             <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>

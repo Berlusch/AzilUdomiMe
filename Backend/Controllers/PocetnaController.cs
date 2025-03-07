@@ -22,7 +22,7 @@ namespace Backend.Controllers
         /// <param>sifra</param>
         /// <returns>Dohvaća podatke o psu po šifri.</returns>
         [HttpGet]
-        [Route("PasPoSifri/{sifra:int}")]
+        [Route("pasPoSifri/{sifra:int}")]
                 public ActionResult<PasDTORead> GetPasPoSifri(int sifra)
         {
             if (!ModelState.IsValid)

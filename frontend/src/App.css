@@ -163,7 +163,7 @@ h4 {
 }
 
 .purpleButton {
-  background-color: #E6CCFF; 
+  background-color: #d4b0f7; 
   color: white;
   padding: 5px 10px;
   text-align: center;
@@ -179,7 +179,7 @@ h4 {
 }
 
 .greyButton {
-  background-color: #b0adb3; 
+  background-color: #959297; 
   color: white;
   padding: 5px 10px;
   text-align: center;
@@ -193,5 +193,13 @@ h4 {
 
 .greyButton:hover {
   background-color: #777477; 
+}
+
+.pasDetaljiSlika {
+  margin-top: 30px;
+  margin-right:40px;
+  width: 300px;   
+  height: auto; 
+  
 }
  
