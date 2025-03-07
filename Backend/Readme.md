@@ -78,6 +78,7 @@
 - [PocetnaController](#T-Backend-Controllers-PocetnaController 'Backend.Controllers.PocetnaController')
   - [#ctor(_context)](#M-Backend-Controllers-PocetnaController-#ctor-Backend-Data-BackendContext,AutoMapper-IMapper- 'Backend.Controllers.PocetnaController.#ctor(Backend.Data.BackendContext,AutoMapper.IMapper)')
   - [DostupniPsi()](#M-Backend-Controllers-PocetnaController-DostupniPsi 'Backend.Controllers.PocetnaController.DostupniPsi')
+  - [IzracunajUkupnoStranica()](#M-Backend-Controllers-PocetnaController-IzracunajUkupnoStranica 'Backend.Controllers.PocetnaController.IzracunajUkupnoStranica')
   - [TraziStranicenje(stranica)](#M-Backend-Controllers-PocetnaController-TraziStranicenje-System-Int32- 'Backend.Controllers.PocetnaController.TraziStranicenje(System.Int32)')
   - [TraziUdomljenePse()](#M-Backend-Controllers-PocetnaController-TraziUdomljenePse 'Backend.Controllers.PocetnaController.TraziUdomljenePse')
 - [Status](#T-Backend-Models-Status 'Backend.Models.Status')
@@ -999,6 +1000,21 @@ Popis svih pasa u bazi.
 
 This method has no parameters.
 
+<a name='M-Backend-Controllers-PocetnaController-IzracunajUkupnoStranica'></a>
+### IzracunajUkupnoStranica() `method`
+
+##### Summary
+
+Traži broj pasa sa statusom "slobodan" ili "privremeni smještaj" te računa ukupan broj stranica na kojima će se prikazati.
+
+##### Returns
+
+Ukupan broj stranica na kojima će se prikazati psi sa traženim statusom.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-Backend-Controllers-PocetnaController-TraziStranicenje-System-Int32-'></a>
 ### TraziStranicenje(stranica) `method`
 
@@ -1008,7 +1024,7 @@ Traži pse sa statusom "slobodan" ili "privremeni smještaj" te ih prikazuje s p
 
 ##### Returns
 
-Objekt koji sadrži listu pasa i ukupan broj stranica.
+Objekt koji sadrži listu pasa s traženim statusom.
 
 ##### Parameters
 

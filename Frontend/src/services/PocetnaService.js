@@ -4,19 +4,30 @@ import { HttpService } from "./HttpService";
 export async function getPsi(stranica) {
     try {
         const odgovor = await HttpService.get('/Pocetna/traziStranicenje/' + stranica);
-        console.log("Dobiveni podaci:", odgovor.data);     
+        console.log("Dobiveni podatci:", odgovor.data);     
         
-        return {
-            psi: odgovor.data.Psi,
-            ukupnoStranica: odgovor.data.UkupnoStranica
-        };
+        return odgovor.data;          
+       
         
     } catch (e) {
         console.error("Greška prilikom dohvaćanja podataka:", e);
         return {
             psi: [],
-            ukupnoStranica: 0
+            
         };
+    }
+}
+
+async function getUkupnoStranica(){
+    try {
+        const odgovor = await HttpService.get('/Pocetna/izracunajUkupnoStranica/');
+        console.log("ukupno stranica:", odgovor.data);     
+        
+        return odgovor.data;          
+       
+        
+    } catch (e) {
+        console.error("Greška prilikom dohvaćanja podataka:", e);        
     }
 }
 
@@ -33,5 +44,6 @@ async function getBrojUdomljenihPasa(){
 
     export default {
         getPsi,
-        getBrojUdomljenihPasa
+        getBrojUdomljenihPasa,
+        getUkupnoStranica
     }

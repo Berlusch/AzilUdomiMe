@@ -46,7 +46,7 @@ namespace Backend.Controllers
         /// Traži pse sa statusom "slobodan" ili "privremeni smještaj" te ih prikazuje s paginacijom.
         /// </summary>
         /// <param name="stranica">Broj stranice (počinje od 1).</param>
-        /// <returns>Objekt koji sadrži listu pasa i ukupan broj stranica.</returns>
+        /// <returns>Objekt koji sadrži listu pasa s traženim statusom.</returns>
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
         public IActionResult TraziStranicenje(int stranica)
@@ -62,8 +62,7 @@ namespace Backend.Controllers
                 var query = _context.Psi.Include(p => p.Status)
                     .Where(p => p.Status.Naziv == "slobodan" || p.Status.Naziv == "privremeni smještaj");
 
-                var ukupniBrojPasa = query.Count();
-                var ukupnoStranica = (int)Math.Ceiling((double)ukupniBrojPasa / poStranici);
+                
 
                 var psi = query.OrderBy(p => p.Ime)
                     .Skip((stranica - 1) * poStranici)
@@ -76,7 +75,7 @@ namespace Backend.Controllers
                     {
                         Poruka = "Trenutačno nema pasa sa statusom 'slobodan' ili 'privremeni smještaj'.",
                         Psi = new List<PasDTORead>(),
-                        UkupnoStranica = ukupnoStranica,
+                        
                         
                     });
                 }
@@ -84,7 +83,7 @@ namespace Backend.Controllers
                 return Ok(new
                 {
                     Psi = _mapper.Map<List<PasDTORead>>(psi),
-                    UkupnoStranica = ukupnoStranica
+                    
                 });
             }
             catch (Exception e)
@@ -93,8 +92,31 @@ namespace Backend.Controllers
             }
         }
 
+        /// <summary>
+        /// Traži broj pasa sa statusom "slobodan" ili "privremeni smještaj" te računa ukupan broj stranica na kojima će se prikazati.
+        /// </summary>        /// 
+        /// <returns>Ukupan broj stranica na kojima će se prikazati psi sa traženim statusom.</returns>
+        [HttpGet]
+        [Route("izracunajUkupnoStranica/")]
+        public IActionResult IzracunajUkupnoStranica()
+        {
+            var poStranici = 5;
+            try
+            {var query = _context.Psi.Include(p => p.Status)
+                    .Where(p => p.Status.Naziv == "slobodan" || p.Status.Naziv == "privremeni smještaj");
+
+                var ukupniBrojPasa = query.Count();
+                var ukupnoStranica = (int)Math.Ceiling((double)ukupniBrojPasa / poStranici);
 
 
+                return Ok(ukupnoStranica);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        
         /// <summary>
         /// Traži udomljene pse te utvrđuje njihov broj.
         /// </summary>

@@ -15,18 +15,29 @@ const { showLoading, hideLoading } = useLoading();
 const [brojUdomljenihPasa, setBrojUdomljenihPasa] = useState(0);
 const [slobodniPsi, setSlobodniPsi] = useState([]);
 const [stranica, setStranica] = useState(1);
-const [ukupnoStranica, setUkupnoStranica]=useState(1);
+const[ukupnoStranica, setUkupnoStranica]=useState(0)
 
 
 async function dohvatiSlobodnePse(stranica) {
     try {
         const odgovor = await PocetnaService.getPsi(stranica);          
             setSlobodniPsi(odgovor.psi);  
-            setUkupnoStranica(odgovor.ukupnoStranica);       
+                           
+        } catch (e) {
+            console.log(e);
+        }
+    } 
+    
+async function dohvatiUkupnoStranica() {
+        try {
+            const odgovor = await PocetnaService.getUkupnoStranica(); 
+            setUkupnoStranica(odgovor);
+            console.log("ukupno stranica",ukupnoStranica)
         } catch (e) {
             console.log(e);
         }
     }    
+
 
 async function dohvatiBrojUdomljenihPasa() {
     try {
@@ -35,13 +46,17 @@ async function dohvatiBrojUdomljenihPasa() {
     } catch (e) {
         console.log(e);
     }
-}    
+}   
+
+
 
 
 async function ucitajPodatke() {
     showLoading();    
     await dohvatiSlobodnePse(stranica);
+    dohvatiUkupnoStranica();   
     await dohvatiBrojUdomljenihPasa(); 
+    
     hideLoading();
   }
 
@@ -50,11 +65,11 @@ useEffect(()=>{
     ucitajPodatke()
 },[]);
 
-async function sljedeca()  {
-    if (stranica < ukupnoStranica) {
+async function sljedeca()  {    
+    
         setStranica(stranica + 1);
-        dohvatiSlobodnePse(stranica + 1);
-    }
+        dohvatiSlobodnePse(stranica + 1);    
+    
 };
 
 
@@ -75,9 +90,11 @@ return (
             </div>            
             ))}
         </div>
-        <Link className="purpleButton" onClick={() => sljedeca()}>
+        {stranica < ukupnoStranica && (
+  <Link className="purpleButton" onClick={() => sljedeca()}>
     Sljedeća
-</Link>
+  </Link>
+)}
     
     </Col>         
   
