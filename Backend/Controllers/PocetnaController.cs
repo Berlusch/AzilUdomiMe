@@ -56,7 +56,7 @@ namespace Backend.Controllers
                 return BadRequest("Broj stranice mora biti 1 ili veći.");
             }
 
-            var poStranici = 5;
+            var poStranici = 4;
             try
             {
                 var query = _context.Psi.Include(p => p.Status)
@@ -100,7 +100,7 @@ namespace Backend.Controllers
         [Route("izracunajUkupnoStranica/")]
         public IActionResult IzracunajUkupnoStranica()
         {
-            var poStranici = 5;
+            var poStranici = 4;
             try
             {var query = _context.Psi.Include(p => p.Status)
                     .Where(p => p.Status.Naziv == "slobodan" || p.Status.Naziv == "privremeni smještaj");
