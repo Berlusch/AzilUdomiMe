@@ -18,6 +18,15 @@ export async function getPsi(stranica) {
     }
 }
 
+async function getPasPoSifri(sifra){
+    return await HttpService.getPasPoSifri('/Pocetna/pasPoSifri/'+sifra)
+    .then((odgovor)=>{
+        //console.table(odgovor.data)
+        return {greska:false, poruka: odgovor.data};
+    })
+    .catch((e)=>{})
+}
+
 async function getUkupnoStranica(){
     try {
         const odgovor = await HttpService.get('/Pocetna/izracunajUkupnoStranica/');
@@ -45,5 +54,6 @@ async function getBrojUdomljenihPasa(){
     export default {
         getPsi,
         getBrojUdomljenihPasa,
-        getUkupnoStranica
+        getUkupnoStranica,
+        getPasPoSifri
     }

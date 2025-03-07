@@ -25,6 +25,7 @@ import Login from "./Pages/Login"
 import useAuth from "./hooks/useAuth"
 import NadzornaPloca from './Pages/NadzornaPloca'
 import useError from "./hooks/useError"
+import PasDetalji from './Pages/PasDetalji'
 
 
 
@@ -41,6 +42,7 @@ function App() {
         <NavbarEdunova />
         <Routes>
         <Route path={RouteNames.HOME} element={<Pocetna />} />
+        <Route path={RouteNames.DETALJI_PSA} element={<PasDetalji />} />
           {isLoggedIn ? (
         <>
           <Route path={RouteNames.NADZORNA_PLOCA} element={<NadzornaPloca />} />

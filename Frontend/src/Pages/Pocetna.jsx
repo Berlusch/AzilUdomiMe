@@ -15,7 +15,7 @@ const { showLoading, hideLoading } = useLoading();
 const [brojUdomljenihPasa, setBrojUdomljenihPasa] = useState(0);
 const [slobodniPsi, setSlobodniPsi] = useState([]);
 const [stranica, setStranica] = useState(1);
-const[ukupnoStranica, setUkupnoStranica]=useState(0)
+const [ukupnoStranica, setUkupnoStranica]=useState(0)
 
 
 async function dohvatiSlobodnePse(stranica) {
@@ -81,47 +81,51 @@ async function prethodna()  {
 
 return (
     <>
-      <h1 className="welcome-title">
-        Dobro došli u aplikaciju Udomi me!
-      </h1>
-             
-      <Row>
-      <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
-        <h4>Oni traže svoj dom:</h4>
-        <div className="psiGrid">
-            {slobodniPsi && slobodniPsi.map((pas, index) => (
-                <div key={index} className="pasItem">
-                <img src={`/pas${pas.sifra}.jpg`} alt={pas.ime} className="pasSlika" />
-                <p>{pas.ime}</p>
-            </div>            
-            ))}
-        </div>
-        {stranica >1 && (
-  <Link className="greyButton" onClick={() => prethodna()}>
-    Prethodna
-  </Link>
-)}
+      <h1 className="welcome-title">Dobro došli u aplikaciju Udomi me!</h1>
 
-        {stranica < ukupnoStranica && (
-  <Link className="purpleButton" onClick={() => sljedeca()}>
-    Sljedeća
-  </Link>
-)}
-    
-    </Col>         
-  
+      <Row>
+        <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
+          <h4>Oni traže svoj dom:</h4>
+          <div className="psiGrid">
+            {slobodniPsi &&
+              slobodniPsi.map((pas) => (
+                <Link to={`/pas-detalji/${pas.sifra}`} key={pas.sifra} className="pasItem">
+                  <img src={`/pas/${pas.sifra}.jpg`} alt={pas.ime} className="pasSlika" />
+                  <p>{pas.ime}</p>
+                </Link>
+              ))}
+          </div>
+
+          {stranica > 1 && (
+            <Link className="greyButton" onClick={prethodna}>
+              Prethodna
+            </Link>
+          )}
+
+          {stranica < ukupnoStranica && (
+            <Link className="purpleButton" onClick={sljedeca}>
+              Sljedeća
+            </Link>
+          )}
+        </Col>
+
         <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6} className="text-end">
-        <h4>Do sada je udomljeno:</h4>
-        <div className="brojUdomljenihPasa">
+          <h4>Do sada je udomljeno:</h4>
+          <div className="brojUdomljenihPasa">
             <CountUp start={0} end={brojUdomljenihPasa} duration={10} separator="." />
-        </div>
-        <p>{brojUdomljenihPasa === 1 ? 'udomljen pas' : (brojUdomljenihPasa < 5 ? 'udomljena psa' : 'udomljenih pasa')}</p>
-        <h4>Hvala udomiteljima ❤️</h4>
+          </div>
+          <p>
+            {brojUdomljenihPasa === 1
+              ? "udomljen pas"
+              : brojUdomljenihPasa < 5
+              ? "udomljena psa"
+              : "udomljenih pasa"}
+          </p>
+          <h4>Hvala udomiteljima ❤️</h4>
         </Col>
       </Row>
     </>
   );
-    
 }
 
 
