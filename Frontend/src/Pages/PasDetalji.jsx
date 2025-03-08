@@ -6,7 +6,7 @@ import { Row, Col } from "react-bootstrap";
 import moment from 'moment';
 
 export default function PasDetalji() {
-  const [pas, setPas] = useState({});  
+  const [pas, setPas] = useState({});   
   const navigate = useNavigate();
   const routeParams = useParams();
   const { sifra } = useParams(0);
@@ -32,6 +32,7 @@ console.log(sifra);
           return moment.utc(datum_Rodjenja).format('DD. MM. YYYY.')
       }
 
+   
   if (!pas) {
     return <p>Učitavanje podataka o psu...</p>;
   }
@@ -44,13 +45,17 @@ console.log(sifra);
 
       <Row>
         <Col xs={12} sm={12} md={3} lg={6} xl={6} xxl={6}className="text-end">
-          
+                 
           <img
             src={`/pas${sifra}.jpg`}
             alt={pas.ime}
             className="pasDetaljiSlika"
           />
-          
+          <div className="text-start">
+        <Link to={RouteNames.HOME}className="listaPasa" >Povratak na listu pasa</Link>
+        
+        </div>
+                  
         </Col>
 
         <Col xs={12} sm={12} md={9} lg={6} xl={6} xxl={6} className="text-start">

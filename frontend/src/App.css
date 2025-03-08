@@ -127,7 +127,7 @@ h4 {
   font-size: 20px;
   color: #7d3d9b; 
   margin-bottom: 30px;
-  margin-top: 30px; 
+  margin-top: 40px; 
 }
 
 .centered-image {
@@ -172,6 +172,7 @@ h4 {
   display: inline-block;
   cursor: pointer;
   font-size: 13px;
+  
 }
 
 .purpleButton:hover {
@@ -196,10 +197,29 @@ h4 {
 }
 
 .pasDetaljiSlika {
-  margin-top: 30px;
+  margin-top: 40px;
   margin-right:40px;
   width: 300px;   
   height: auto; 
   
 }
- 
+
+.pasIme {
+  margin-top: 5px;
+  color: #7d3d9b; 
+  margin-bottom: 20px;
+  
+}
+
+.listaPasa {
+  background-color: #959297;
+  color: white;
+  padding: 5px 10px;
+  text-align: left;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;   
+  margin-top: -30px;
+}
+

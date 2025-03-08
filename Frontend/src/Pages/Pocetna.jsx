@@ -87,13 +87,15 @@ return (
         <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
           <h4>Oni traže svoj dom:</h4>
           <div className="psiGrid">
-            {slobodniPsi &&
-              slobodniPsi.map((pas) => (
-                <Link to={`/detalji-psa/${pas.sifra}`} key={pas.sifra} className="pasItem">
-                  <img src={`/pas${pas.sifra}.jpg`} alt={pas.ime} className="pasSlika" />
-                  <p>{pas.ime}</p>
-                </Link>
-              ))}
+              {slobodniPsi &&
+                slobodniPsi.map((pas) => (
+              <div key={pas.sifra} className="pasItem">
+              <Link to={`/detalji-psa/${pas.sifra}`} className="pasLink">
+                <img src={`/pas${pas.sifra}.jpg`} alt={pas.ime} className="pasSlika" />
+              </Link>
+              <p className="pasIme">{pas.ime}</p>
+          </div>
+      ))}
           </div>
 
           {stranica > 1 && (
