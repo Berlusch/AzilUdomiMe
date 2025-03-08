@@ -12,6 +12,7 @@ namespace Backend.Controllers
     /// Kontroler za početne operacije.
     /// </summary>
     /// <param name="_context">Kontekst baze podataka.</param>
+    /// <param name="_mapper">Mapira podatke.</param>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class PocetnaController(BackendContext _context, IMapper _mapper) : ControllerBase
