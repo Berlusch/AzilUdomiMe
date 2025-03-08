@@ -83,6 +83,9 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { poruka = ModelState });
             }
+
+            dto = dto with { BrojCipa = dto.BrojCipa.Trim() };
+
             Status? s;
             try
             {
