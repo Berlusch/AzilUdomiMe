@@ -106,9 +106,9 @@ export default function PsiDodaj(){
         <Form.Group className='mb-3' controlId="spol">
             <Form.Label>Spol</Form.Label>
             <Form.Select 
-                value={pasSpol} // Dodajte value da bi bila kontrolirana komponenta
+                value={pasSpol} 
                 onChange={(e) => { setPasSpol(e.target.value) }}
-                required // Dodajte required atribut
+                required 
             >
                 <option value="">Odaberite spol</option>
                 <option value="muški">muški</option>
