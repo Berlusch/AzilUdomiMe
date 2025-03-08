@@ -12,7 +12,7 @@ export default function PsiDodaj(){
     const [statusi,setStatusi]=useState([]);
     const [statusSifra, setStatusSifra]=useState();
     const[psi, setPsi]=useState([])
-    const [pasSpol, setPasSpol]=useState('odaberi');
+    const [pasSpol, setPasSpol]=useState('Odaberite spol');
    
     async function dohvatiStatuse(){
         try {
@@ -109,7 +109,7 @@ export default function PsiDodaj(){
                 onChange={(e) => { setPasSpol(e.target.value) }}
                 required 
             >
-                <option value="odaberi">Odaberite spol</option>
+                <option value="Odaberite spol">Odaberite spol</option>
                 <option value="muški">muški</option>
                 <option value="ženski">ženski</option>
                 {psi && psi.filter((s) => s.spol !== "muški" && s.spol !== "ženski").map((s, index) => (

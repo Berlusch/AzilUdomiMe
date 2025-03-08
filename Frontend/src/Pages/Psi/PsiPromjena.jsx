@@ -123,19 +123,18 @@ export default function PsiPromjena(){
             checked={kastracija}  
             />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='statusNaziv'>
+        <Form.Group className='mb-3' controlId='status'>
             <Form.Label>Status</Form.Label>
-            <Form.Select
+            <Form.Select 
             value={statusSifra}
             onChange={(e)=>{setStatusSifra(e.target.value)}}
-            >
-            {statusi && statusi.map((s,index)=>(
+            >{statusi && statusi.map((s,index)=>(
               <option key={index} value={s.sifra}>
                 {s.naziv}
               </option>
             ))}
             </Form.Select>
-          </Form.Group>
+            </Form.Group>
 
         <hr/>
     
