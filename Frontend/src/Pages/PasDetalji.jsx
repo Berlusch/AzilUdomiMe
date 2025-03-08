@@ -43,7 +43,7 @@ console.log(sifra);
       </Link>
 
       <Row>
-        <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}className="text-end">
+        <Col xs={12} sm={12} md={3} lg={6} xl={6} xxl={6}className="text-end">
           
           <img
             src={`/pas${sifra}.jpg`}
@@ -53,7 +53,7 @@ console.log(sifra);
           
         </Col>
 
-        <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6} className="text-start">
+        <Col xs={12} sm={12} md={9} lg={6} xl={6} xxl={6} className="text-start">
           <h4>Detalji psa {pas.ime}</h4>
           <div className="detaljiPsa">
             <p>Broj čipa: {pas.brojCipa}</p>
