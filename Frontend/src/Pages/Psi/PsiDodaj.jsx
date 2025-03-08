@@ -12,7 +12,7 @@ export default function PsiDodaj(){
     const [statusi,setStatusi]=useState([]);
     const [statusSifra, setStatusSifra]=useState();
     const[psi, setPsi]=useState([])
-    const [pasSpol, setPasSpol]=useState({});
+    const [pasSpol, setPasSpol]=useState('odaberi');
    
     async function dohvatiStatuse(){
         try {
@@ -36,7 +36,6 @@ export default function PsiDodaj(){
             console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
                 if (Array.isArray(odgovor) && odgovor.length > 0) {
                 setPsi(odgovor);  
-                setPasSpol(odgovor[0].spol);  
             } else {
                 console.error("Nema spola u odgovoru ili odgovor nije niz");
             }
@@ -110,7 +109,7 @@ export default function PsiDodaj(){
                 onChange={(e) => { setPasSpol(e.target.value) }}
                 required 
             >
-                <option value="">Odaberite spol</option>
+                <option value="odaberi">Odaberite spol</option>
                 <option value="muški">muški</option>
                 <option value="ženski">ženski</option>
                 {psi && psi.filter((s) => s.spol !== "muški" && s.spol !== "ženski").map((s, index) => (
