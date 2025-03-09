@@ -82,6 +82,7 @@ function App() {
       </Container>
       <div style={{ textAlign: 'center', paddingRight: '30px' }}>
   &copy; Udomi me 2025.
+  Kontakt: aziludomime@gmail.com
 </div>
 
     </>
