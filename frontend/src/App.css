@@ -229,7 +229,11 @@ h4 {
   transition: background-color 0.3s ease;
 }
 
-.gumb {
+.siroko1:hover {
+  background-color: #7d3d9b;
+}
+
+.authGumb {
   background-color: #7d3d9b;
   color: white;
   padding: 8px 16px;
@@ -237,9 +241,10 @@ h4 {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  margin-top: 20px;
 }
 
-.gumb:hover {
+.authGumb:hover {
   background-color: #632081;
 }
 

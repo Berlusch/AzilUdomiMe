@@ -20,8 +20,9 @@ export default function Login() {
     <Container className='mt-4'>   
      <div className="loginPodatci">
       <p>email:  bernarda.lusch@gmail.com</p>
-      <p>lozinka:  kadulja</p> 
-        </div>   
+      <p>lozinka:  kadulja</p>       
+        </div> 
+        <br/>  
       <Form onSubmit={handleSubmit}>
         <Form.Group className='mb-3' controlId='email'>
           <Form.Label>Email</Form.Label>
@@ -37,7 +38,7 @@ export default function Login() {
           <Form.Label>Lozinka</Form.Label>
           <Form.Control type='password' name='lozinka' required />
         </Form.Group>
-        <Button className="gumb" type="submit">
+        <Button className="authGumb" type="submit">
         Autoriziraj
       </Button>
       </Form>
