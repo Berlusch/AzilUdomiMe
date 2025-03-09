@@ -63,7 +63,13 @@ console.log(sifra);
           <div className="detaljiPsa">
             <p>Broj čipa: {pas.brojCipa}</p>
             <p>Datum rođenja: {formatirajDatum(pas.datum_Rodjenja)}</p>
-            <p>Spol: {pas.spol}</p>
+            <p>
+  Spol: 
+  <span style={{ fontSize: "22px", color: pas.spol === "ženski" ? "red" : "blue"}}>
+    {pas.spol === "ženski" ? "  ♀" : "  ♂"}
+  </span> 
+  {pas.spol === "ženski" ? " ženski" : " muški"}
+</p>
             <p>Opis: {pas.opis}</p>
             <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>
             <p>Status: {pas.statusNaziv}</p>
