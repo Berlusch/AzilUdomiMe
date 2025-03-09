@@ -82,7 +82,9 @@ function App() {
       </Container>
       <div style={{ textAlign: 'center', paddingRight: '30px' }}>
   &copy; Udomi me 2025.
-  Kontakt: aziludomime@gmail.com
+  </div>    
+  <div style={{ textAlign: 'center', paddingRight: '30px', fontSize: '14px'}}>
+  Kontakt: <a href="mailto:aziludomime@gmail.com">aziludomime@gmail.com</a>
 </div>
 
     </>

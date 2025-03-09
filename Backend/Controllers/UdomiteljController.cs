@@ -212,7 +212,7 @@ namespace Backend.Controllers
             }
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Traži udomitelje s paginacijom.
         /// </summary>
         /// <param name="stranica">Broj stranice.</param>
@@ -242,7 +242,7 @@ namespace Backend.Controllers
             {
                 return BadRequest(e.Message);
             }
-        }
+        }*/
 
 
     }
