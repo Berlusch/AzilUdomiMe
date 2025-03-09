@@ -39,9 +39,9 @@ console.log(sifra);
 
   return (
     <>
-      <Link to={RouteNames.DETALJI_PSA} className="btn btn-success siroko">
+      <div className="btn btn-success siroko1">
         {pas.ime}
-      </Link>
+      </div>
 
       <Row>
         <Col xs={12} sm={12} md={3} lg={6} xl={6} xxl={6}className="text-end">

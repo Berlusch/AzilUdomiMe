@@ -76,7 +76,7 @@ function App() {
         <hr/>
     
 
-        <img src="/paw.png" alt="Logo" className="logo-centered" width="250" />
+        <img src="/paw.png" alt="Logo" className="logo-centered" width="220" />
 
 
       </Container>

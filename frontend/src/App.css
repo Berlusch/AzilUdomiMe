@@ -223,3 +223,29 @@ h4 {
   margin-top: -30px;
 }
 
+.siroko1{
+  width:100%;
+  background-color: #7d3d9b;
+  transition: background-color 0.3s ease;
+}
+
+.gumb {
+  background-color: #7d3d9b;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.gumb:hover {
+  background-color: #632081;
+}
+
+.loginPodatci {
+  color: rgb(236, 212, 247)
+}
+
+
+
