@@ -17,13 +17,20 @@ export default function PsiPromjena(){
     const[statusSifra, setStatusSifra]=useState(1)
 
     const[pas, setPas]=useState({});
-    const [kastracija,setKastracija] = useState(false);
+    const[psi, setPsi]=useState([]);
+    const [kastracija,setKastracija] = useState(false);    
+    const [pasSpol, setPasSpol]=useState({});
     
     async function dohvatiStatuse(){
         const odgovor=await StatusService.get()
         setStatusi(odgovor);
     }             
     
+    async function dohvatiPse(){
+        const odgovor=await StatusService.get()
+        setPsi(odgovor);
+    }       
+
     async function dohvatiPsa(){
         const odgovor= await Service.getBySifra(routeParams.sifra);
         console.log(odgovor); //koji su podatci dohvaćeni
@@ -36,13 +43,15 @@ export default function PsiPromjena(){
         setPas(p);
         setKastracija(p.kastracija);
         p.datum_Rodjenja = moment.utc(p.datum_Rodjenja).format('yyyy-MM-DD');
-        setStatusSifra(p.statusSifra);      
+        setStatusSifra(p.statusSifra);    
+        setPasSpol(p.spol);
                    
     }  
     
     async function dohvatiInicijalnePodatke() {
         await dohvatiStatuse();
         await dohvatiPsa();
+        await dohvatiPse();
       }
      
     useEffect(()=>{
@@ -69,7 +78,7 @@ export default function PsiPromjena(){
                 ime: podatci.get('ime'),
                 brojCipa: podatci.get('brojCipa'),
                 datum_Rodjenja: moment.utc(podatci.get('datum_Rodjenja')),
-                spol: podatci.get('spol'),
+                spol: pasSpol,
                 opis: podatci.get('opis'),
                 kastracija: podatci.get('kastracija')=='on' ? true : false,
                 statusSifra: parseInt(statusSifra)
@@ -103,10 +112,22 @@ export default function PsiPromjena(){
             defaultValue={pas.datum_Rodjenja}/>
         </Form.Group>
 
-        <Form.Group controlId="spol">
-            <Form.Label>Spol (M/Ž)</Form.Label>
-            <Form.Control type="text" name="spol" required
-            defaultValue={pas?.spol || ''}/>
+        <Form.Group className='mb-3' controlId="spol">
+            <Form.Label>Spol</Form.Label>
+            <Form.Select 
+                value={pasSpol} 
+                onChange={(e) => { setPasSpol(e.target.value) }}
+                required   >                
+                <option value="muški">muški</option>
+                <option value="ženski">ženski</option>
+                {psi && psi
+                .filter((s) => s.spol && s.spol !== "muški" && s.spol !== "ženski")
+                .map((s, index) => (
+                    <option key={index} value={s.spol}>
+                        {s.spol}
+                    </option>
+                ))}
+            </Form.Select>
         </Form.Group>
 
         <Form.Group controlId="opis">
