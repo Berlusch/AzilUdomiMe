@@ -149,6 +149,8 @@ h4 {
     display: grid;
     grid-template-columns: repeat(5, 1fr); 
     gap: 20px; 
+    justify-content: center;
+    margin-left:90px;
 } 
 
 .pasItem {
