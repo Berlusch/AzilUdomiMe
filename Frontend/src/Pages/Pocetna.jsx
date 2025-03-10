@@ -84,7 +84,7 @@ return (
       <h1 className="welcome-title">Dobro došli u aplikaciju Udomi me!</h1>
 
       <Row>
-        <Col xs={6} sm={6} md={3} lg={6} xl={6} xxl={6}>
+        <Col xs={12} sm={12} md={9} lg={6} xl={6} xxl={6}>
           <h4>Oni traže svoj dom:</h4>
           <div className="psiGrid">
               {slobodniPsi &&
@@ -111,7 +111,7 @@ return (
           )}
         </Col>
 
-        <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6} className="text-end">
+        <Col xs={12} sm={12} md={3} lg={6} xl={6} xxl={6} className="text-end">
           <h4>Do sada je udomljeno:</h4>
           <div className="brojUdomljenihPasa">
             <CountUp start={0} end={brojUdomljenihPasa} duration={10} separator="." />
