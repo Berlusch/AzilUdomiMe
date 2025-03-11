@@ -37,9 +37,9 @@ export default function UdomiteljiPregled(){
         >Dodaj novog udomitelja</Link>
         <Table striped bordered hover responsive>
             <thead>
-                <tr>
-                    <th>Ime</th>
+                <tr>                    
                     <th>Prezime</th>
+                    <th>Ime</th>
                     <th>Adresa</th>
                     <th>Telefon</th>
                     <th>Email</th>
@@ -50,12 +50,13 @@ export default function UdomiteljiPregled(){
             <tbody>
                 {udomitelji && udomitelji.map((udomitelj,index)=>(
                     <tr key={index}>
+                        
+                        <td>
+                            {udomitelj.prezime}
+                        </td>
                         <td>
                             {udomitelj.ime}
                             
-                        </td>
-                        <td>
-                            {udomitelj.prezime}
                         </td>
                         <td>
                             {udomitelj.adresa}
