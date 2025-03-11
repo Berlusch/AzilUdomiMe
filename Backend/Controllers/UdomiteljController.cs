@@ -29,7 +29,7 @@ namespace Backend.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<UdomiteljDTORead>>(_context.Udomitelji));
+                return Ok(_mapper.Map<List<UdomiteljDTORead>>(_context.Udomitelji.OrderBy(u => u.Prezime)));
             }
             catch (Exception ex)
             {

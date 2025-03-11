@@ -32,7 +32,7 @@ namespace Backend.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<PasDTORead>>(_context.Psi.Include(p => p.Status)));
+                return Ok(_mapper.Map<List<PasDTORead>>(_context.Psi.OrderBy(p => p.Ime).Include(p => p.Status)));
             }
             catch (Exception ex)
             {
