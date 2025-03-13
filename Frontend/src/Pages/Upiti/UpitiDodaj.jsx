@@ -12,10 +12,9 @@ import { useRef, useState, useEffect } from "react";
 
 export default function UpitiDodaj(){
 
-    const navigate = useNavigate();   
+    const navigate = useNavigate();       
     
-    const [upiti,setUpiti]=useState([]);
-    const [statusUpita, setStatusUpita]=useState({});
+    const [statusUpita, setStatusUpita]=useState("zaprimljen");
     
     const [pasSifra, setPasSifra]=useState(1);
     const [pasIme, setPasIme]=useState('');
@@ -179,27 +178,9 @@ export default function UpitiDodaj(){
             </Form.Group>
 
             <Form.Group className='mb-3' controlId='statusUpita'>
-                <Form.Label>Status upita</Form.Label>
-                <Form.Select onChange={(e) => setStatusUpita(e.target.value)} required>
-                    <option value="">Odaberite status upita</option>
-                    <option value="zaprimljen">zaprimljen</option>
-                    <option value="u obradi">u obradi</option>
-                    <option value="obrađen">obrađen</option>                    
-
-                    {upiti && 
-                        upiti
-                            .filter((s) => s.statusUpita !== "zaprimljen" && s.statusUpita !== "u obradi" && s.statusUpita !== "obrađen")
-                            .map((s, index, self) => (
-                                // Filtriranje duplića
-                                self.findIndex((item) => item.statusUpita === s.statusUpita) === index && (
-                                    <option key={index} value={s.statusUpita}>
-                                        {s.statusUpita}
-                                    </option>
-                                )
-                            ))
-                    }
-                </Form.Select>
-            </Form.Group>
+    <Form.Label>Status upita</Form.Label>
+    <Form.Control type="text" value={statusUpita} readOnly />
+</Form.Group>
 
         <Form.Group controlId="napomene">
             <Form.Label>Napomene</Form.Label>
