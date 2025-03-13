@@ -126,8 +126,8 @@ export default function UpitiPromjena(){
 
             <Form.Group controlId="datumUpita">
                     <Form.Label>Datum upita</Form.Label>
-                    <Form.Control type="date" step={0.01} name="datumUpita" required
-                    defaultValue={upit.datumUpita}/>
+                    <Form.Control type="date" name="datumUpita" required
+                    defaultValue={upit.datumUpita} readOnly/>
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='statusUpita'>
