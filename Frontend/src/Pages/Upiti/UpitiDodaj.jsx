@@ -10,11 +10,14 @@ import { useRef, useState, useEffect } from "react";
 
 
 
+
 export default function UpitiDodaj(){
 
     const navigate = useNavigate();       
     
     const [statusUpita, setStatusUpita]=useState("zaprimljen");
+
+    const [datumUpita, setDatumUpita] = useState('');
     
     const [pasSifra, setPasSifra]=useState(1);
     const [pasIme, setPasIme]=useState('');
@@ -31,8 +34,7 @@ export default function UpitiDodaj(){
             try {
                 const odgovor = await Service.get();
                 console.log("Odgovor:", odgovor);  // Provjeri cijeli odgovor
-                    if (Array.isArray(odgovor) && odgovor.length > 0) {
-                    setUpiti(odgovor);  
+                    if (Array.isArray(odgovor) && odgovor.length > 0) {                    
                     setStatusUpita(odgovor[0].statusUpita);  
                 } else {
                     console.error("Nema statusa upita u odgovoru ili odgovor nije niz");
@@ -79,8 +81,12 @@ export default function UpitiDodaj(){
     useEffect(()=>{
         
             dohvatiStatuseUpita();  
+            const danasnjiDatum = moment().format('YYYY-MM-DD');
+            setDatumUpita(danasnjiDatum);
                        
-          },[]);
+          },[]);      
+        
+                    
 
 
     async function dodaj(e){
@@ -92,25 +98,28 @@ export default function UpitiDodaj(){
         navigate(RouteNames.UPIT_PREGLED)     
        
 
-    }
+    }   
+    
 
     function odradiSubmit(e){ // e je event
         e.preventDefault(); //nemoj odraditi zahtjev na server na standardni način
-        
-        const podatci = new FormData(e.target);
 
+        const podatci = new FormData(e.target);
+        
         dodaj(
             {            
  
                 pasSifra: pasSifra,
                 udomiteljSifra: udomiteljSifra,
-                datumUpita: moment.utc(podatci.get('datumUpita')),
+                datumUpita: datumUpita,
                 statusUpita: statusUpita,
                 napomene: podatci.get('napomene')
             }            
         
         );
-    }    
+    }   
+    
+
     return(
     <>
     <h2 className="naslov">Dodavanje upita</h2>
@@ -172,10 +181,15 @@ export default function UpitiDodaj(){
             </p>
     </Form.Group>
         
-        <Form.Group controlId="datumUpita">
-                <Form.Label>Datum upita</Form.Label>
-                <Form.Control type="date" name="datumUpita" />
-            </Form.Group>
+    <Form.Group controlId="datumUpita">
+            <Form.Label>Datum upita (MM-DD-YYYY)</Form.Label>
+                <Form.Control
+            type="date" 
+            name="datumUpita"
+            value={datumUpita} 
+            readOnly 
+            />
+            </Form.Group>    
 
             <Form.Group className='mb-3' controlId='statusUpita'>
     <Form.Label>Status upita</Form.Label>
