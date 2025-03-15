@@ -26,6 +26,7 @@ import useAuth from "./hooks/useAuth"
 import NadzornaPloca from './Pages/NadzornaPloca'
 import useError from "./hooks/useError"
 import PasDetalji from './Pages/PasDetalji'
+import UpitObrazac from './Pages/UpitObrazac'
 
 
 
@@ -43,6 +44,7 @@ function App() {
         <Routes>
         <Route path={RouteNames.HOME} element={<Pocetna />} />
         <Route path={RouteNames.DETALJI_PSA} element={<PasDetalji />} />
+        <Route path={RouteNames.UPIT_OBRAZAC} element={<UpitObrazac />} />
           {isLoggedIn ? (
         <>
           <Route path={RouteNames.NADZORNA_PLOCA} element={<NadzornaPloca />} />

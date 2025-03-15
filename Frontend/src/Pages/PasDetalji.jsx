@@ -20,6 +20,7 @@ console.log(sifra);
       console.log(e);
     }
   }
+  
 
   useEffect(() => {
     if (routeParams.sifra) {
@@ -73,12 +74,17 @@ console.log(sifra);
             <p>Opis: {pas.opis}</p>
             <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>
             <p>Status: {pas.statusNaziv}</p>
-            <br/>
-            <div className="posaljiUpit">
-            <p>Pošaljite upit</p>
-            </div>
-            
-          </div>
+            <br/> 
+                   
+            <Link 
+              to={RouteNames.UPIT_OBRAZAC}               
+              className="posaljiUpit"
+            >
+              Pošalji upit
+            </Link>
+
+        </div>      
+          
         </Col>
       </Row>
     </>

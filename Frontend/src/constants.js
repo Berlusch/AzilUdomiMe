@@ -23,7 +23,8 @@ export const RouteNames={
     ERA_DIJAGRAM: '/era-dijagram',
     LOGIN: '/login',
     NADZORNA_PLOCA: '/nadzornaploca',
-    DETALJI_PSA: '/detalji-psa/:sifra'
+    DETALJI_PSA: '/detalji-psa/:sifra',
+    UPIT_OBRAZAC: '/upit-obrazac'
     
 }
 
