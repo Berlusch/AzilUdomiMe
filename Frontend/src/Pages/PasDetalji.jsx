@@ -73,6 +73,11 @@ console.log(sifra);
             <p>Opis: {pas.opis}</p>
             <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>
             <p>Status: {pas.statusNaziv}</p>
+            <br/>
+            <div className="posaljiUpit">
+            <p>Pošaljite upit</p>
+            </div>
+            
           </div>
         </Col>
       </Row>

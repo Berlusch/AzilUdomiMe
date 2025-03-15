@@ -201,7 +201,7 @@ h4 {
 .pasDetaljiSlika {
   margin-top: 40px;
   margin-right:40px;
-  width: 300px;   
+  width: 380px;   
   height: auto; 
   
 }
@@ -252,6 +252,23 @@ h4 {
 
 .loginPodatci {
   color: rgb(236, 212, 247)
+}
+
+.posaljiUpit {
+  background-color: #bf7cec;
+  color: white;
+  padding: 10px 10px 10px 10px;  
+  border-radius: 5px;  
+  cursor: pointer;
+  font-size: 16px;   
+  display: inline-block;
+  width: auto;
+  height: 45px;
+  margin-bottom: 60px;
+}
+
+.posaljiUpit:hover {
+  background-color: #632081;
 }
 
 
