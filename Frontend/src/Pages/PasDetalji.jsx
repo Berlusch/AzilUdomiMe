@@ -73,15 +73,19 @@ console.log(sifra);
 </p>
             <p>Opis: {pas.opis}</p>
             <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>
-            <p>Status: {pas.statusNaziv}</p>
+            <p>Status: {pas.statusNaziv}</p>  
+            {pas.statusNaziv === "na liječenju" && (
+            <p>Napomena: pas će biti dostupan za udomljenje po završetku liječenja. Za više informacija molimo pošaljite upit.</p>
+          )}
+                  
             <br/> 
                    
             <Link 
-              to={RouteNames.UPIT_OBRAZAC}               
-              className="posaljiUpit"
-            >
-              Pošalji upit
-            </Link>
+            to={`/upit-obrazac/${pas.sifra}`}  
+            className="posaljiUpit"
+          >
+            Pošalji upit
+          </Link>
 
         </div>      
           
