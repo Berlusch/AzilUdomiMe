@@ -67,7 +67,7 @@ namespace Backend.Controllers
             try
             {
                 var query = _context.Psi.Include(p => p.Status)
-                    .Where(p => p.Status.Naziv == "slobodan" || p.Status.Naziv == "privremeni smještaj");
+                    .Where(p => p.Status.Naziv == "slobodan" || p.Status.Naziv == "privremeni smještaj" || p.Status.Naziv == "na liječenju");
 
                 
 
