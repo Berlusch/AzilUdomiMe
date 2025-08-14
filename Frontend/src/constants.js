@@ -24,7 +24,8 @@ export const RouteNames={
     LOGIN: '/login',
     NADZORNA_PLOCA: '/nadzornaploca',
     DETALJI_PSA: '/detalji-psa/:sifra',
-    UPIT_OBRAZAC: '/upit-obrazac'
+    UPIT_OBRAZAC: '/upit-obrazac/:sifra'
+
     
 }
 
