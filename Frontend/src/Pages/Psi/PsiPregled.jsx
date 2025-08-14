@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import PasService from "../../services/PasService"
 import { Button, Table } from "react-bootstrap";
 import moment from "moment";
-import { GrValidate } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
 
@@ -95,15 +94,17 @@ export default function PsiPregled(){
                     {/* Ikona s hover efektom */}
                     <div className="ikona">
                         <img
-                        src="ikonicaSlika.png"
+                        src={`/pas${pas.sifra}.jpg`}
                         alt={pas.ime}
                         width="40"
+                        style={{ borderRadius: "10px" }}
                         />
                         <div className="tooltip">
                         <img 
                             src={`/pas${pas.sifra}.jpg`}  
                             alt={pas.ime}
                             width="220" 
+                            style={{ borderRadius: "10px" }}
                         />
                     </div>
                     </div>
