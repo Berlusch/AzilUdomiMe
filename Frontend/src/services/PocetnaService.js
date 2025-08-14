@@ -3,8 +3,7 @@ import { HttpService } from "./HttpService";
 
 export async function getPsi(stranica) {
     try {
-        const odgovor = await HttpService.get('/Pocetna/traziStranicenje/' + stranica);
-        console.log("Dobiveni podatci:", odgovor.data);     
+        const odgovor = await HttpService.get('/Pocetna/traziStranicenje/' + stranica);        
         
         return odgovor.data;          
        
