@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { RouteNames } from "../constants";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import PasService from "../services/PasService";
 import emailjs from "emailjs-com";
 import { useNavigate } from "react-router-dom";
+import PocetnaService from "../services/PocetnaService";
 
 
 export default function UpitObrazac() {
@@ -24,7 +24,7 @@ export default function UpitObrazac() {
     
     useEffect(() => {
         async function fetchPas() {
-            const odgovor = await PasService.getBySifra(sifra);
+            const odgovor = await PocetnaService.getPasPoSifri(sifra);
 
             if (odgovor.greska) {
                 setError(odgovor.poruka);
@@ -42,6 +42,9 @@ export default function UpitObrazac() {
     e.preventDefault(); 
 
     const podatci = new FormData(e.target); 
+    
+    const today = new Date();
+    const datum = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}.`;
 
     const upitData = {
         ime: podatci.get("ime"),
@@ -50,39 +53,38 @@ export default function UpitObrazac() {
         telefon: podatci.get("telefon"),
         email: podatci.get("email"),
         upit: podatci.get("upit"),
-        pasIme: pasIme
+        pasIme: pasIme,
+        datum: datum
     };
-   
-    console.log(upitData);
-
     
     emailjs.send(
-        'service_g6kbdlp',  
+        'service_g6kbdlp',
         'template_dtb2wpu',  
-        upitData,           
-        '2Zssg2RzCT6m4NeRA'  
+        upitData,
+        '2Zssg2RzCT6m4NeRA'
     ).then(
         (result) => {
             console.log("Success:", result.text);
+            
+            emailjs.send(
+                'service_g6kbdlp',
+                'template_es0hg7u', 
+                upitData,
+                '2Zssg2RzCT6m4NeRA'
+            ).then(() => {
+                console.log("Autoresponder poslan korisniku");
+            });
+
             alert("Upit je uspješno poslan! Odgovorit ćemo u najkraćem mogućem roku.");            
         },
         (error) => {
             console.log("Error:", error.text);
             alert("Došlo je do pogreške prilikom slanja upita.");
         }
+        
     );
     navigate(RouteNames.HOME);
 }
-
-
-    if (isLoading) {
-        return <p>Učitavam podatke o psu...</p>;
-    }
-
-    if (error) {
-        return <p>Došlo je do pogreške: {error}</p>;
-    }
-
     return (
         <>
             <h2 className="naslov">Upit za psa {pasIme}</h2>
