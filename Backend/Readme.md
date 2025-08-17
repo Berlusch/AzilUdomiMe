@@ -143,7 +143,7 @@
 - [UpitDTORead](#T-Backend-Models-DTO-UpitDTORead 'Backend.Models.DTO.UpitDTORead')
   - [#ctor(Sifra,PasIme,UdomiteljImePrezime,DatumUpita,StatusUpita,Napomene)](#M-Backend-Models-DTO-UpitDTORead-#ctor-System-Int32,System-String,System-String,System-DateTime,System-String,System-String- 'Backend.Models.DTO.UpitDTORead.#ctor(System.Int32,System.String,System.String,System.DateTime,System.String,System.String)')
   - [DatumUpita](#P-Backend-Models-DTO-UpitDTORead-DatumUpita 'Backend.Models.DTO.UpitDTORead.DatumUpita')
-  - [Napomene](#P-Backend-Models-DTO-UpitDTORead-Napomene 'Backend.Models.DTO.UpitDTORead.Napomene')
+  - [SadrzajUpita](#P-Backend-Models-DTO-UpitDTORead-SadrzajUpita 'Backend.Models.DTO.UpitDTORead.SadrzajUpita')
   - [PasIme](#P-Backend-Models-DTO-UpitDTORead-PasIme 'Backend.Models.DTO.UpitDTORead.PasIme')
   - [Sifra](#P-Backend-Models-DTO-UpitDTORead-Sifra 'Backend.Models.DTO.UpitDTORead.Sifra')
   - [StatusUpita](#P-Backend-Models-DTO-UpitDTORead-StatusUpita 'Backend.Models.DTO.UpitDTORead.StatusUpita')

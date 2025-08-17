@@ -32,10 +32,10 @@ namespace Backend.Models
         public string StatusUpita { get; set; }="";
 
         /// <summary>
-        /// Napomene.
+        /// Sadržaj upita.
         /// </summary>
-        [Column(name: "napomene")]
-        public string Napomene { get; set; } = "";
+        [Column(name: "sadrzaj_upita")]
+        public string SadrzajUpita { get; set; } = "";
         
 
 

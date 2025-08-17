@@ -8,7 +8,7 @@
     /// <param name="UdomiteljImePrezime">Ime i prezime udomitelja.</param>
     /// <param name="DatumUpita">Datum upita.</param>
     /// <param name="StatusUpita">Status upita.</param>
-    /// <param name="Napomene">Napomene.</param>
+    /// <param name="SadrzajUpita">Sadržaj upita.</param>
     public record UpitDTORead
     (
         int Sifra,
@@ -16,6 +16,6 @@
         string UdomiteljImePrezime, 
         DateTime DatumUpita, 
         string StatusUpita,
-        string Napomene 
+        string SadrzajUpita
     );
 }

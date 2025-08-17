@@ -45,7 +45,7 @@ namespace Backend.Mapping
                 e.Udomitelj.Ime + " " + e.Udomitelj.Prezime,
                 e.DatumUpita,
                 e.StatusUpita,
-                e.Napomene
+                e.SadrzajUpita
                 ));
             CreateMap<Upit, UpitDTOInsertUpdate>().ForMember(
                     dest => dest.PasSifra,

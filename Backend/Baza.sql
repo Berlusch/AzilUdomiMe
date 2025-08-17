@@ -72,7 +72,7 @@ pas int not null references psi(sifra),
 udomitelj int not null references udomitelji(sifra),
 datum_upita date not null,
 status_upita varchar(30) not null,
-napomene varchar(200)
+sadrzaj_upita varchar(500)
 );
 
 insert into statusi(naziv) values
@@ -108,7 +108,7 @@ VALUES
 ('Petar', 'Soldo', 'Valpovo, Zagrebačka 34', '385 98 9012345', 'petar.soldo@gmail.com'),
 ('Jelena', 'Vuković', 'Osijek, Trg Sv. Trojstva 8', '385 91 0123456', 'jelena.vukovic@gmail.com');
 
-INSERT INTO upiti (pas, udomitelj, datum_upita, status_upita, napomene)
+INSERT INTO upiti (pas, udomitelj, datum_upita, status_upita, sadrzaj_upita)
 VALUES
 (3, 7, '2024-06-15', 'zaprimljen', 'nema napomene'),
 (9, 2, '2024-08-10', 'u obradi', 'nema napomene'),

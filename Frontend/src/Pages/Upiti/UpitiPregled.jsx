@@ -61,7 +61,7 @@ export default function UpitiPregled(){
                     <th>Udomitelj</th>
                     <th>Datum upita</th>
                     <th>Status upita</th>
-                    <th>Napomene</th>
+                    <th>Sadržaj upita</th>
                     <th style={{ width: "120px", textAlign: "center" }}>Opcije</th>
                 </tr>
 
@@ -73,7 +73,7 @@ export default function UpitiPregled(){
                         <td>{upit.udomiteljImePrezime}</td>
                         <td>{formatirajDatum(upit.datumUpita)}</td>
                         <td>{upit.statusUpita}</td>
-                        <td>{upit.napomene}</td>
+                        <td>{upit.sadrzajUpita}</td>
                         <td style={{ display: "flex", gap: "10px" }}>
                             <Button
                             style={{ backgroundColor: '#7d3d9b', color: "white" }}

@@ -152,10 +152,10 @@ export default function UpitiPromjena(){
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group controlId="napomene">
-                <Form.Label>Napomene</Form.Label>
-                <Form.Control type="text" name="napomene" required
-                defaultValue={upit.napomene}/>
+            <Form.Group controlId="sadrzajUpita">
+                <Form.Label>Sadržaj upita</Form.Label>
+                <Form.Control type="text" name="sadrzajUpita" required
+                defaultValue={upit.sadrzajUpita}/>
             </Form.Group>
 
         <hr/>
