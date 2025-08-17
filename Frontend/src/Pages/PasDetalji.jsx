@@ -75,7 +75,9 @@ console.log(sifra);
             <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>
             <p>Status: {pas.statusNaziv}</p>  
             {pas.statusNaziv === "na liječenju" && (
-            <p>Napomena: pas će biti dostupan za udomljenje po završetku liječenja. Za više informacija molimo pošaljite upit.</p>
+            <p style={{ color: "red" }}>
+              Napomena: pas će biti dostupan za udomljenje po završetku liječenja. Za više informacija molimo pošaljite upit.
+            </p>
           )}
                   
             <br/> 
