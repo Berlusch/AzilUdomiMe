@@ -12,6 +12,7 @@ export default function UpitObrazac() {
     const navigate = useNavigate();
     const { sifra } = useParams();
     const [pasIme, setPasIme] = useState("");
+    const [pasBrojCipa, setPasBrojCipa] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -31,6 +32,7 @@ export default function UpitObrazac() {
                 setIsLoading(false);
             } else {
                 setPasIme(odgovor.poruka.ime);
+                setPasBrojCipa(odgovor.poruka.brojCipa)
                 setIsLoading(false);
             }
         }
@@ -54,7 +56,8 @@ export default function UpitObrazac() {
         email: podatci.get("email"),
         upit: podatci.get("upit"),
         pasIme: pasIme,
-        datum: datum
+        datum: datum,
+        pasBrojCipa: pasBrojCipa
     };
     
     emailjs.send(
@@ -75,7 +78,7 @@ export default function UpitObrazac() {
                 console.log("Autoresponder poslan korisniku");
             });
 
-            alert("Upit je uspješno poslan! Odgovorit ćemo u najkraćem mogućem roku.");            
+            alert("Upit je uspješno poslan!");            
         },
         (error) => {
             console.log("Error:", error.text);
