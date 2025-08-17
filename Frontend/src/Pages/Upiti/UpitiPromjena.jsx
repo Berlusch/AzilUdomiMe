@@ -83,7 +83,7 @@ export default function UpitiPromjena(){
                 udomiteljSifra: udomiteljSifra,
                 datumUpita: moment.utc(podatci.get('datumUpita')),
                 statusUpita: statusUpita,
-                napomene: podatci.get('napomene')
+                sadrzajUpita: podatci.get('sadrzajUpita')
             }
                 
         );
