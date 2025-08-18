@@ -123,7 +123,67 @@ namespace Backend.Controllers
                 return BadRequest(e.Message);
             }
         }
-        
+
+        /// <summary>
+        /// Omogućuje upis podataka o upitu putem obrasca kojeg korisnik ispunjava. 
+        /// </summary>        /// 
+        /// <returns>Status kreiranja upita.</returns>
+        [HttpPost]
+        [Route("upitObrazac")]  
+        public IActionResult Post([FromBody] UpitObrazacDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(new { poruka = ModelState });
+
+            try
+            {
+               
+                var udomitelj = _context.Udomitelji
+                    .FirstOrDefault(u => u.Email == dto.Email);
+
+                if (udomitelj == null)
+                {
+                    
+                    udomitelj = new Udomitelj
+                    {
+                        Ime = dto.Ime,
+                        Prezime = dto.Prezime,
+                        Email = dto.Email,
+                        Adresa = "Nepoznato",
+                        Telefon = "Nepoznato"
+                    };
+                    _context.Udomitelji.Add(udomitelj);
+                    _context.SaveChanges(); 
+                }
+
+                
+                var pas = _context.Psi.FirstOrDefault(p => p.Sifra == dto.PasSifra);
+                if (pas == null)
+                    return NotFound(new { poruka = "Pas nije pronađen." });
+
+                
+                var upit = new Upit
+                {
+                    Pas = pas,
+                    Udomitelj = udomitelj,
+                    DatumUpita = DateTime.Now,
+                    StatusUpita = "zaprimljen",
+                    SadrzajUpita = dto.SadrzajUpita
+                };
+
+                _context.Upiti.Add(upit);
+                _context.SaveChanges();
+
+                return Ok(new { poruka = "Upit je uspješno kreiran." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { poruka = ex.Message });
+            }
+        }
+
+
+
         /// <summary>
         /// Traži udomljene pse te utvrđuje njihov broj.
         /// </summary>
