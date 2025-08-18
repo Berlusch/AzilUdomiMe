@@ -56,6 +56,14 @@ namespace Backend.Mapping
                 );
             CreateMap<UpitDTOInsertUpdate, Upit>();
 
+            CreateMap<UpitObrazacDTO, Upit>()
+            .ForMember(dest => dest.DatumUpita, opt => opt.MapFrom(src => DateTime.Now))
+            .ForMember(dest => dest.StatusUpita, opt => opt.MapFrom(src => "zaprimljen"))
+            .ForMember(dest => dest.Pas, opt => opt.Ignore())       
+            .ForMember(dest => dest.Udomitelj, opt => opt.Ignore());
+
+
+
         }
 
         /*/// <summary>
