@@ -49,9 +49,9 @@ async function getBrojUdomljenihPasa(){
     .catch((e)=>{})
 }
 
-async function postUpitForm(upitData) {
+async function postUpitForm(upitObrazacBaza) {
     try {        
-        const odgovor = await HttpService.post('Pocetna/upitObrazac/', upitData);   
+        const odgovor = await HttpService.post('Pocetna/upitObrazac/', upitObrazacBaza);   
         return odgovor.data;        
     } catch (e) {
         console.error("Greška prilikom upisa podataka:", e);
