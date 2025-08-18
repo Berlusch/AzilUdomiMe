@@ -40,11 +40,11 @@ export default function UpitObrazac() {
         fetchPas();
     }, [sifra]);
 
-    function odradiSubmit(e) {
-    e.preventDefault(); 
+    async function odradiSubmit(e) {
+    e.preventDefault();
 
-    const podatci = new FormData(e.target); 
-    
+    const podatci = new FormData(e.target);
+
     const today = new Date();
     const datum = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}.`;
 
@@ -54,40 +54,42 @@ export default function UpitObrazac() {
         adresa: podatci.get("adresa"),
         telefon: podatci.get("telefon"),
         email: podatci.get("email"),
-        upit: podatci.get("upit"),
+        sadrzajUpita: podatci.get("sadrzajUpita"),
         pasIme: pasIme,
         datum: datum,
         pasBrojCipa: pasBrojCipa
     };
-    
-    emailjs.send(
-        'service_g6kbdlp',
-        'template_dtb2wpu',  
-        upitData,
-        '2Zssg2RzCT6m4NeRA'
-    ).then(
-        (result) => {
-            console.log("Success:", result.text);
-            
-            emailjs.send(
-                'service_g6kbdlp',
-                'template_es0hg7u', 
-                upitData,
-                '2Zssg2RzCT6m4NeRA'
-            ).then(() => {
-                console.log("Autoresponder poslan korisniku");
-            });
 
-            alert("Upit je uspješno poslan!");            
-        },
-        (error) => {
-            console.log("Error:", error.text);
-            alert("Došlo je do pogreške prilikom slanja upita.");
+    const upitObrazacBaza = {
+    PasSifra: Number(sifra),           // ako sifra dolazi kao string, pretvori u broj
+    Ime: podatci.get("ime"),
+    Prezime: podatci.get("prezime"),
+    Email: podatci.get("email"),
+    SadrzajUpita: podatci.get("sadrzajUpita")
+};
+
+    try {
+        await emailjs.send('service_g6kbdlp', 'template_dtb2wpu', upitData, '2Zssg2RzCT6m4NeRA');
+        console.log("Success: email poslan");
+
+        await emailjs.send('service_g6kbdlp', 'template_es0hg7u', upitData, '2Zssg2RzCT6m4NeRA');
+        console.log("Autoresponder poslan korisniku");
+
+        const odgovor = await PocetnaService.postUpitForm(upitObrazacBaza);
+        if (odgovor.greska) {
+            alert("Došlo je do pogreške prilikom slanja upita u bazu: " + odgovor.poruka);
+        } else {
+            alert("Upit je uspješno poslan i spremljen!");
         }
-        
-    );
-    navigate(RouteNames.HOME);
+
+        navigate(RouteNames.HOME);
+
+    } catch (error) {
+        console.error("Greška:", error);
+        alert("Došlo je do pogreške prilikom slanja upita.");
+    }
 }
+
     return (
         <>
             <h2 className="naslov">Upit za psa {pasIme}</h2>
@@ -118,9 +120,9 @@ export default function UpitObrazac() {
                     <Form.Control type="text" name="email" required />
                 </Form.Group>
 
-                <Form.Group controlId="upit">
+                <Form.Group controlId="sadrzajUpita">
                     <Form.Label>Sadržaj upita</Form.Label>
-                    <Form.Control type="text" name="upit" required />
+                    <Form.Control type="text" name="sadrzajUpita" required />
                 </Form.Group>
 
                 <hr />
