@@ -49,10 +49,21 @@ async function getBrojUdomljenihPasa(){
     .catch((e)=>{})
 }
 
+async function postUpitForm(upitData) {
+    try {        
+        const odgovor = await HttpService.post('Pocetna/upitObrazac/', upitData);   
+        return odgovor.data;        
+    } catch (e) {
+        console.error("Greška prilikom upisa podataka:", e);
+        return { greska: true, poruka: "Došlo je do pogreške prilikom slanja upita." };
+    }  
+}   
 
-    export default {
+
+export default {
         getPsi,
         getBrojUdomljenihPasa,
         getUkupnoStranica,
-        getPasPoSifri
+        getPasPoSifri,
+        postUpitForm
     }
