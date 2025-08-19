@@ -136,7 +136,14 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = ModelState });
 
             try
-            {                
+            {
+                
+                bool isDuplicate = _context.Upiti
+                    .Any(u => u.SadrzajUpita == dto.SadrzajUpita && u.Pas.Sifra == dto.PasSifra && u.Udomitelj.Email == dto.Email);
+
+                if (isDuplicate)
+                    return BadRequest(new { poruka = "Taj upit je već poslan." });
+
                 var udomitelj = _context.Udomitelji.FirstOrDefault(u => u.Email == dto.Email);
                 if (udomitelj == null)
                 {
@@ -151,15 +158,15 @@ namespace Backend.Controllers
                     _context.Udomitelji.Add(udomitelj);
                     _context.SaveChanges();
                 }
-           
+
                 var pas = _context.Psi.FirstOrDefault(p => p.Sifra == dto.PasSifra);
                 if (pas == null)
                     return NotFound(new { poruka = "Pas nije pronađen." });
-                
+
                 var upit = _mapper.Map<Upit>(dto);
                 upit.Pas = pas;
                 upit.Udomitelj = udomitelj;
-               
+
                 _context.Upiti.Add(upit);
                 _context.SaveChanges();
 
@@ -194,7 +201,7 @@ namespace Backend.Controllers
             }
             catch (Exception e)
             {
-                // Ako dođe do greške, vraćamo BadRequest sa porukom greške
+                
                 return BadRequest(e.Message);
             }
         }
