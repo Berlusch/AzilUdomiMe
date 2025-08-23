@@ -50,13 +50,14 @@ namespace Backend.Controllers
 
 
         /// <summary>
-        /// Traži pse sa statusom "slobodan" ili "privremeni smještaj" te ih prikazuje s paginacijom.
+        /// Traži pse na određenoj lokaciji sa statusom "slobodan" ili "privremeni smještaj" te ih prikazuje s paginacijom.
         /// </summary>
         /// <param name="stranica">Broj stranice (počinje od 1).</param>
+        /// <param name="grad">Opcionalni parametar za filtriranje po gradu.</param>
         /// <returns>Objekt koji sadrži listu pasa s traženim statusom.</returns>
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
-        public IActionResult TraziStranicenje(int stranica)
+        public IActionResult TraziStranicenje(int stranica, [FromQuery] string? grad)
         {
             if (stranica < 1)
             {
@@ -66,10 +67,17 @@ namespace Backend.Controllers
             var poStranici = 4;
             try
             {
-                var query = _context.Psi.Include(p => p.Status)
-                    .Where(p => p.Status.Naziv == "slobodan" || p.Status.Naziv == "privremeni smještaj" || p.Status.Naziv == "na liječenju");
+                var query = _context.Psi
+                .Include(p => p.Status)
+                .Include(p => p.Lokacija)
+                .Where(p => p.Status.Naziv == "slobodan"
+                         || p.Status.Naziv == "privremeni smještaj"
+                         || p.Status.Naziv == "na liječenju");
 
-                
+                if (!string.IsNullOrEmpty(grad))
+                {
+                    query = query.Where(p => p.Lokacija.Grad == grad);
+                }
 
                 var psi = query.OrderBy(p => p.Ime)
                     .Skip((stranica - 1) * poStranici)
