@@ -39,6 +39,12 @@ namespace Backend.Data
         public DbSet<Operater> Operateri { get; set; }
 
         /// <summary>
+        /// Skup podataka za entitet Lokacija.
+        /// </summary>
+        public DbSet<Lokacija> Lokacije { get; set; }
+
+
+        /// <summary>
         /// Konfiguracija modela prilikom kreiranja baze podataka.
         /// </summary>
         /// <param name="modelBuilder">Graditelj modela.</param>
@@ -48,6 +54,7 @@ namespace Backend.Data
             //implementacija 1:n veza
 
             modelBuilder.Entity<Pas>().HasOne(g => g.Status);
+            modelBuilder.Entity<Pas>().HasOne(g => g.Lokacija);
             modelBuilder.Entity<Upit>().HasOne(g => g.Pas);
             modelBuilder.Entity<Upit>().HasOne(g => g.Udomitelj);
 
