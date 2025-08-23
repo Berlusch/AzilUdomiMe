@@ -60,38 +60,39 @@ console.log(sifra);
         </Col>
 
         <Col xs={12} sm={12} md={9} lg={6} xl={6} xxl={6} className="text-start">
-          <h4>Detalji psa {pas.ime}</h4>
-          <div className="detaljiPsa">
-            <p>Broj čipa: {pas.brojCipa}</p>
-            <p>Datum rođenja: {formatirajDatum(pas.datum_Rodjenja)}</p>
-            <p>
-  Spol: 
-  <span style={{ fontSize: "22px", color: pas.spol === "ženski" ? "red" : "blue"}}>
-    {pas.spol === "ženski" ? "  ♀" : "  ♂"}
-  </span> 
-  {pas.spol === "ženski" ? " ženski" : " muški"}
-</p>
-            <p>Opis: {pas.opis}</p>
-            <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>
-            <p>Status: {pas.statusNaziv}</p>  
-            {pas.statusNaziv === "na liječenju" && (
-            <p style={{ color: "red" }}>
-              Napomena: pas će biti dostupan za udomljenje po završetku liječenja. Za više informacija molimo pošaljite upit.
-            </p>
+        <h4>Detalji psa {pas.ime}</h4>
+        <div className="detaljiPsa">
+          <p>Broj čipa: {pas.brojCipa}</p>
+          <p>Datum rođenja: {formatirajDatum(pas.datum_Rodjenja)}</p>
+          <p>
+            Spol: 
+            <span style={{ fontSize: "22px", color: pas.spol === "ženski" ? "red" : "blue" }}>
+              {pas.spol === "ženski" ? " ♀" : " ♂"}
+            </span> 
+            {pas.spol === "ženski" ? " ženski" : " muški"}
+          </p>
+          <p>Opis: {pas.opis}</p>
+          <p>Kastracija: {pas.kastracija ? "Da" : "Ne"}</p>
+          <p>Status: {pas.statusNaziv}</p>  
+
+          {pas.statusNaziv === "na liječenju" && (
+            <>
+              <p style={{ color: "red" }}>
+                Napomena: pas će biti dostupan za udomljenje po završetku liječenja. Za više informacija molimo pošaljite upit.
+              </p>
+              <p>Lokacija: {pas.lokacijaGrad}</p>
+            </>
           )}
-                  
-            <br/> 
-                   
-            <Link 
+          
+          <br/> 
+          <Link 
             to={`/upit-obrazac/${pas.sifra}`}  
             className="posaljiUpit"
           >
             Pošalji upit
           </Link>
-
-        </div>      
-          
-        </Col>
+    </div>      
+</Col>
       </Row>
     </>
   );
