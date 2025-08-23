@@ -34,6 +34,12 @@ namespace Backend.Models
         public string Opis { get; set; } = "";
 
         /// <summary>
+        /// Lokacija psa (vanjski ključ).
+        /// </summary>
+        [ForeignKey("lokacija")]
+        public required Lokacija Lokacija { get; set; }
+
+        /// <summary>
         /// Kastracija psa.
         /// </summary>
         public bool Kastracija { get; set; }
