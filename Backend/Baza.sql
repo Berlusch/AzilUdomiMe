@@ -28,7 +28,7 @@ insert into operateri values ('bernarda.lusch@gmail.com',
 insert into operateri values ('edunova@edunova.hr',
 '$2a$12$btGdO8IVkKJJX1szpX4S7ubofyBxUTx1A3yKigbDDFY.o0FXBo9nG');
 
---TABLICA STATUS
+--TABLICA STATUSI
 
 create table statusi(
 sifra int not null primary key identity(1,1),
@@ -51,6 +51,7 @@ CONSTRAINT chk_spol CHECK (spol IN ('muški', 'ženski')),
 opis varchar(500) not null,
 status int not null references statusi(sifra),
 kastracija bit not null,
+Lokacija INT NOT NULL REFERENCES Lokacije(Sifra)
 );
 
 --TABLICA UDOMITELJI
@@ -73,6 +74,16 @@ udomitelj int not null references udomitelji(sifra),
 datum_upita date not null,
 status_upita varchar(30) not null,
 sadrzaj_upita varchar(500)
+);
+
+--TABLICA LOKACIJE
+
+create table lokacije(
+sifra int not null primary key identity(1,1),
+naziv varchar(50) null,
+adresa varchar(100) not null,
+grad varchar(50) not null,
+postanski_broj char(5) not null
 );
 
 insert into statusi(naziv) values
