@@ -12,7 +12,7 @@ namespace Backend.Models.DTO
     /// <param name="Opis">Opis psa.</param>
     /// <param name="Kastracija">Indikator je li pas kastriran ili ne.</param>
     /// <param name="StatusSifra">Status psa.</param>
-    /// <param name="LokacijaSifra">Lokacija psa.</param>
+    ///// <param name="LokacijaSifra">Lokacija psa.</param>
 
 
     public record PasDTOInsertUpdate(
@@ -26,8 +26,8 @@ namespace Backend.Models.DTO
         string Spol,
         string Opis,
         bool Kastracija,
-        int StatusSifra,
-        int LokacijaSifra 
+        int StatusSifra
+        //int LokacijaSifra 
 
     );
 

@@ -26,8 +26,8 @@ namespace Backend.Mapping
 
 
             CreateMap<Pas, PasDTORead>()
-                .ForCtorParam("StatusNaziv", opt => opt.MapFrom(src => src.Status.Naziv))
-                .ForCtorParam("LokacijaGrad", opt => opt.MapFrom(src => src.Lokacija.Grad));
+                .ForCtorParam("StatusNaziv", opt => opt.MapFrom(src => src.Status.Naziv));
+                //.ForCtorParam("LokacijaGrad", opt => opt.MapFrom(src => src.Lokacija.Grad));
                
 
             CreateMap<Pas, PasDTOInsertUpdate>().ForMember(
@@ -35,10 +35,10 @@ namespace Backend.Mapping
                     opt => opt.MapFrom(src => src.Status.Sifra)
                 );
 
-            CreateMap<PasDTOInsertUpdate, Pas>()
+            /*CreateMap<PasDTOInsertUpdate, Pas>()
             .ForMember(dest => dest.Lokacija, opt => opt.Ignore());
             CreateMap<Pas, PasDTOInsertUpdate>()
-            .ForMember(dest => dest.LokacijaSifra, opt => opt.MapFrom(src => src.Lokacija.Sifra));
+            .ForMember(dest => dest.LokacijaSifra, opt => opt.MapFrom(src => src.Lokacija.Sifra));*/
 
 
             CreateMap<Upit, UpitDTORead>().ConstructUsing(e => new UpitDTORead(
@@ -64,9 +64,9 @@ namespace Backend.Mapping
             .ForMember(dest => dest.Pas, opt => opt.Ignore())       
             .ForMember(dest => dest.Udomitelj, opt => opt.Ignore());
 
-            CreateMap<Lokacija, LokacijaDTORead>();
+            /*CreateMap<Lokacija, LokacijaDTORead>();
             CreateMap<LokacijaDTOInsertUpdate, Lokacija>();
-            CreateMap<Lokacija, LokacijaDTOInsertUpdate>();
+            CreateMap<Lokacija, LokacijaDTOInsertUpdate>();*/
 
 
 

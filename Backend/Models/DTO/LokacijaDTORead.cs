@@ -1,4 +1,4 @@
-﻿namespace Backend.Models.DTO
+﻿/*namespace Backend.Models.DTO
 {
     /// <summary>
     /// DTO za čitanje podataka o lokaciji.
@@ -16,4 +16,4 @@
         string Grad,
         int PostanskiBroj
         );
-}
+}*/

@@ -33,11 +33,11 @@ namespace Backend.Models
         /// </summary>
         public string Opis { get; set; } = "";
 
-        /// <summary>
+       /* /// <summary>
         /// Lokacija psa (vanjski ključ).
         /// </summary>
         [ForeignKey("lokacija")]
-        public required Lokacija Lokacija { get; set; }
+        public required Lokacija Lokacija { get; set; }*/
 
         /// <summary>
         /// Kastracija psa.

@@ -57,7 +57,7 @@ namespace Backend.Controllers
         /// <returns>Objekt koji sadrži listu pasa s traženim statusom.</returns>
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
-        public IActionResult TraziStranicenje(int stranica, [FromQuery] string? grad)
+        public IActionResult TraziStranicenje(int stranica)
         {
             if (stranica < 1)
             {
@@ -69,15 +69,15 @@ namespace Backend.Controllers
             {
                 var query = _context.Psi
                 .Include(p => p.Status)
-                .Include(p => p.Lokacija)
+                //.Include(p => p.Lokacija)
                 .Where(p => p.Status.Naziv == "slobodan"
                          || p.Status.Naziv == "privremeni smještaj"
                          || p.Status.Naziv == "na liječenju");
 
-                if (!string.IsNullOrEmpty(grad))
+                /*if (!string.IsNullOrEmpty(grad))
                 {
                     query = query.Where(p => p.Lokacija.Grad == grad);
-                }
+                }*/
 
                 var psi = query.OrderBy(p => p.Ime)
                     .Skip((stranica - 1) * poStranici)

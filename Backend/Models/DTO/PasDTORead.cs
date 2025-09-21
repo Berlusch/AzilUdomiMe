@@ -20,8 +20,8 @@
     string Spol,
     string Opis,
     bool Kastracija,
-    string StatusNaziv,
-    string LokacijaGrad
+    string StatusNaziv
+    //string LokacijaGrad
 );
 
 }
