@@ -35,8 +35,8 @@ namespace Backend.Mapping
                     opt => opt.MapFrom(src => src.Status.Sifra)
                 );
 
-            /*CreateMap<PasDTOInsertUpdate, Pas>()
-            .ForMember(dest => dest.Lokacija, opt => opt.Ignore());
+            CreateMap<PasDTOInsertUpdate, Pas>();
+            /*.ForMember(dest => dest.Lokacija, opt => opt.Ignore());
             CreateMap<Pas, PasDTOInsertUpdate>()
             .ForMember(dest => dest.LokacijaSifra, opt => opt.MapFrom(src => src.Lokacija.Sifra));*/
 
