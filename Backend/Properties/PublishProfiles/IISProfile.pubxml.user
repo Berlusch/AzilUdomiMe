@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAaLGvF0okHEStl0KiNO1qDgAAAAACAAAAAAAQZgAAAAEAACAAAAAC370/wOqFZuYITlw1cNxuwFtICQc9WvQxW7fvqQ2W8QAAAAAOgAAAAAIAACAAAAAJaT6NH6toUi/jf0I6uHMgglPZkqaNqkqL+UJAOF3lIyAAAAARy1JbAqm5Oqqt+HHlwInDL4mimXcrKfnGsurDSC6YTEAAAAAYbEdW0GI2CmIfgXUC0/Ite3LxMt/zzfN2Ymn17aPfwY8l3a6JxKnBJNHfx2K748s+dXtQsok8cyS9Dn3U/jvO</EncryptedPassword>
+    <History>False|2026-02-16T14:29:23.2934508Z||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="BackendContext">
+      <Value>Data Source=SQL1002.site4now.net%3bInitial Catalog=db_ab2678_udomime%3bUser Id=db_ab2678_udomime_admin%3bPassword=nekalozinka</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
