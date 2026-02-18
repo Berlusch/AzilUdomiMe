@@ -65,7 +65,9 @@ export default function UpitObrazac() {
     Ime: podatci.get("ime"),
     Prezime: podatci.get("prezime"),
     Email: podatci.get("email"),
-    SadrzajUpita: podatci.get("sadrzajUpita")
+    SadrzajUpita: podatci.get("sadrzajUpita"),
+    Adresa: podatci.get("adresa"),
+    Telefon: podatci.get("telefon")
 };
 
     try {

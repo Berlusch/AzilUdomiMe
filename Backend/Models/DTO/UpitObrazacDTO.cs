@@ -8,6 +8,8 @@
     /// <param name="Email">Email udomitelja.</param>
     /// <param name="SadrzajUpita">Sadržaj upita.</param>
     /// <param name="PasSifra">Šifra psa.</param>
+    /// <param name="Adresa">Adresa udomitelja.</param>
+    /// <param name="Telefon">Telefon udomitelja.</param>
 
     public record UpitObrazacDTO
     (
@@ -15,6 +17,8 @@
         string Ime,
         string Prezime,
         string Email,
-        string SadrzajUpita
+        string SadrzajUpita,
+        string Telefon,
+        string Adresa
     );
 }
