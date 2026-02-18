@@ -19,7 +19,7 @@ export default function NavBarEdunova() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link onClick={() => navigate(RouteNames.HOME)}>
-            <img src="/logo-removebg-preview.png" alt="Logo" className="logo-navbar" />
+            <img src="/azil-logo.png" alt="Logo" className="logo-navbar" />
           </Nav.Link>
         </Nav>        
 
