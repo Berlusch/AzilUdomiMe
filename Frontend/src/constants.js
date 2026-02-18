@@ -30,7 +30,7 @@ export const RouteNames={
 }
 
 
-export const PRODUKCIJA ='https://solusch-001-site1.atempurl.com/api/v1';
+export const PRODUKCIJA ='https://solusch-001-site1.anytempurl.com/api/v1';
 
 //export const PRODUKCIJA ='https://localhost:7015/api/v1';
 
