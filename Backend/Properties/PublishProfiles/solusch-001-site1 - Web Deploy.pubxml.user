@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAaLGvF0okHEStl0KiNO1qDgAAAAACAAAAAAAQZgAAAAEAACAAAACoFXVBEZK+wyUlSjJBKkrGG4oo3XZTbqLk8oPo2A5QrgAAAAAOgAAAAAIAACAAAABiK59rsBOoBz/BCca0vVI3/3Y1J0ao9msKUheuAyOu9yAAAABmo78Iv7aruBSvrzCIrvDYTinkdl5pezPuzX4M06VzrEAAAAADEOTReRFLaMuNsY4MnlWP9yyOesVWwbEROEA2EhHtljmKAOHNqDQlHpxlfj8pb3SdeRUqx1Ja//dEp3iOzvna</EncryptedPassword>
+    <History>True|2026-02-18T08:44:25.9507221Z||;True|2026-02-18T09:06:21.2615947+01:00||;True|2026-02-18T09:04:45.5912347+01:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="BackendContext">
+      <Value>Data Source=SQL5106.site4now.net%3bInitial Catalog=db_ac5711_aziludomime%3bUser Id=db_ac5711_aziludomime_admin%3bPassword=Bergoni1503!%3bEncrypt=True%3bTrustServerCertificate=True%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
