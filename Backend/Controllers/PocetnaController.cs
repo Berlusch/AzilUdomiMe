@@ -160,8 +160,8 @@ namespace Backend.Controllers
                         Ime = dto.Ime,
                         Prezime = dto.Prezime,
                         Email = dto.Email,
-                        Adresa = "Nepoznato",
-                        Telefon = "Nepoznato"
+                        Adresa = dto.Adresa,
+                        Telefon = dto.Telefon
                     };
                     _context.Udomitelji.Add(udomitelj);
                     _context.SaveChanges();
