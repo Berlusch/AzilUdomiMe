@@ -19,6 +19,7 @@ export default function Login() {
   return (
     <Container className='mt-4'>   
      <div className="loginPodatci">
+      <p>PRISTUPNI PODATCI: </p>
       <p>email:  bernarda.lusch@gmail.com</p>
       <p>lozinka:  kadulja</p>       
         </div> 
