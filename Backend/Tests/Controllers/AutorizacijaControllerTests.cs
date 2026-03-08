@@ -2,12 +2,8 @@ using Backend.Controllers;
 using Backend.Data;
 using Backend.Models;
 using Backend.Models.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Moq;
-using System.Text;
 using Xunit;
 
 namespace Backend.Tests.Controllers
@@ -82,12 +78,12 @@ namespace Backend.Tests.Controllers
             // Assert
             var statusCodeResult = Xunit.Assert.IsType<ObjectResult>(result);
             Xunit.Assert.Equal(StatusCodes.Status403Forbidden, statusCodeResult.StatusCode);
-            Xunit.Assert.Equal("Niste autorizirani, operater ne postoji u bazi.", statusCodeResult.Value);
+            Xunit.Assert.Equal("Niste autorizirani, ne mogu naći operatera", statusCodeResult.Value);
         }
 
         /// <summary>
         /// Testira slučaj kada unesena lozinka ne odgovara pohranjenoj u bazi.
-        /// Očekuje se povrat ObjectResult sa statusom Forbidden i odgovarajućom porukom.
+        /// Očekuje se povrat ObjectResult sa statusom Forbidden s porukom "Niste autorizirani, lozinka ne odgovara"
         /// </summary>
         [Fact]
         public void GenerirajToken_InvalidPassword_ReturnsForbidden()
@@ -112,7 +108,7 @@ namespace Backend.Tests.Controllers
             // Assert
             var statusCodeResult = Xunit.Assert.IsType<ObjectResult>(result);
             Xunit.Assert.Equal(StatusCodes.Status403Forbidden, statusCodeResult.StatusCode);
-            Xunit.Assert.Equal("Niste autorizirani, lozinka nije valjana.", statusCodeResult.Value);
+            Xunit.Assert.Equal("Niste autorizirani, lozinka ne odgovara", statusCodeResult.Value);
         }
 
         /// <summary>
