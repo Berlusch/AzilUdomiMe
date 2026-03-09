@@ -7,6 +7,9 @@
 		<!-- Za potrebe dokumentacije, čitati https://medium.com/geekculture/customizing-swagger-in-asp-net-core-5-2c98d03cbe52 -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DocumentationMarkdown>$(MSBuildProjectDirectory)\Readme.md</DocumentationMarkdown>
+		<GenerateProgramFile>false</GenerateProgramFile>
+		<NoWarn>$(NoWarn);CS7022</NoWarn>
+		
 	</PropertyGroup>
 
 	<ItemGroup>
