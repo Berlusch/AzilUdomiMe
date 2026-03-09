@@ -10,8 +10,7 @@
     /// <param name="Spol">Spol psa.</param>
     /// <param name="Opis">Opis psa.</param>
     /// <param name="Kastracija">Indikator je li pas kastriran ili ne.</param>
-    /// <param name="StatusNaziv">Naziv statusa psa.</param>
-    /// <param name="LokacijaGrad">Grad lokacije psa.</param>
+    /// <param name="StatusNaziv">Naziv statusa psa.</param>    
     public record PasDTORead(
         int Sifra,
     string Ime,
