@@ -81,7 +81,9 @@ namespace Backend.Controllers
                 return BadRequest(new { poruka = ModelState });
             }
             try
-            {
+            {                
+                dto = dto with { Telefon = dto.Telefon.Replace(" ", "") };
+
                 var e = _mapper.Map<Udomitelj>(dto);
                 _context.Udomitelji.Add(e);
                 _context.SaveChanges();
@@ -90,8 +92,7 @@ namespace Backend.Controllers
             catch (Exception ex)
             {
                 return BadRequest(new { poruka = ex.Message });
-            }           
-
+            }
         }
 
         /// <summary>
@@ -110,8 +111,10 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { poruka = ModelState });
             }
-            try
-            {
+            try            {
+                
+                dto = dto with { Telefon = dto.Telefon.Replace(" ", "") };
+
                 Udomitelj? e;
                 try
                 {
@@ -125,19 +128,15 @@ namespace Backend.Controllers
                 {
                     return NotFound(new { poruka = "Udomitelj ne postoji u bazi" });
                 }
-
                 e = _mapper.Map(dto, e);
-
                 _context.Udomitelji.Update(e);
                 _context.SaveChanges();
-
                 return Ok(new { poruka = "Uspješno promijenjeno" });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { poruka = ex.Message });
             }
-
         }
 
         /// <summary>

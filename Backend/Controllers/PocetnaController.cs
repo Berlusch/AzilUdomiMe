@@ -135,7 +135,7 @@ namespace Backend.Controllers
 
         /// <summary>
         /// Omogućuje upis podataka o upitu putem obrasca kojeg korisnik ispunjava. 
-        /// </summary>        /// 
+        /// </summary>        
         /// <returns>Status kreiranja upita.</returns>
         [HttpPost]
         [Route("upitObrazac")]
@@ -144,9 +144,10 @@ namespace Backend.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(new { poruka = ModelState });
 
+            dto = dto with { Telefon = dto.Telefon.Replace(" ", "") };
+
             try
             {
-                
                 bool isDuplicate = _context.Upiti
                     .Any(u => u.SadrzajUpita == dto.SadrzajUpita && u.Pas.Sifra == dto.PasSifra && u.Udomitelj.Email == dto.Email);
 

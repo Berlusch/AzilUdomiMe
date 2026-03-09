@@ -88,7 +88,7 @@ namespace Backend.Tests.Controllers
                 Ime = "Marko",
                 Prezime = "Horvat",
                 Adresa = "Ilica 1, Zagreb",
-                Telefon = "0911234567",
+                Telefon = "+38592234567",
                 Email = "marko.horvat@example.com"
             };
             _context.Udomitelji.Add(udomitelj);
@@ -279,7 +279,7 @@ namespace Backend.Tests.Controllers
                 Ime = "Marko",
                 Prezime = "Horvat",
                 Adresa = "Ilica 1, Zagreb",
-                Telefon = "0911234567",
+                Telefon = "+38592234567",
                 Email = "marko.horvat@example.com"
             });
             _context.SaveChanges();
