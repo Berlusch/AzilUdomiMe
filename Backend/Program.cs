@@ -67,3 +67,9 @@ app.UseCors("CorsPolicy");
 //završio za potrebe produkcije
 
 app.Run();
+
+/// <summary>
+/// Parcijalna deklaracija klase <c>Program</c> koja omogucuje
+/// test projektima pristup entry pointu aplikacije.
+/// </summary>
+public partial class Program { }
