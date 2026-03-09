@@ -113,9 +113,15 @@ export default function UpitObrazac() {
                 </Form.Group>
 
                 <Form.Group controlId="telefon">
-                    <Form.Label>Telefon</Form.Label>
-                    <Form.Control type="number" name="telefon" required />
-                </Form.Group>
+            <Form.Label>Telefon</Form.Label>
+            <Form.Control 
+                type="text" 
+                name="telefon" 
+                defaultValue="+385 "
+                placeholder="+385 91 1234567"
+                required
+            />
+        </Form.Group>
 
                 <Form.Group controlId="email">
                     <Form.Label>Email</Form.Label>
