@@ -52,9 +52,10 @@ namespace Backend.Controllers
         /// <summary>
         /// Traži pse na određenoj lokaciji sa statusom "slobodan" ili "privremeni smještaj" te ih prikazuje s paginacijom.
         /// </summary>
-        /// <param name="stranica">Broj stranice (počinje od 1).</param>
-        /// <param name="grad">Opcionalni parametar za filtriranje po gradu.</param>
+        /// <param name="stranica">Broj stranice (počinje od 1).</param>                
         /// <returns>Objekt koji sadrži listu pasa s traženim statusom.</returns>
+
+
         [HttpGet]
         [Route("traziStranicenje/{stranica}")]
         public IActionResult TraziStranicenje(int stranica)
