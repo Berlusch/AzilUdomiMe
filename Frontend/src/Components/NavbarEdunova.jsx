@@ -11,12 +11,18 @@ export default function NavBarEdunova() {
   const { logout, isLoggedIn } = useAuth();
   const loginRef = useRef(null);
   const [showBubble, setShowBubble] = useState(false);
-  const [animateBubble, setAnimateBubble] = useState(false); // kontrola animacije
+  const [animateBubble, setAnimateBubble] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 992);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isLoggedIn) {
       setShowBubble(true);
-      // mali timeout da CSS tranzicija proradi
       const timer = setTimeout(() => setAnimateBubble(true), 50);
       return () => clearTimeout(timer);
     } else {
@@ -91,32 +97,49 @@ export default function NavBarEdunova() {
               <div
                 style={{
                   position: 'absolute',
-                  top: '120%',
-                  right: 0,
+                  ...(isMobile ? {
+                    top: '50%',
+                    right: '110%',
+                    transform: animateBubble
+                      ? 'translateY(-50%)'
+                      : 'translateY(-50%) translateX(10px)',
+                  } : {
+                    top: '120%',
+                    right: 0,
+                    transform: animateBubble ? 'translateY(0)' : 'translateY(-10px)',
+                  }),
                   backgroundColor: '#f0e6ff',
                   color: '#4B0082',
-                  padding: '8px 12px',
+                  padding: '6px 10px',
                   borderRadius: '8px',
                   boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-                  whiteSpace: 'nowrap',
+                  whiteSpace: 'pre',                  
                   zIndex: 10,
-                  fontSize: '0.75rem',
+                  fontSize: isMobile ? '0.55rem' : '0.75rem',
                   opacity: animateBubble ? 1 : 0,
-                  transform: animateBubble ? 'translateY(0)' : 'translateY(-10px)',
                   transition: 'opacity 0.5s ease, transform 0.5s ease',
                 }}
               >
-                Prijavite se kako biste testirali CRUD funkcionalnosti aplikacije!
+                {'Prijavite se kako\nbiste testirali CRUD\nfunkcionalnosti aplikacije!'}
                 <div
                   style={{
                     position: 'absolute',
-                    top: '-8px',   
-                    right: '10px',
+                    ...(isMobile ? {
+                      top: '50%',
+                      right: '-8px',
+                      transform: 'translateY(-50%)',
+                      borderTop: '8px solid transparent',
+                      borderBottom: '8px solid transparent',
+                      borderLeft: '8px solid #f0e6ff',
+                    } : {
+                      top: '-8px',
+                      right: '10px',
+                      borderLeft: '8px solid transparent',
+                      borderRight: '8px solid transparent',
+                      borderBottom: '8px solid #f0e6ff',
+                    }),
                     width: 0,
                     height: 0,
-                    borderLeft: '8px solid transparent',
-                    borderRight: '8px solid transparent',
-                    borderBottom: '8px solid #f0e6ff',
                   }}
                 />
               </div>

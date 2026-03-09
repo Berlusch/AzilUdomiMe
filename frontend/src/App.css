@@ -150,8 +150,15 @@ h4 {
     grid-template-columns: repeat(5, 1fr); 
     gap: 20px; 
     justify-content: center;
-    margin-left:90px;
-} 
+    margin-left: 90px;
+}
+
+@media (max-width: 768px) {
+    .psiGrid {
+        grid-template-columns: repeat(4, 1fr);
+        margin-left: 0;
+    }
+}
 
 .pasItem {
   text-align: center; 
